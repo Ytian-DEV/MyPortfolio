@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import svgPaths from "./imports/svg-6sovak61ez";
 import localProfileImage from "./assets/myprofile-photo.png";
+import amaranthWeb from "./assets/imgURL/amaranth-dvm6.vercel.app.png";
+import amaranthScuaa8VNR from "./assets/imgURL/amaranth-scua8-finalreport.jpg";
+import amaranthRecap from "./assets/imgURL/amaranth-staff-tribute-and-recap-2024-2025.png";
+import amaranthHigayongPambaye from "./assets/imgURL/higayong-pambaye.png";
 import { ExternalLink, Play, Image as ImageIcon, Code } from 'lucide-react';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
 
@@ -381,7 +385,7 @@ function ProjectsSection() {
       description: "Amaranth - VSU's web platform featuring responsive design, interactive campus maps, academic resources, and streamlined information architecture for better user engagement.",
       type: "web",
       link: "https://amaranth-dvm6.vercel.app/",
-      imageUrl: "./assets/imgURL/amaranth-dvm6.vercel.app.png",
+      imageUrl: amaranthWeb,
       tags: ["Web Development", "Full Stack", "React", "Typescript", "TailwindCSS", "Supabase"]
     },
     {
@@ -390,7 +394,7 @@ function ProjectsSection() {
       description: "Comprehensive video news report documenting the SCUAA-8 event coverage, featuring highlights from the competition and the culminating awards ceremony. Produced to capture the excitement and achievements of the athletic meet.",
       type: "video",
       videoUrl: "https://youtu.be/L1bbL-iUQMo",
-      imageUrl: "./assets/imgURL/amaranth-scua8-finalreport.jpg",
+      imageUrl: amaranthScuaa8VNR,
       tags: ["Video Editing", "Video News Report", "Adobe Premiere Pro", "Adobe After Effects"]
     },
     {
@@ -399,7 +403,7 @@ function ProjectsSection() {
       description: "A heartfelt animated tribute video showcasing Amaranth's progress and achievements throughout 2024-2025, celebrating the dedication and contributions of graduating staff members with emotional storytelling and visual artistry.",
       type: "video",
       videoUrl: "https://youtu.be/6tQAIzzpKGY",
-      imageUrl: "./assets/imgURL/amaranth-staff-tribute-and-recap-2024-2025.png",
+      imageUrl: amaranthRecap,
       tags: ["Video Editing", "Animation", "Motion Graphics", "Adobe After Effects"]
     },
     {
@@ -408,7 +412,7 @@ function ProjectsSection() {
       description: "News coverage of Higayong Pambayi's 3rd annual Women's Month celebration at VSU, showcasing women's empowerment events and activities through professional video reporting and production.",
       type: "video",
       videoUrl: "https://youtu.be/UIityaj5g-E",
-      imageUrl: "./assets/imgURL/higayong-pambaye.png",
+      imageUrl: amaranthHigayongPambaye,
       tags: ["Video Editing", "Video News Report", "Adobe Premiere Pro", "Adobe After Effects"]
     },
     {
