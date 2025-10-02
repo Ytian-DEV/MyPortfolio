@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import svgPaths from "./imports/svg-6sovak61ez";
-import imgAdobeExpressFile31 from "figma:asset/7ba16f5335969b66c314f7955ee4897ab548acd6.png";
+import localProfileImage from "./assets/myprofile-photo.png";
 import { ExternalLink, Play, Image as ImageIcon, Code } from 'lucide-react';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
 
@@ -205,10 +205,10 @@ function HeroSection() {
         <div className="space-y-6 md:space-y-10 order-2 lg:order-1">
           <div className="space-y-4 md:space-y-6">
             <h2 className="text-[14px] md:text-[18px] lg:text-[20px] text-white tracking-[0.2em] md:tracking-[0.3em] uppercase" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 200 }}>
-              HI, I'M NEERAJ
+              Hi, I'm Boyles, Christian Earl James N.
             </h2>
             <h1 className="text-[48px] md:text-[72px] lg:text-[96px] leading-[0.95] text-white" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 700 }}>
-              I'M A PRODUCT<br />MANAGER
+              Full-Stack Developer,<br />Video & Photo Editor
             </h1>
           </div>
           
@@ -226,7 +226,7 @@ function HeroSection() {
         <div className="relative order-1 lg:order-2 mt-8 md:mt-0">
           <div
             className="w-full h-[400px] md:h-[500px] lg:h-[700px] xl:h-[800px] bg-cover bg-center bg-no-repeat rounded-lg"
-            style={{ backgroundImage: `url('${imgAdobeExpressFile31}')` }}
+            style={{ backgroundImage: `url('${localProfileImage}')` }}
           />
         </div>
       </div>
@@ -238,71 +238,112 @@ function AboutSection() {
   return (
     <section id="about" className="py-12 md:py-20 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <h2 className="text-[48px] md:text-[72px] lg:text-[96px] text-white mb-8 md:mb-12 lg:mb-16" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 700 }}>
+        <h2 className="text-[32px] md:text-[48px] lg:text-[64px] text-white mb-8 md:mb-12 lg:mb-16" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 500 }}>
           About me
         </h2>
         
         <div className="max-w-4xl">
           <p className="text-[16px] md:text-[20px] lg:text-[22px] text-white/70 leading-[1.7] mb-6 md:mb-8" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 300 }}>
-            I'm Dynamic and results-driven Senior Business Development Associate with a robust background in sales, client relations, and Agile product management.
+            I am a Full-Stack Developer and Multimedia Creator with a unique fusion of technical expertise and visual storytelling. I build dynamic, user-centric web applications using modern technologies like React.js, Next.js, TypeScript, and Tailwind CSS, while also producing high-impact visual content through expert proficiency in the Adobe Suite.
           </p>
+          <p className="text-[16px] md:text-[20px] lg:text-[22px] text-white/70 leading-[1.7] mb-6 md:mb-8" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 300 }}>
+            I have a proven ability to own a project from concept to launch, architecting robust backend systems with MongoDB and Firebase while simultaneously crafting the compelling photo and video narratives that define the user experience. This end-to-end capability ensures that the final product is not only technically sound but also visually engaging and market-ready.
+          </p>
+
           <p className="text-[16px] md:text-[20px] lg:text-[22px] text-white/70 leading-[1.7]" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 300 }}>
-            I have a proven track record of exceeding targets, driving revenue growth, and leading high-performing teams. Experienced in utilizing data analytics, market research, and innovative strategies to achieve business objectives. Certified Scrum Product Owner (CSPO) with advanced expertise in Agile methodologies, product backlog management, and sprint planning. Passionate about continuous improvement and delivering customer-centric solutions that drive operational efficiency and market success.
+            Certified in Agile methodologies, I am passionate about leveraging this dual skillset to solve complex problems, drive user engagement, and deliver solutions that are both innovative and effective.
           </p>
         </div>
 
         {/* Education */}
         <div className="mt-12 md:mt-16 lg:mt-20">
-          <h3 className="text-[14px] md:text-[16px] lg:text-[18px] text-white mb-6 md:mb-8 lg:mb-10 tracking-[0.2em] md:tracking-[0.3em] uppercase" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 400 }}>
-            EDUCATION
-          </h3>
-          <div className="max-w-4xl">
-            <h4 className="text-[20px] md:text-[24px] lg:text-[26px] text-white mb-2 md:mb-3" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600 }}>
-              National Institute of Technology Puducherry
-            </h4>
-            <p className="text-[16px] md:text-[18px] lg:text-[20px] text-white/70 leading-[1.7]" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 300 }}>
-              I hold a Bachelor of Technology degree in Electronics and Communications from National Institute of Technology Puducherry, with a cumulative GPA of 5.29/10.0. My education has equipped me with a solid foundation in technical skills and problem-solving
-            </p>
+          <h2 className="text-[32px] md:text-[48px] lg:text-[64px] text-white mb-8 md:mb-12 lg:mb-16" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 500 }}>
+            Education
+          </h2>
+          <div className="space-y-8 md:space-y-12">
+            <div className="max-w-4xl">
+              <h4 className="text-[20px] md:text-[24px] lg:text-[26px] text-white mb-2 md:mb-3" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 600 }}>
+                Visayas State University - Main Campus
+              </h4>
+              <h5 className="text-[14px] md:text-[18px] lg:text-[20px] text-white mb-2 md:mb-3" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 400 }}>
+                August 2022 - Present
+              </h5>
+              <p className="text-[16px] md:text-[18px] lg:text-[20px] text-white/70 leading-[1.7]" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 300 }}>
+                I am a fourth-year Computer Science student specializing in software and web development, I've found my passion in bringing ideas to life through code. I love crafting modern, user-friendly websites and applications, paying close attention to creating intuitive designs that people actually enjoy using. What excites me most is taking a project from that initial spark of an idea through planning, development, and testing—all the way to launching something that genuinely solves problems and helps users. I'm always eager to roll up my sleeves and contribute to building digital solutions that make a real difference.
+              </p>
+            </div>
+
+            <div className="max-w-4xl">
+              <h4 className="text-[20px] md:text-[24px] lg:text-[26px] text-white mb-2 md:mb-3" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 600 }}>
+                Ubay National Science High School
+              </h4>
+              <h5 className="text-[14px] md:text-[18px] lg:text-[20px] text-white mb-2 md:mb-3" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 400 }}>
+                June 2016 - July 2022
+              </h5>
+              <p className="text-[16px] md:text-[18px] lg:text-[20px] text-white/70 leading-[1.7]" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 300 }}>
+                My journey into design began with a dream of becoming an architect, a path I paved by graduating with honors in STEM. While my direction shifted to Computer Science in college—where I also graduated my junior year with honors—my core passion for creating meaningful designs remains. I've simply translated that passion from designing physical structures to crafting digital solutions, using technology to solve social issues and build a better, more connected world.
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Experience */}
         <div className="mt-12 md:mt-16 lg:mt-20">
-          <h3 className="text-[14px] md:text-[16px] lg:text-[18px] text-white mb-6 md:mb-8 lg:mb-10 tracking-[0.2em] md:tracking-[0.3em] uppercase" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 400 }}>
+          <h2 className="text-[32px] md:text-[48px] lg:text-[64px] text-white mb-8 md:mb-12 lg:mb-16" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 500 }}>
             Experience
-          </h3>
-          <div className="space-y-8 md:space-y-10 lg:space-y-12">
-            <ExperienceItem
-              title="PRODUCT MANAGER"
-              period="2024 — current"
-              description="As a Product Manager at TRANSOND Systems Private Limited Joint Venture and EOR of AICTEC India, I bridge the gap between cutting-edge products and customer needs. My responsibilities include comprehensive market research to identify trends, customer pain points, and opportunities, while collaborating with cross-functional teams to refine product strategies. I leverage data insights to inform the product roadmap, prioritizing features that maximize user value and drive business growth. Additionally, I ensure smooth product launches that enhance functionality and deliver an exceptional user experience."
-            />
-            <ExperienceItem
-              title="SENIOR BUSINESS DEVELOPMENT ASSOCIATE"
-              period="2021 — 2022"
-              description="As a senior business development associate I established and nurtured relationships with prospective clients, driving business growth and consistently exceeding sales targets. By facilitating virtual presentations via Zoom, I educated clients on product offerings. I developed and executed targeted sales strategies, securing new business opportunities and significantly contributing to revenue growth. Leading a dynamic team of business development associates, I provided mentorship and guidance to ensure high performance. Conducting thorough market research, I identified new markets and customer segments, expanding the academy's footprint."
-            />
-            <ExperienceItem
-              title="SENIOR ADMISSION COUNSELLOR"
-              period="2020 — 2021"
-              description="As a senior admission counsellor established and maintained communication with prospective clients, cultivating strategic partnerships and consistently meeting revenue targets. I provided comprehensive guidance to prospective students on course selection, admission requirements, and career pathways, ensuring informed decisions. Managing the end-to-end admission process, I consistently exceeded enrolment targets. Collaborating with marketing and academic teams, I aligned admission strategies with organizational goals, enhancing program visibility."
-            />
-            <ExperienceItem
-              title="BUSINESS DEVELOPMENT ASSOCIATE"
-              period="2018 — 2019"
-              description="As a business development associate have I contacted potential clients to set up meetings and counselled them on learning pedagogies and personalized learning experiences, achieving sales targets consistently. I directed and mentored a team of 10 business development representatives, providing guidance to achieve individual and collective goals. I developed and implemented strategic plans to enhance market penetration and customer acquisition."
-            />
+          </h2>
+          <div className="relative">
+            {/* Vertical timeline line */}
+            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-white/20 hidden md:block"></div>
+            
+            <div className="space-y-8 md:space-y-10 lg:space-y-12" style={{ fontFamily: 'Jost, sans-serif' }}>
+              <ExperienceItem
+                title="Full-Stack Developer"
+                period="May 2025 — present"
+                description="Add description here."
+              />
+              <ExperienceItem
+                title="Front-End Developer"
+                period="September 2024 — present"
+                description="Add description here."
+              />
+              <ExperienceItem
+                title="UI/UX Designer"
+                period= "December 2024 — present"
+                description="Add description here."
+              />
+              <ExperienceItem
+                title="Multimedia & Production Head"
+                period="August 2025 — present"
+                description="Add description here."
+              />
+              <ExperienceItem
+                title='Video Editor'
+                period='January 2024 — present'
+                description='Add description here.'
+              />
+              <ExperienceItem
+                title='Photo Editor'
+                period='January 2024 — present'
+                description='Add description here.'
+              />
+              <ExperienceItem
+                title='Photojournalist'
+                period='February 2023 — January 2024'
+                description='Add description here.'
+              />
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </section> 
   );
 }
 
 function ExperienceItem({ title, period, description }: { title: string; period: string; description: string }) {
   return (
     <div className="max-w-4xl">
-      <h4 className="text-[20px] md:text-[24px] lg:text-[26px] text-white mb-2" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600 }}>
+      <h4 className="text-[20px] md:text-[24px] lg:text-[26px] text-white mb-2" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 600 }}>
         {title}
       </h4>
       <p className="text-[14px] md:text-[16px] lg:text-[18px] text-white/50 mb-3 md:mb-4 tracking-wider" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 200 }}>
@@ -335,22 +376,40 @@ function ProjectsSection() {
 
   const projects: Project[] = [
     {
-      title: "Energic - EV Charging Station Management",
-      period: "07/2024 — current",
-      description: "Comprehensive CSMS platform for real-time station management, scheduling, and maintenance alerts.",
+      title: "Amaranth | Visayas State University Revamped Website",
+      period: "August 26 — current",
+      description: "Amaranth - VSU's web platform featuring responsive design, interactive campus maps, academic resources, and streamlined information architecture for better user engagement.",
       type: "web",
-      link: "https://example.com/energic", // Replace with actual link
-      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXNoYm9hcmQlMjBhbmFseXRpY3N8ZW58MXx8fHwxNzU5MjgwODg2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      tags: ["Web Development", "Full Stack", "React"]
+      link: "https://amaranth-dvm6.vercel.app/",
+      imageUrl: "src/assets/imgURL/amaranth-dvm6.vercel.app.png",
+      tags: ["Web Development", "Full Stack", "React", "Typescript", "TailwindCSS", "Supabase"]
     },
     {
-      title: "Commercial Video Production",
-      period: "2024",
-      description: "Professional video editing and color grading for brand commercials and promotional content.",
+      title: "AMARANTH SCUAA-8 Coverage Final Report",
+      period: "December 2024",
+      description: "Comprehensive video news report documenting the SCUAA-8 event coverage, featuring highlights from the competition and the culminating awards ceremony. Produced to capture the excitement and achievements of the athletic meet.",
       type: "video",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Replace with actual video
-      imageUrl: "https://images.unsplash.com/photo-1497015289639-54688650d173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aWRlbyUyMHByb2R1Y3Rpb258ZW58MXx8fHwxNzU5MjM5OTQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      tags: ["Video Editing", "Color Grading", "Motion Graphics"]
+      videoUrl: "https://youtu.be/L1bbL-iUQMo",
+      imageUrl: "src/assets/imgURL/amaranth-scua8-finalreport.jpg",
+      tags: ["Video Editing", "Video News Report", "Adobe Premiere Pro", "Adobe After Effects"]
+    },
+    {
+      title: "AMARANTH Staff Recap & Tribute 2024-2025",
+      period: "July 2025",
+      description: "A heartfelt animated tribute video showcasing Amaranth's progress and achievements throughout 2024-2025, celebrating the dedication and contributions of graduating staff members with emotional storytelling and visual artistry.",
+      type: "video",
+      videoUrl: "https://youtu.be/6tQAIzzpKGY",
+      imageUrl: "src/assets/imgURL/amaranth-staff-tribute-and-recap-2024-2025.png",
+      tags: ["Video Editing", "Animation", "Motion Graphics", "Adobe After Effects"]
+    },
+    {
+      title: "AMARANTH Higayong Pambaye 2025",
+      period: "April 2025",
+      description: "News coverage of Higayong Pambayi's 3rd annual Women's Month celebration at VSU, showcasing women's empowerment events and activities through professional video reporting and production.",
+      type: "video",
+      videoUrl: "https://youtu.be/UIityaj5g-E",
+      imageUrl: "src/assets/imgURL/higayong-pambaye.png",
+      tags: ["Video Editing", "Video News Report", "Adobe Premiere Pro", "Adobe After Effects"]
     },
     {
       title: "Product Photography Enhancement",
@@ -360,37 +419,13 @@ function ProjectsSection() {
       beforeImage: "https://images.unsplash.com/photo-1648536426233-29776d89d6f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWZvcmUlMjBhZnRlciUyMHBob3RvJTIwZWRpdGluZ3xlbnwxfHx8fDE3NTkzMTI0MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       afterImage: "https://images.unsplash.com/photo-1648536426233-29776d89d6f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWZvcmUlMjBhZnRlciUyMHBob3RvJTIwZWRpdGluZ3xlbnwxfHx8fDE3NTkzMTI0MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       tags: ["Photo Editing", "Retouching", "Adobe Photoshop"]
-    },
-    {
-      title: "Online Grocery Platform Roadmap",
-      period: "06/2024 — 07/2024",
-      description: "12-month product roadmap focusing on growth, customer satisfaction, and market leadership.",
-      type: "product",
-      imageUrl: "https://images.unsplash.com/photo-1481487196290-c152efe083f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWJzaXRlJTIwbW9ja3VwfGVufDF8fHx8MTc1OTMxMjQxNnww&ixlib=rb-4.1.0&q=80&w=1080",
-      tags: ["Product Management", "Strategy", "Roadmap"]
-    },
-    {
-      title: "IPL Best XI Analytics",
-      period: "05/2023 — 07/2023",
-      description: "Python-based data analysis to determine optimal playing XI across all IPL teams using statistical modeling.",
-      type: "analysis",
-      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXNoYm9hcmQlMjBhbmFseXRpY3N8ZW58MXx8fHwxNzU5MjgwODg2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      tags: ["Python", "Data Analysis", "Sports Analytics"]
-    },
-    {
-      title: "Financial Analysis Dashboard",
-      period: "02/2023 — 04/2023",
-      description: "5-year financial statement analysis with trend identification and industry benchmarking.",
-      type: "analysis",
-      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXNoYm9hcmQlMjBhbmFseXRpY3N8ZW58MXx8fHwxNzU5MjgwODg2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      tags: ["Financial Analysis", "Excel", "Business Intelligence"]
     }
   ];
 
   return (
     <section id="projects" className="py-12 md:py-20 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <h2 className="text-[48px] md:text-[72px] lg:text-[96px] text-white mb-8 md:mb-12 lg:mb-16" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 700 }}>
+        <h2 className="text-[32px] md:text-[48px] lg:text-[64px] text-white mb-8 md:mb-12 lg:mb-16" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 500 }}>
           Projects
         </h2>
         
@@ -441,6 +476,7 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
           src={project.imageUrl || project.beforeImage || ''}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          fallbackSrc="https://via.placeholder.com/400x300/333/fff?text=Image+Not+Found"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
         
@@ -522,7 +558,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
           {project.type === 'video' && project.videoUrl && (
             <div className="mb-8 aspect-video bg-black border border-white/10">
               <iframe
-                src={project.videoUrl}
+                src={`https://www.youtube.com/embed/${getYouTubeId(project.videoUrl)}`}
                 className="w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -606,26 +642,21 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 function CertificationsSection() {
   const certifications = [
     {
-      title: "CERTIFICATION OF BUSINESS CORRESPONDENTS/FACILITATORS",
-      year: "2019",
-      organization: "Indian Institute of Banking & Finance"
+      title: "CERTIFICATION OF Introduction to Data Science",
+      year: "2025",
+      organization: "Networking Academy through the Cisco Networking Academy program"
     },
     {
-      title: "CERTIFIED SCRUM PRODUCT OWNER®",
-      year: "2024",
-      organization: "Scrum Alliance®"
-    },
-    {
-      title: "ADVANCE CERTIFIED SCRUM PRODUCT OWNER®",
-      year: "2024",
-      organization: "Scrum Alliance®"
+      title: "Certification of Data Science: R Basics",
+      year: "2025",
+      organization: "Harvard EdX HarvardX PH125.1x"
     }
   ];
 
   return (
     <section id="certifications" className="py-12 md:py-20 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <h2 className="text-[48px] md:text-[72px] lg:text-[96px] text-white mb-8 md:mb-12 lg:mb-16" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 700 }}>
+        <h2 className="text-[32px] md:text-[48px] lg:text-[64px] text-white mb-8 md:mb-12 lg:mb-16" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 500 }}>
           Certifications
         </h2>
         
@@ -636,7 +667,7 @@ function CertificationsSection() {
                 <div className="absolute left-[-6px] md:left-[-8px] top-[10px] md:top-[12px] w-[12px] h-[12px] md:w-[16px] md:h-[16px] bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,0.5)]" />
                 <h3 className={`text-[18px] md:text-[24px] lg:text-[26px] text-white mb-2 ${
                   cert.title === "CERTIFICATION OF BUSINESS CORRESPONDENTS/FACILITATORS" ? "md:whitespace-nowrap" : ""
-                }`} style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600 }}>
+                }`} style={{ fontFamily: 'Jost, sans-serif', fontWeight: 600 }}>
                   {cert.title}
                 </h3>
                 <p className="text-[14px] md:text-[16px] lg:text-[18px] text-white/50 mb-2 md:mb-3 tracking-wider" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 200 }}>
@@ -658,25 +689,25 @@ function ContactsSection() {
   return (
     <section id="contacts" className="py-12 md:py-20 lg:py-24 pb-16 md:pb-24 lg:pb-32 relative">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <h2 className="text-[48px] md:text-[72px] lg:text-[96px] text-white mb-8 md:mb-12 lg:mb-16" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 700 }}>
+        <h2 className="text-[32px] md:text-[48px] lg:text-[64px] text-white mb-8 md:mb-12 lg:mb-16" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 500 }}>
           Contacts
         </h2>
         
         <div className="space-y-4 md:space-y-6 max-w-4xl">
           <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-0">
             <span className="text-[18px] md:text-[20px] lg:text-[22px] text-white" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600 }}>
-              Email - 
+              Email:  
             </span>
             <span className="text-[16px] md:text-[20px] lg:text-[22px] text-white/70 break-all" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 300 }}>
-              neo.maddison17@gmail.com
+               christianboyles0143@gmail.com
             </span>
           </div>
           <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-0">
             <span className="text-[18px] md:text-[20px] lg:text-[22px] text-white" style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600 }}>
-              Phone - 
+              Phone: 
             </span>
             <span className="text-[16px] md:text-[20px] lg:text-[22px] text-white/70" style={{ fontFamily: 'Jost, sans-serif', fontWeight: 300 }}>
-              +916282587126
+               +63 915 211 1698
             </span>
           </div>
         </div>
@@ -684,7 +715,6 @@ function ContactsSection() {
     </section>
   );
 }
-
 export default function App() {
   return (
     <div className="bg-[#000000] min-h-screen text-white" style={{ fontFamily: 'Jost, sans-serif' }}>
@@ -699,3 +729,9 @@ export default function App() {
     </div>
   );
 }
+
+function getYouTubeId(url: string) {
+            // Handles various YouTube URL formats
+            const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
+            return match ? match[1] : url;
+          }

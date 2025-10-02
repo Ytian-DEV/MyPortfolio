@@ -1,5 +1,5 @@
 import svgPaths from "./svg-6sovak61ez";
-import imgAdobeExpressFile31 from "figma:asset/7ba16f5335969b66c314f7955ee4897ab548acd6.png";
+import localProfileImage from "./assets/myprofile-photo.png";
 
 function Frame4() {
   return (
@@ -97,23 +97,47 @@ function Instagram() {
   );
 }
 
-function Twitter() {
+// function Twitter() {
+//   return (
+//     <div className="relative shrink-0 size-6" data-name="twitter">
+//       <svg
+//         className="block size-full"
+//         fill="none"
+//         preserveAspectRatio="none"
+//         viewBox="0 0 24 24"
+//       >
+//         <g id="twitter">
+//           <path
+//             d={svgPaths.p3350a500}
+//             id="Vector"
+//             stroke="var(--stroke-0, #F8F7F9)"
+//             strokeLinecap="round"
+//             strokeLinejoin="round"
+//             strokeWidth="2"
+//           />
+//         </g>
+//       </svg>
+//     </div>
+//   );
+// }
+
+function Facebook() {
   return (
-    <div className="relative shrink-0 size-6" data-name="twitter">
+    <div className="relative shrink-0 size-6" data-name="facebook">
       <svg
         className="block size-full"
         fill="none"
         preserveAspectRatio="none"
         viewBox="0 0 24 24"
       >
-        <g id="twitter">
+        <g id="facebook">
           <path
-            d={svgPaths.p3350a500}
-            id="Vector"
+            d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
             stroke="var(--stroke-0, #F8F7F9)"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
+            fill="none"
           />
         </g>
       </svg>
@@ -125,7 +149,7 @@ function Frame3() {
   return (
     <div className="box-border content-stretch flex flex-row gap-6 items-start justify-start p-0 relative shrink-0">
       <Instagram />
-      <Twitter />
+      <Facebook />
     </div>
   );
 }
@@ -144,7 +168,7 @@ function Frame8() {
   return (
     <div className="box-border content-stretch flex flex-row gap-2.5 items-start justify-start p-[10px] relative shrink-0">
       <div className="font-['Poppins:Bold',_sans-serif] leading-[0] not-italic relative shrink-0 text-[#f8f7f9] text-[24px] text-left text-nowrap">
-        <p className="block leading-[normal] whitespace-pre">{`HI, I’M NEERAJ `}</p>
+        <p className="block leading-[normal] whitespace-pre">{`Hi, I’m Boyles, Christian Earl James N. `}</p>
       </div>
     </div>
   );
@@ -531,7 +555,7 @@ export default function LandingPage() {
       <div
         className="absolute bg-center bg-cover bg-no-repeat h-[1320px] left-[745px] top-20 w-[742.5px]"
         data-name="Adobe Express - file (3) 1"
-        style={{ backgroundImage: `url('${imgAdobeExpressFile31}')` }}
+        style={{ backgroundImage: `url('${localProfileImage}')` }}
       />
       <div className="absolute font-['Poppins:Bold',_sans-serif] h-[100px] leading-[0] left-[61px] not-italic text-[#f8f7f9] text-[96px] text-left top-[1218px] w-[715px]">
         <p className="block leading-[96px]">{`About me `}</p>
@@ -742,7 +766,7 @@ export default function LandingPage() {
         <p className="leading-[normal]">
           <span className="font-['Poppins:ExtraBold',_sans-serif]">{`Phone - `}</span>
           <span className="font-['Poppins:Medium',_sans-serif]">
-            +916282587126
+            +63 915 211 1698
           </span>
         </p>
       </div>
