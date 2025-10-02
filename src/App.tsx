@@ -386,7 +386,7 @@ function ProjectsSection() {
       type: "web",
       link: "https://amaranth-dvm6.vercel.app/",
       imageUrl: amaranthWeb,
-      tags: ["Web Development", "Full Stack", "React", "Typescript", "TailwindCSS", "Supabase"]
+      tags: ["Web Development", "Full Stack", "React.js", "Typescript", "TailwindCSS", "Supabase"]
     },
     {
       title: "AMARANTH SCUAA-8 Coverage Final Report",
