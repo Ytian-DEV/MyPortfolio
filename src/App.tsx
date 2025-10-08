@@ -5,6 +5,8 @@ import amaranthWeb from "./assets/imgURL/amaranth-dvm6.vercel.app.png";
 import amaranthScuaa8VNR from "./assets/imgURL/amaranth-scua8-finalreport.jpg";
 import amaranthRecap from "./assets/imgURL/amaranth-staff-tribute-and-recap-2024-2025.png";
 import amaranthHigayongPambaye from "./assets/imgURL/higayong-pambaye.png";
+import ticTacToeImage from "./assets/imgURL/tictactoe-zeta.vercel.app.png.png";
+import xmass3Lighting from "./assets/imgURL/xmass-tree-lighting.png"
 import { ExternalLink, Play, Image as ImageIcon, Code } from 'lucide-react';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
 
@@ -304,37 +306,37 @@ function AboutSection() {
               <ExperienceItem
                 title="Full-Stack Developer"
                 period="May 2025 — present"
-                description="Add description here."
+                description="As a Junior Full-Stack Developer, I have strategically expanded my expertise from a front-end foundation to encompass back-end technologies, driven by a deep curiosity for how systems integrate end-to-end. This dedicated upskilling allows me to seamlessly build and connect intuitive user interfaces with robust server-side logic, delivering cohesive and high-performing applications. I am passionate about leveraging this comprehensive skill set to contribute to full project lifecycles and drive tangible business results."
               />
               <ExperienceItem
                 title="Front-End Developer"
                 period="September 2024 — present"
-                description="Add description here."
+                description="As a motivated Junior Front-End Developer, my academic journey in Computer Science has formally transitioned into hands-on development, solidifying a passion I've held since choosing this career path. While my earlier studies provided a strong foundation in algorithms and data structures, I am now actively applying this knowledge to build dynamic, user-centric websites. I am a highly committed and reliable team member, eager to contribute my growing skills and enthusiasm to real-world projects."
               />
               <ExperienceItem
                 title="UI/UX Designer"
                 period= "December 2024 — present"
-                description="Add description here."
+                description="I specialize in creating modern, user-centered designs using Figma, with a focus on solving societal issues through intuitive digital experiences. My development background ensures that all designs are not only visually compelling but also technically feasible, bridging the gap between aesthetic vision and practical implementation. I am committed to an iterative design process that balances user needs with client objectives, delivering solutions that satisfy both stakeholders and end-users."
               />
               <ExperienceItem
                 title="Multimedia & Production Head"
                 period="August 2025 — present"
-                description="Add description here."
+                description="As the newly promoted head of multimedia and production for Amaranth, the official media organization of Visayas State University, I lead a team in creating and distributing content for the student body. My responsibilities include strategic planning, workflow management, and quality assurance across all publication channels. I oversee the complete production lifecycle, ensuring timely delivery of high-quality multimedia content while maintaining the organization's editorial standards and brand consistency."
               />
               <ExperienceItem
                 title='Video Editor'
                 period='January 2024 — present'
-                description='Add description here.'
+                description='I craft compelling visual narratives through professional video editing, transforming raw footage into polished content that engages and informs audiences. My work encompasses everything from social media clips to documentary-style features, with expertise in pacing, color grading, audio mixing, and motion graphics. I collaborate closely with content creators to ensure the final product aligns with creative vision and communication objectives.'
               />
               <ExperienceItem
                 title='Photo Editor'
                 period='January 2024 — present'
-                description='Add description here.'
+                description='I enhance visual storytelling through meticulous photo editing and curation, ensuring images meet publication standards while maintaining authenticity. My expertise includes color correction, retouching, composition optimization, and developing cohesive visual styles across projects. I manage photo libraries and collaborate with photographers to select and prepare images that effectively communicate intended messages.'
               />
               <ExperienceItem
                 title='Photojournalist'
                 period='February 2023 — January 2024'
-                description='Add description here.'
+                description='I documented campus life and events through compelling photojournalism, capturing authentic moments that told the universitys story. My work involved quick thinking in dynamic environments, technical proficiency in various lighting conditions, and ethical judgment in image selection. I developed strong relationships with subjects and editors to ensure accurate, respectful visual reporting.'
               />
             </div>
           </div>
@@ -389,6 +391,15 @@ function ProjectsSection() {
       tags: ["Web Development", "Full Stack", "React.js", "Typescript", "TailwindCSS", "Supabase"]
     },
     {
+      title: "Tic Tac Toe Game",
+      period: "October 9, 2025",
+      description: "A modern, fully-featured Tic-Tac-Toe game built with React and TypeScript, featuring a sleek dark theme with vibrant pink/purple gradients and smooth animations.",
+      type: "web",
+      link: "https://tiktactoe-zeta.vercel.app/",
+      imageUrl: ticTacToeImage,
+      tags: ["Web Development", "Game Development", "React.js", "Typescript", "TailwindCSS"]
+    },
+    {
       title: "AMARANTH SCUAA-8 Coverage Final Report",
       period: "December 2024",
       description: "Comprehensive video news report documenting the SCUAA-8 event coverage, featuring highlights from the competition and the culminating awards ceremony. Produced to capture the excitement and achievements of the athletic meet.",
@@ -416,14 +427,23 @@ function ProjectsSection() {
       tags: ["Video Editing", "Video News Report", "Adobe Premiere Pro", "Adobe After Effects"]
     },
     {
-      title: "Product Photography Enhancement",
-      period: "2024",
-      description: "Professional photo retouching and enhancement for e-commerce product listings.",
-      type: "photo",
-      beforeImage: "https://images.unsplash.com/photo-1648536426233-29776d89d6f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWZvcmUlMjBhZnRlciUyMHBob3RvJTIwZWRpdGluZ3xlbnwxfHx8fDE3NTkzMTI0MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      afterImage: "https://images.unsplash.com/photo-1648536426233-29776d89d6f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWZvcmUlMjBhZnRlciUyMHBob3RvJTIwZWRpdGluZ3xlbnwxfHx8fDE3NTkzMTI0MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      tags: ["Photo Editing", "Retouching", "Adobe Photoshop"]
-    }
+      title: "AMARANTH Christmass Tree Lighting News Report December 2024",
+      period: "April 2025",
+      description: "News coverage of the Christmas Tree Lighting event at VSU, showcasing the festive atmosphere and community involvement through professional video reporting and production.",
+      type: "video",
+      videoUrl: "https://youtu.be/NIMRgf4rd7A",
+      imageUrl: xmass3Lighting,
+      tags: ["Video Editing", "Video News Report", "Adobe Premiere Pro", "Adobe After Effects"]
+    },
+    // {
+    //   title: "Product Photography Enhancement",
+    //   period: "2024",
+    //   description: "Professional photo retouching and enhancement for e-commerce product listings.",
+    //   type: "photo",
+    //   beforeImage: "https://images.unsplash.com/photo-1648536426233-29776d89d6f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWZvcmUlMjBhZnRlciUyMHBob3RvJTIwZWRpdGluZ3xlbnwxfHx8fDE3NTkzMTI0MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    //   afterImage: "https://images.unsplash.com/photo-1648536426233-29776d89d6f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWZvcmUlMjBhZnRlciUyMHBob3RvJTIwZWRpdGluZ3xlbnwxfHx8fDE3NTkzMTI0MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    //   tags: ["Photo Editing", "Retouching", "Adobe Photoshop"]
+    // }
   ];
 
   return (
