@@ -540,7 +540,7 @@ function ProjectsSection() {
     },
     {
       title: "Birthday Celebration e-Invitation",
-      period: "October 9, 2025",
+      period: "October 14, 2025 - October 20, 2025",
       description: (
         <>
           A sleek and modern online invitation creator with a vibrant gradient
