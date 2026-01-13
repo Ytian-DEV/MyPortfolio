@@ -8,6 +8,7 @@ import amaranthHigayongPambaye from "./assets/imgURL/higayong-pambaye.png";
 import ticTacToeImage from "./assets/imgURL/tictactoe-zeta.vercel.app.png.png";
 import xmass3Lighting from "./assets/imgURL/xmass-tree-lighting.png";
 import birthdayInvitationImage from "./assets/imgURL/birthday-invitation.png";
+import agroVlogImage from "./assets/imgURL/agro-vlog.png";
 import { ExternalLink, Play, Image as ImageIcon, Code } from "lucide-react";
 import { ImageWithFallback } from "./components/figma/ImageWithFallback";
 
@@ -505,6 +506,7 @@ function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const projects: Project[] = [
+    // Web Development Projects
     {
       title: "Amaranth | Visayas State University Revamped Website",
       period: "August 26 — current",
@@ -579,6 +581,25 @@ function ProjectsSection() {
         "QR Code Integration",
       ],
     },
+
+    // Video Editing Projects
+    {
+      title: "AgroVlog",
+      period: "December 20, 2025",
+      description:
+        "A video content series showcasing agricultural practices and innovations in VSU Baybay City, featuring interviews with local farmers and expert insights.",
+      type: "video",
+      videoUrl: "https://youtu.be/xjwizKsgjRw",
+      imageUrl: agroVlogImage,
+      tags: [
+        "Video Editing",
+        "Content Creation",
+        "Adobe Premiere Pro",
+        "Adobe After Effects",
+        "Agriculture",
+        "Video Production",
+      ],
+    },
     {
       title: "AMARANTH SCUAA-8 Coverage Final Report",
       period: "December 2024",
@@ -639,36 +660,86 @@ function ProjectsSection() {
         "Adobe After Effects",
       ],
     },
-    // {
-    //   title: "Product Photography Enhancement",
-    //   period: "2024",
-    //   description: "Professional photo retouching and enhancement for e-commerce product listings.",
-    //   type: "photo",
-    //   beforeImage: "https://images.unsplash.com/photo-1648536426233-29776d89d6f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWZvcmUlMjBhZnRlciUyMHBob3RvJTIwZWRpdGluZ3xlbnwxfHx8fDE3NTkzMTI0MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    //   afterImage: "https://images.unsplash.com/photo-1648536426233-29776d89d6f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWZvcmUlMjBhZnRlciUyMHBob3RvJTIwZWRpdGluZ3xlbnwxfHx8fDE3NTkzMTI0MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    //   tags: ["Photo Editing", "Retouching", "Adobe Photoshop"]
-    // }
   ];
+
+  // Categorize projects by type
+  const webProjects = projects.filter((p) => p.type === "web");
+  const videoProjects = projects.filter((p) => p.type === "video");
+  const photoProjects = projects.filter((p) => p.type === "photo");
+
+  const renderProjectSection = (
+    title: string,
+    projectList: Project[],
+    emptyMessage: string
+  ) => {
+    return (
+      <div className="mb-16 md:mb-20 lg:mb-24">
+        {/* Section Header with more spacing */}
+        <div className="mb-12 md:mb-16 lg:mb-20">
+          <h3
+            className="text-[32px] md:text-[40px] lg:text-[48px] text-white"
+            style={{ fontFamily: "Playfair Display, serif", fontWeight: 500 }}
+          >
+            {title}
+          </h3>
+        </div>
+        
+        {/* Projects Grid or Empty State */}
+        {projectList.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {projectList.map((project, index) => (
+              <ProjectCard
+                key={index}
+                project={project}
+                onClick={() => setSelectedProject(project)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="py-16 md:py-20 border border-white/10 flex items-center justify-center">
+            <p
+              className="text-[18px] md:text-[20px] text-white/50 italic"
+              style={{ fontFamily: "Jost, sans-serif", fontWeight: 300 }}
+            >
+              {emptyMessage}
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <section id="projects" className="py-12 md:py-20 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
+        {/* Main Section Title */}
         <h2
-          className="text-[32px] md:text-[48px] lg:text-[64px] text-white mb-8 md:mb-12 lg:mb-16"
+          className="text-[32px] md:text-[48px] lg:text-[64px] text-white mb-20 md:mb-24 lg:mb-32"
           style={{ fontFamily: "Playfair Display, serif", fontWeight: 500 }}
         >
           Projects
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              project={project}
-              onClick={() => setSelectedProject(project)}
-            />
-          ))}
-        </div>
+        {/* Web Development Projects */}
+        {renderProjectSection(
+          "Web Development",
+          webProjects,
+          "No web projects uploaded yet"
+        )}
+
+        {/* Video Editing Projects */}
+        {renderProjectSection(
+          "Video Editing",
+          videoProjects,
+          "No video projects uploaded yet"
+        )}
+
+        {/* Photo Editing Projects */}
+        {renderProjectSection(
+          "Photo Editing",
+          photoProjects,
+          "No photo projects uploaded yet"
+        )}
       </div>
 
       {/* Project Modal */}
