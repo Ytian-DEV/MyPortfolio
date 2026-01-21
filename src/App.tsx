@@ -9,6 +9,7 @@ import ticTacToeImage from "./assets/imgURL/tictactoe-zeta.vercel.app.png.png";
 import xmass3Lighting from "./assets/imgURL/xmass-tree-lighting.png";
 import birthdayInvitationImage from "./assets/imgURL/birthday-invitation.png";
 import agroVlogImage from "./assets/imgURL/agro-vlog.png";
+import boardmap from "./assets/imgURL/boardmap.jpeg";
 import { ExternalLink, Play, Image as ImageIcon, Code } from "lucide-react";
 import { ImageWithFallback } from "./components/figma/ImageWithFallback";
 
@@ -508,8 +509,26 @@ function ProjectsSection() {
   const projects: Project[] = [
     // Web Development Projects
     {
+      title: "BoardMap",
+      period: "November 18, 2025 - December 16, 2025",
+      description:
+        "A Web-based platform that helps students and faculty to locate boarding houses near Visayas State Univeristy Baybay City Campus using interactive maps and filters for amenities, pricing, and ratings.",
+      type: "web",
+      link: "https://batch-2025-vsu-boardmap-web.vercel.app/",
+      imageUrl: boardmap,
+      tags: [
+        "Web Development",
+        "Full Stack",
+        "React.js",
+        "Typescript",
+        "TailwindCSS",
+        "Leaflet Maps API",
+        "Supabase",
+      ],
+    },
+    {
       title: "Amaranth | Visayas State University Revamped Website",
-      period: "August 26 — current",
+      period: "August 26, 2025 — current",
       description:
         "Amaranth - VSU's web platform featuring responsive design, interactive campus maps, academic resources, and streamlined information architecture for better user engagement.",
       type: "web",
