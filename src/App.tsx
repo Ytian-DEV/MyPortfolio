@@ -603,6 +603,20 @@ function ProjectsSection() {
 
     // Video Editing Projects
     {
+      title: "Back2School VoxBox",
+      period: "January 26, 2026",
+      description: "A Amaranth video content series capturing the excitement of students returning to Visayas State University for the new academic year, featuring interviews, campus highlights, and student experiences.",
+      type: "video",
+      videoUrl: "https://youtu.be/https://www.facebook.com/share/v/17trTcxmyf/",
+      imageUrl: birthdayInvitationImage,
+      tags: [
+        "Video Editing",
+        "Content Creation",
+        "Adobe Premiere Pro",
+        "Adobe After Effects",
+      ],
+    },
+    {
       title: "AgroVlog",
       period: "December 20, 2025",
       description:
