@@ -10,6 +10,7 @@ import xmass3Lighting from "./assets/imgURL/xmass-tree-lighting.png";
 import birthdayInvitationImage from "./assets/imgURL/birthday-invitation.png";
 import agroVlogImage from "./assets/imgURL/agro-vlog.png";
 import boardmap from "./assets/imgURL/boardmap.jpeg";
+import back2schoolVoxBox from "./assets/imgURL/back2school-voxbox.png";
 import { ExternalLink, Play, Image as ImageIcon, Code } from "lucide-react";
 import { ImageWithFallback } from "./components/figma/ImageWithFallback";
 
@@ -607,8 +608,8 @@ function ProjectsSection() {
       period: "January 26, 2026",
       description: "A Amaranth video content series capturing the excitement of students returning to Visayas State University for the new academic year, featuring interviews, campus highlights, and student experiences.",
       type: "video",
-      videoUrl: "https://youtu.be/https://www.facebook.com/share/v/17trTcxmyf/",
-      imageUrl: birthdayInvitationImage,
+      videoUrl: "https://www.facebook.com/share/v/17p7cB8FHY/",
+      imageUrl: back2schoolVoxBox,
       tags: [
         "Video Editing",
         "Content Creation",
