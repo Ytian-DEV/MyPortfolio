@@ -11,6 +11,19 @@ import birthdayInvitationImage from "./assets/imgURL/birthday-invitation.png";
 import agroVlogImage from "./assets/imgURL/agro-vlog.png";
 import boardmap from "./assets/imgURL/boardmap.jpeg";
 import back2schoolVoxBox from "./assets/imgURL/back2school-voxbox.png";
+import boardmapLogIn from "./assets/images/BoardMap/Log In Page.png";
+import boardmapSignUp from "./assets/images/BoardMap/SignUp Page.png";
+import boardmapStudentMap from "./assets/images/BoardMap/Student DashBoard-MapView.png";
+import boardmapStudentMapFilter from "./assets/images/BoardMap/Student Dashboard-MapView-Filter.png";
+import boardmapStudentList from "./assets/images/BoardMap/Student Dashboard-ListView.png";
+import boardmapStudentListFilter from "./assets/images/BoardMap/Student Dashboard-ListView-Filter.png";
+import boardmapStudentProperty from "./assets/images/BoardMap/Student Dashboard-Property.png";
+import boardmapStudentMessages from "./assets/images/BoardMap/Student Dashboard-Message.png";
+import boardmapStudentChat from "./assets/images/BoardMap/Student Dashboard-Message-CHat.png";
+import boardmapOwnerProperty from "./assets/images/BoardMap/Owner Dashboard-Property.png";
+import boardmapOwnerInquiries from "./assets/images/BoardMap/Owner Dashboard-Inquiries.png";
+import boardmapOwnerAnalytics from "./assets/images/BoardMap/Owner Dashboard-Analytics.png";
+import boardmapOwnerOccupants from "./assets/images/BoardMap/Owner Dashboard-Occupants.png";
 import { ExternalLink, Play, Image as ImageIcon, Code } from "lucide-react";
 import { ImageWithFallback } from "./components/figma/ImageWithFallback";
 
@@ -489,7 +502,7 @@ function ExperienceItem({
   );
 }
 
-type ProjectType = "web" | "video" | "photo" | "product" | "analysis";
+type ProjectType = "web" | "video" | "photo" | "product" | "uiux";
 
 interface Project {
   title: string;
@@ -499,6 +512,7 @@ interface Project {
   link?: string;
   videoUrl?: string;
   imageUrl?: string;
+  images?: string[];
   beforeImage?: string;
   afterImage?: string;
   tags?: string[];
@@ -506,8 +520,27 @@ interface Project {
 
 function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
+//UIUX DESIGN
   const projects: Project[] = [
+    {
+      title: "BoardMap",
+      period: "October 26, 2025 - November 8, 2025",
+      description:
+        "A Figma design project for BoardMap, a web-based platform that helps students and faculty locate boarding houses near Visayas State University Baybay City Campus using interactive maps and filters for amenities, pricing, and ratings.",
+      type: "uiux",
+      link: "https://www.figma.com/design/PLyl615g6uSVaesonXgCk2/BoardMap?node-id=0-1&t=R30u6mbH4MCXcR7o-1",
+      imageUrl: boardmap,
+      images: [boardmapLogIn, boardmapSignUp, boardmapStudentMap, boardmapStudentMapFilter, boardmapStudentList, boardmapStudentListFilter, boardmapStudentProperty, boardmapStudentMessages, boardmapStudentChat, boardmapOwnerProperty, boardmapOwnerOccupants, boardmapOwnerInquiries, boardmapOwnerAnalytics],
+      tags: [
+        "UI Design",
+        "UX Design",
+        "Figma",
+        "Dashboard Design",
+        "Wireframing",
+        "Prototyping",
+      ],
+    },
+
     // Web Development Projects
     {
       title: "BoardMap",
@@ -606,7 +639,8 @@ function ProjectsSection() {
     {
       title: "Back2School VoxBox",
       period: "January 26, 2026",
-      description: "A Amaranth video content series capturing the excitement of students returning to Visayas State University for the new academic year, featuring interviews, campus highlights, and student experiences.",
+      description:
+        "A Amaranth video content series capturing the excitement of students returning to Visayas State University for the new academic year, featuring interviews, campus highlights, and student experiences.",
       type: "video",
       videoUrl: "https://www.facebook.com/share/v/17p7cB8FHY/",
       imageUrl: back2schoolVoxBox,
@@ -697,6 +731,7 @@ function ProjectsSection() {
   ];
 
   // Categorize projects by type
+  const uiuxProjects = projects.filter((p) => p.type === "uiux");
   const webProjects = projects.filter((p) => p.type === "web");
   const videoProjects = projects.filter((p) => p.type === "video");
   const photoProjects = projects.filter((p) => p.type === "photo");
@@ -704,7 +739,7 @@ function ProjectsSection() {
   const renderProjectSection = (
     title: string,
     projectList: Project[],
-    emptyMessage: string
+    emptyMessage: string,
   ) => {
     return (
       <div className="mb-16 md:mb-20 lg:mb-24">
@@ -717,7 +752,7 @@ function ProjectsSection() {
             {title}
           </h3>
         </div>
-        
+
         {/* Projects Grid or Empty State */}
         {projectList.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -753,26 +788,32 @@ function ProjectsSection() {
         >
           Projects
         </h2>
+        {/*UI/UX Design Projects */}
+        {renderProjectSection(
+          "UI/UX Design",
+          uiuxProjects,
+          "No UI/UX design projects uploaded yet",
+        )}
 
         {/* Web Development Projects */}
         {renderProjectSection(
           "Web Development",
           webProjects,
-          "No web projects uploaded yet"
+          "No web projects uploaded yet",
         )}
 
         {/* Video Editing Projects */}
         {renderProjectSection(
           "Video Editing",
           videoProjects,
-          "No video projects uploaded yet"
+          "No video projects uploaded yet",
         )}
 
         {/* Photo Editing Projects */}
         {renderProjectSection(
           "Photo Editing",
           photoProjects,
-          "No photo projects uploaded yet"
+          "No photo projects uploaded yet",
         )}
       </div>
 
@@ -882,6 +923,31 @@ function ProjectModal({
   project: Project;
   onClose: () => void;
 }) {
+  // Add state for carousel
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Navigation functions for carousel
+  const nextImage = () => {
+    if (project.images && project.images.length > 0) {
+      setCurrentImageIndex((prevIndex) => 
+        prevIndex === project.images!.length - 1 ? 0 : prevIndex + 1
+      );
+    }
+  };
+  
+  const prevImage = () => {
+    if (project.images && project.images.length > 0) {
+      setCurrentImageIndex((prevIndex) => 
+        prevIndex === 0 ? project.images!.length - 1 : prevIndex - 1
+      );
+    }
+  };
+  
+  // Reset index when project changes
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [project]);
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4"
@@ -894,7 +960,7 @@ function ProjectModal({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 p-2.5 border border-white/30 transition-colors"
+          className="absolute top-4 right-4 z-20 bg-white/10 hover:bg-white/20 p-2.5 border border-white/30 transition-colors"
         >
           <svg
             className="w-6 h-6 text-white"
@@ -932,7 +998,7 @@ function ProjectModal({
             <div className="mb-8 aspect-video bg-black border border-white/10">
               <iframe
                 src={`https://www.youtube.com/embed/${getYouTubeId(
-                  project.videoUrl
+                  project.videoUrl,
                 )}`}
                 className="w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -982,10 +1048,108 @@ function ProjectModal({
               </div>
             )}
 
-          {(project.type === "web" ||
-            project.type === "product" ||
-            project.type === "analysis") &&
-            project.imageUrl && (
+          {/* Carousel for UI/UX Projects */}
+          {project.type === "uiux" && project.images && project.images.length > 0 && (
+            <div className="mb-8 relative">
+              {/* Main Image */}
+              <div className="relative border border-white/10 bg-black/50">
+                <ImageWithFallback
+                  src={project.images[currentImageIndex]}
+                  alt={`${project.title} - Image ${currentImageIndex + 1}`}
+                  className="w-full h-auto max-h-[70vh] object-contain"
+                />
+                
+                {/* Navigation Arrows - Only show if more than 1 image */}
+                {project.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        prevImage();
+                      }}
+                      className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/70 hover:bg-black/90 p-3 border border-white/30 transition-all duration-300 z-10"
+                    >
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 19l-7-7 7-7"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        nextImage();
+                      }}
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/70 hover:bg-black/90 p-3 border border-white/30 transition-all duration-300 z-10"
+                    >
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </button>
+                  </>
+                )}
+                
+                {/* Image Counter */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 px-4 py-2 border border-white/30">
+                  <span
+                    className="text-[14px] text-white tracking-wider"
+                    style={{ fontFamily: "Jost, sans-serif", fontWeight: 300 }}
+                  >
+                    {currentImageIndex + 1} / {project.images.length}
+                  </span>
+                </div>
+              </div>
+              
+              {/* Thumbnail Navigation */}
+              {project.images.length > 1 && (
+                <div className="mt-4 flex justify-center gap-2 overflow-x-auto py-2">
+                  {project.images.map((image, index) => (
+                    <button
+                      key={index}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentImageIndex(index);
+                      }}
+                      className={`flex-shrink-0 border-2 transition-all duration-300 ${
+                        currentImageIndex === index
+                          ? "border-white"
+                          : "border-white/30 hover:border-white/60"
+                      }`}
+                    >
+                      <ImageWithFallback
+                        src={image}
+                        alt={`Thumbnail ${index + 1}`}
+                        className="w-20 h-16 object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Show single image for web/product projects if no images array */}
+          {(project.type === "web" || project.type === "product") &&
+            project.imageUrl &&
+            !project.images && (
               <div className="mb-8">
                 <ImageWithFallback
                   src={project.imageUrl}
@@ -1172,7 +1336,7 @@ export default function App() {
 function getYouTubeId(url: string) {
   // Handles various YouTube URL formats
   const match = url.match(
-    /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/
+    /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/,
   );
   return match ? match[1] : url;
 }
