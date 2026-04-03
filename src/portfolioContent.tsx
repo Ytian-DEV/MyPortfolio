@@ -7,7 +7,7 @@ import ticTacToeImage from "./assets/imgURL/tictactoe-zeta.vercel.app.png.png";
 import xmass3Lighting from "./assets/imgURL/xmass-tree-lighting.png";
 import birthdayInvitationImage from "./assets/imgURL/birthday-invitation.png";
 import agroVlogImage from "./assets/imgURL/agro-vlog.png";
-import boardmapPreview from "./assets/imgURL/boardmap.jpeg";
+import boardmapV2Preview from "./assets/imgURL/boardmap-v2.png";
 import back2schoolVoxBox from "./assets/imgURL/back2school-voxbox.png";
 import boardmapLogIn from "./assets/images/BoardMap/LogInPage.png";
 import boardmapSignUp from "./assets/images/BoardMap/SignUpPage.png";
@@ -265,10 +265,10 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    title: "BoardMap",
+    title: "BoardMap UI/UX Concept",
     period: "Oct 26, 2025 - Nov 8, 2025",
     summary:
-      "A Figma product design project for a map-based boarding house finder built for students and faculty near Visayas State University.",
+      "An early Figma concept for a map-based boarding house finder built for students and faculty near Visayas State University.",
     details: (
       <div className="copy-stack">
         <p>
@@ -276,11 +276,15 @@ export const PROJECTS: Project[] = [
           students and faculty locate boarding houses near Visayas State
           University - Baybay City Campus.
         </p>
+        <p>
+          This preserves the original product exploration before the later web
+          implementation and the revamped v2 release.
+        </p>
       </div>
     ),
     type: "uiux",
     link: "https://www.figma.com/design/PLyl615g6uSVaesonXgCk2/BoardMap?node-id=0-1&t=R30u6mbH4MCXcR7o-1",
-    imageUrl: boardmapPreview,
+    imageUrl: boardmapStudentMap,
     images: [
       boardmapLogIn,
       boardmapSignUp,
@@ -345,13 +349,26 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    title: "BoardMap",
-    period: "Nov 18, 2025 - Dec 16, 2025",
+    title: "BoardMap v2",
+    period: "Nov 18, 2025 - Current",
     summary:
-      "A full-stack boarding house platform with map-driven discovery, filters, and a cleaner way to browse nearby options around VSU.",
+      "A revamped full-stack boarding house platform with map-driven discovery, cleaner navigation, and a more polished experience for browsing nearby options around VSU.",
+    details: (
+      <div className="copy-stack">
+        <p>
+          This entry now highlights BoardMap v2, which is the current live
+          version of the project.
+        </p>
+        <p>
+          The older v1 build remains part of the project's history, but it is
+          no longer linked separately because the public deployment now opens
+          the latest release.
+        </p>
+      </div>
+    ),
     type: "web",
     link: "https://batch-2025-vsu-boardmap-web.vercel.app/",
-    imageUrl: boardmapPreview,
+    imageUrl: boardmapV2Preview,
     tags: [
       "Web Development",
       "Full Stack",
