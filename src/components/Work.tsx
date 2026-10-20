@@ -66,9 +66,9 @@ function Flagship({ project, onOpen }: { project: Project; onOpen: (p: Project) 
           <h3 className="flagship__title">{project.title}</h3>
           <p className="muted">{project.summary}</p>
           <dl className="facts">
-            <div><dt>Role</dt><dd>Product design → full-stack build</dd></div>
-            <div><dt>Stack</dt><dd>{project.stack.slice(0, 4).join(" · ")}</dd></div>
-            <div><dt>Evolution</dt><dd>Figma concept → v1 → v2 rebuild</dd></div>
+            {(project.facts ?? [{ label: "Stack", value: project.stack.slice(0, 4).join(" · ") }]).map((f) => (
+              <div key={f.label}><dt>{f.label}</dt><dd>{f.value}</dd></div>
+            ))}
           </dl>
           <div className="row">
             {project.live ? (

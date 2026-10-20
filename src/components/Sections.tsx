@@ -1,7 +1,7 @@
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { Check, Code2, Copy, Database, Mail, Phone, Sparkles } from "lucide-react";
 import { useRef, useState, type FormEvent } from "react";
-import portrait from "../assets/myprofile-photo1.jpg";
+import portrait from "../assets/profile-headshot.webp";
 import { ARSENAL, CAMPAIGN, MARQUEE, PROFILE, STATS, TIMELINE } from "../content";
 import { Chip, CountUp, Eyebrow, GithubIcon, MagneticButton, Reveal, Sigil } from "./ui";
 

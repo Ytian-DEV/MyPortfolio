@@ -1,25 +1,25 @@
-import boardmapV2 from "./assets/imgURL/boardmap-v2.png";
-import reseato from "./assets/imgURL/reseato-cebu.png";
-import mapaguapa from "./assets/imgURL/mapaguapa.png";
-import amaranth from "./assets/imgURL/amaranth-dvm6.vercel.app.png";
-import invitation from "./assets/imgURL/birthday-invitation.png";
-import ticTacToe from "./assets/imgURL/tictactoe-zeta.vercel.app.png.png";
-import bmLogIn from "./assets/images/BoardMap/LogInPage.png";
-import bmStudentMap from "./assets/images/BoardMap/StudentDashBoard-MapView.png";
-import bmStudentMapFilter from "./assets/images/BoardMap/StudentDashBoard-MapView-Filter.png";
-import bmStudentList from "./assets/images/BoardMap/StudentDashBoard-ListView.png";
-import bmStudentProperty from "./assets/images/BoardMap/StudentDashBoard-Property.png";
-import bmStudentChat from "./assets/images/BoardMap/StudentDashBoard-Message-CHat.png";
-import bmOwnerProperty from "./assets/images/BoardMap/OwnerDashBoard-Property.png";
-import bmOwnerInquiries from "./assets/images/BoardMap/OwnerDashBoard-Inquiries.png";
-import bmOwnerAnalytics from "./assets/images/BoardMap/OwnerDashBoard-Analytics.png";
-import rydeHomeDark from "./assets/images/Ryde/Home Page - Dark Theme.png";
-import rydeLoginDark from "./assets/images/Ryde/Login Page - Dark Theme.png";
-import rydeOtpLight from "./assets/images/Ryde/OTP Page - Light Theme.png";
-import rydeHomeLight from "./assets/images/Ryde/Home Page - Light Theme.png";
-import rydePickup from "./assets/images/Ryde/Set Pick-up Location Page - Light Theme.png";
-import rydeTime from "./assets/images/Ryde/Select Time Page - Light Theme.png";
-import rydePayment from "./assets/images/Ryde/Payment Method Page - Light Theme.png";
+import boardmapV2 from "./assets/imgURL/boardmap-v2.webp";
+import reseato from "./assets/imgURL/reseato-cebu.webp";
+import mapaguapa from "./assets/imgURL/mapaguapa.webp";
+import amaranth from "./assets/imgURL/amaranth-dvm6.webp";
+import invitation from "./assets/imgURL/birthday-invitation.webp";
+import ticTacToe from "./assets/imgURL/tictactoe.webp";
+import bmLogIn from "./assets/images/BoardMap/loginpage.webp";
+import bmStudentMap from "./assets/images/BoardMap/studentdashboard-mapview.webp";
+import bmStudentMapFilter from "./assets/images/BoardMap/studentdashboard-mapview-filter.webp";
+import bmStudentList from "./assets/images/BoardMap/studentdashboard-listview.webp";
+import bmStudentProperty from "./assets/images/BoardMap/studentdashboard-property.webp";
+import bmStudentChat from "./assets/images/BoardMap/studentdashboard-message-chat.webp";
+import bmOwnerProperty from "./assets/images/BoardMap/ownerdashboard-property.webp";
+import bmOwnerInquiries from "./assets/images/BoardMap/ownerdashboard-inquiries.webp";
+import bmOwnerAnalytics from "./assets/images/BoardMap/ownerdashboard-analytics.webp";
+import rydeHomeDark from "./assets/images/Ryde/home-page-dark-theme.webp";
+import rydeLoginDark from "./assets/images/Ryde/login-page-dark-theme.webp";
+import rydeOtpLight from "./assets/images/Ryde/otp-page-light-theme.webp";
+import rydeHomeLight from "./assets/images/Ryde/home-page-light-theme.webp";
+import rydePickup from "./assets/images/Ryde/set-pick-up-location-page-light-theme.webp";
+import rydeTime from "./assets/images/Ryde/select-time-page-light-theme.webp";
+import rydePayment from "./assets/images/Ryde/payment-method-page-light-theme.webp";
 
 export const PROFILE = {
   name: "Christian Boyles",
@@ -38,6 +38,7 @@ export type ProjectCategory = "fullstack" | "frontend" | "design";
 
 export interface Project {
   id: string;
+  /** Display number; assigned from PROJECT_ORDER below. */
   index: string;
   title: string;
   kicker: string;
@@ -53,11 +54,13 @@ export interface Project {
   cover: string;
   gallery: { src: string; caption: string }[];
   flagship?: boolean;
+  /** Key facts shown on the flagship card. */
+  facts?: { label: string; value: string }[];
   /** Portrait mobile screens get a different gallery layout. */
   mobile?: boolean;
 }
 
-export const PROJECTS: Project[] = [
+const ALL_PROJECTS: Project[] = [
   {
     id: "boardmap",
     index: "01",
@@ -65,7 +68,6 @@ export const PROJECTS: Project[] = [
     kicker: "Student housing platform",
     period: "Nov 2025 → Now",
     category: "fullstack",
-    flagship: true,
     summary:
       "VSU students used to hunt for boarding houses door-to-door. BoardMap puts every listing on a live map — with filters, owner dashboards, inquiries and in-app messaging.",
     problem:
@@ -127,6 +129,12 @@ export const PROJECTS: Project[] = [
     kicker: "Housing finder · VYM",
     period: "Mar → Apr 2026",
     category: "fullstack",
+    flagship: true,
+    facts: [
+      { label: "Role", value: "Full-stack developer" },
+      { label: "Stack", value: "React · TypeScript · Supabase · Maps" },
+      { label: "Built for", value: "Viscan students at VSU" },
+    ],
     summary:
       "Helps Viscan students find boarding houses and apartments that match their comfort, location and budget — all in one accessible platform.",
     problem:
@@ -234,6 +242,14 @@ export const PROJECTS: Project[] = [
     ],
   },
 ];
+
+/** Display order — the first entry is numbered 01. */
+const PROJECT_ORDER = ["mapaguapa", "amaranth", "boardmap", "reseato", "invitation", "tictactoe", "ryde"];
+
+export const PROJECTS: Project[] = PROJECT_ORDER.map((id, i) => ({
+  ...ALL_PROJECTS.find((p) => p.id === id)!,
+  index: String(i + 1).padStart(2, "0"),
+}));
 
 export const FILTERS: { id: "all" | ProjectCategory; label: string }[] = [
   { id: "all", label: "All realms" },
