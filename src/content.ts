@@ -21,6 +21,16 @@ import rydePickup from "./assets/images/Ryde/set-pick-up-location-page-light-the
 import rydeTime from "./assets/images/Ryde/select-time-page-light-theme.webp";
 import rydePayment from "./assets/images/Ryde/payment-method-page-light-theme.webp";
 
+import khAndroidHome from "./assets/images/Kheryne/android-home.webp";
+import khAndroidScan from "./assets/images/Kheryne/android-scan.webp";
+import khAndroidReport from "./assets/images/Kheryne/android-report.webp";
+import khAndroidMorpho from "./assets/images/Kheryne/android-morphometrics.webp";
+import khWinWorkspace from "./assets/images/Kheryne/windows-workspace.webp";
+import khWinLive from "./assets/images/Kheryne/windows-live.webp";
+import khWinCompare from "./assets/images/Kheryne/windows-compare.webp";
+import khWinKey from "./assets/images/Kheryne/windows-key.webp";
+import khWinReport from "./assets/images/Kheryne/windows-report.webp";
+
 export const PROFILE = {
   name: "Christian Boyles",
   fullName: "Christian Earl James Boyles",
@@ -213,6 +223,43 @@ const ALL_PROJECTS: Project[] = [
     gallery: [{ src: ticTacToe, caption: "Game board" }],
   },
   {
+    id: "kheryne",
+    index: "",
+    title: "Kheryne",
+    kicker: "Nematode ID · Android + Windows",
+    period: "2026",
+    category: "design",
+    summary:
+      "An offline assistant that spots plant-parasitic nematodes through the microscope and identifies them from order to genus — designed for Android and Windows, in light and dark.",
+    problem:
+      "Identifying nematodes means hours at the eyepiece comparing anatomy against dichotomous keys, and field labs often have no reliable internet — so cloud tools aren't an option.",
+    role: "Product & UI designer — the full system in Figma: foundations, components, and every flow on Android and Windows.",
+    built: [
+      "Live scan: a phone clipped to the eyepiece marks likely nematodes in real time and prompts a switch to 40× for genus-level detail",
+      "Explainable results — order → family → genus with confidence, plus the traits used (stylet knobs, tail shape, vulva position)",
+      "Morphometrics with stage-micrometer calibration and automatic De Man indices",
+      "Windows workspace that pairs with the phone for live streaming, batch analysis, side-by-side compare and full PDF reports",
+      "Offline-first (models on-device), light & dark themes, built on a documented design system",
+    ],
+    stack: ["Figma", "Design system", "Android", "Windows", "Light & dark"],
+    extraLink: {
+      label: "Open in Figma",
+      href: "https://www.figma.com/design/KWcNyL3Ehh9ayQ09f7QB1n/Kheryne-%E2%80%94-UI-design?node-id=1-4",
+    },
+    cover: khWinWorkspace,
+    gallery: [
+      { src: khAndroidHome, caption: "Android — home, light & dark" },
+      { src: khAndroidScan, caption: "Android — live scan & identify" },
+      { src: khAndroidReport, caption: "Android — identification report" },
+      { src: khAndroidMorpho, caption: "Android — calibrate & measure" },
+      { src: khWinWorkspace, caption: "Windows — workspace" },
+      { src: khWinLive, caption: "Windows — live stream from phone" },
+      { src: khWinCompare, caption: "Windows — compare" },
+      { src: khWinKey, caption: "Windows — dichotomous key" },
+      { src: khWinReport, caption: "Windows — full report" },
+    ],
+  },
+  {
     id: "ryde",
     index: "07",
     title: "Ryde",
@@ -244,7 +291,7 @@ const ALL_PROJECTS: Project[] = [
 ];
 
 /** Display order — the first entry is numbered 01. */
-const PROJECT_ORDER = ["mapaguapa", "amaranth", "boardmap", "reseato", "invitation", "tictactoe", "ryde"];
+const PROJECT_ORDER = ["mapaguapa", "amaranth", "boardmap", "reseato", "invitation", "tictactoe", "kheryne", "ryde"];
 
 export const PROJECTS: Project[] = PROJECT_ORDER.map((id, i) => ({
   ...ALL_PROJECTS.find((p) => p.id === id)!,

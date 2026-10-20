@@ -105,6 +105,10 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: (p: Projec
           <a className="card__link" href={project.live} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
             Visit live site <ArrowUpRight size={16} />
           </a>
+        ) : project.extraLink ? (
+          <a className="card__link" href={project.extraLink.href} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
+            {project.extraLink.label} <ArrowUpRight size={16} />
+          </a>
         ) : (
           <span className="card__link">Figma blueprint <ArrowUpRight size={16} /></span>
         )}
