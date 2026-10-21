@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import { PROFILE } from "../content";
-import { DragonThrone } from "./DragonThrone";
+import { HeroDragon } from "./HeroDragon";
 import { Chip, MagneticButton } from "./ui";
 
 const HEADLINE = ["I", "forge", "web", "apps", "worthy", "of", "the"];
@@ -78,7 +78,7 @@ export function Hero({ breathing, flying, onDragonClick }: { breathing: boolean;
           transition={{ duration: 1.4, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <button type="button" className="hero__dragon" onClick={onDragonClick} aria-label="Wake the dragon">
-            <DragonThrone breathing={breathing} flying={flying} />
+            <HeroDragon breathing={breathing} flying={flying} />
           </button>
           <p className="hero__hint" aria-hidden="true">
             click the dragon — or type <kbd>dracarys</kbd>

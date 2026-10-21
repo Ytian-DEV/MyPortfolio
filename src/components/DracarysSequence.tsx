@@ -1,30 +1,30 @@
 import { useEffect, useRef } from "react";
-import dragonFly from "../assets/art/dragon-fly.webp";
-import dragonRoar from "../assets/art/dragon-roar.webp";
+import dragonBreath from "../assets/art/dragon-breath.webp";
 import fireBlast from "../assets/art/fire-blast.webp";
 
 /*
- * Full-screen "Dracarys" cinematic: a realistic black dragon flies in toward
- * the viewer, cuts to a roaring close-up, lunges at the screen and floods it
- * with fire, then bursts through the camera. One rAF clock drives the image
- * transforms, the fire layers and the spark particles so everything stays in
- * sync. Dragon and fire images are original AI renders (Figma AI), not a film
- * character.
+ * Full-screen "Dracarys" cinematic, one continuous shot: a realistic black
+ * dragon glides in toward the camera with fire gathering in its jaws, then
+ * breathes a stream of fire that floods the screen while it keeps coming,
+ * and passes through the camera. The dragon is scaled around its mouth, so
+ * the flight and the fire share one anchor point and never cut.
+ * Images are original renders (Figma AI), not a film character.
  */
 
-export const DRACARYS_DURATION = 3600; // ms
+export const DRACARYS_DURATION = 3800; // ms
 
-const FIRE_START = 1.5;
-const FIRE_END = 2.85;
-/** Throat position in dragon-roar.webp, as a fraction of its width/height. */
-const MOUTH = { x: 0.5, y: 0.56 };
-/** Fire is a stream of fireball layers rushing from the mouth toward the camera. */
+const APPROACH_START = 0.25;
+const PASS_THROUGH = 3.25; // dragon reaches the camera
+const FIRE_START = 1.55;
+const FIRE_END = 3.0;
+/** Mouth position in dragon-breath.webp, as a fraction of its width/height. */
+const MOUTH = { x: 0.498, y: 0.497 };
 const FIRE_LAYERS = 5;
 const FIRE_CYCLE = 0.75; // s for one fireball to travel "through" the screen
 
 /** Decode the images ahead of time so the cinematic never starts on a blank frame. */
 export function preloadDracarys() {
-  [dragonFly, dragonRoar, fireBlast].forEach((src) => {
+  [dragonBreath, fireBlast].forEach((src) => {
     const img = new Image();
     img.src = src;
     img.decode?.().catch(() => {});
@@ -35,40 +35,38 @@ const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const seg = (t: number, a: number, b: number) => clamp((t - a) / (b - a));
 const lerp = (a: number, b: number, k: number) => a + (b - a) * k;
 const easeOut = (k: number) => 1 - Math.pow(1 - k, 3);
-const easeIn = (k: number) => k * k * k;
-const easeInOut = (k: number) => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
 
-/** Flying shot: rushes in from the distance, bobbing with each wingbeat. */
-function flyPose(t: number) {
-  const k = easeOut(seg(t, 0.25, 1.3));
-  const beat = Math.sin(t * 13);
+/**
+ * The dragon's flight, one smooth curve in log-scale: it rushes in from the
+ * distance, is nearly full-frame by the time it breathes, then keeps pressing
+ * toward the camera while slowing slightly — a dragon braking to breathe.
+ * Position settles from high-left to centre as it banks level. No cuts.
+ */
+function flight(t: number) {
+  const k = seg(t, APPROACH_START, PASS_THROUGH);
+  const s = Math.exp(lerp(Math.log(0.06), Math.log(3), 1 - Math.pow(1 - k, 2)));
+  const settle = easeOut(seg(t, APPROACH_START, 1.6));
   return {
-    s: lerp(0.05, 1, k),
-    sy: 1 + beat * 0.05 * (1 - k * 0.5),
-    y: lerp(-30, 0, k) + beat * 1.4,
-    o: seg(t, 0.25, 0.5) * (1 - seg(t, 1.2, 1.45)),
+    s,
+    x: lerp(-10, 0, settle), // vw
+    y: lerp(-20, 3, settle) + Math.sin(t * 2.6) * 0.6 * (1 - settle), // vh, a slow glide
+    rot: lerp(-8, 0, settle),
+    o: seg(t, APPROACH_START, 0.55) * (1 - seg(t, 3.05, 3.45)),
   };
-}
-
-/** Roaring close-up: settles, then lunges at the screen while breathing fire. */
-function roarPose(t: number) {
-  let s: number;
-  if (t < FIRE_START) s = lerp(0.72, 0.84, easeInOut(seg(t, 1.2, FIRE_START)));
-  else if (t < 2.9) s = lerp(0.84, 2.1, easeOut(seg(t, FIRE_START, 2.9)));
-  else s = lerp(2.1, 3.8, easeIn(seg(t, 2.9, 3.5)));
-  return { s, o: seg(t, 1.2, 1.45) * (1 - seg(t, 2.95, 3.4)) };
 }
 
 /** Fireball layer i at time t: grows from the mouth past the camera, then relaunches. */
 function firePose(t: number, i: number) {
-  const local = t - FIRE_START - (i * FIRE_CYCLE) / FIRE_LAYERS;
+  const offset = (i * FIRE_CYCLE) / FIRE_LAYERS;
+  const local = t - FIRE_START - offset;
   if (local < 0) return null;
   const cycle = Math.floor(local / FIRE_CYCLE);
-  // No new fireballs after the breath ends; let the last ones finish.
-  if (FIRE_START + (i * FIRE_CYCLE) / FIRE_LAYERS + cycle * FIRE_CYCLE > FIRE_END) return null;
+  if (FIRE_START + offset + cycle * FIRE_CYCLE > FIRE_END) return null;
   const k = (local % FIRE_CYCLE) / FIRE_CYCLE;
+  // The very first burst starts smaller so the fire visibly leaves the jaws.
+  const first = cycle === 0 && i === 0 ? 0.6 : 1;
   return {
-    s: lerp(0.12, 4.6, Math.pow(k, 1.6)),
+    s: lerp(0.08, 4.6, Math.pow(k, 1.6)) * first,
     o: Math.pow(Math.sin(Math.PI * Math.min(1, k * 1.15)), 0.7),
     rot: (i * 72 + cycle * 47 + k * 50) * (i % 2 ? -1 : 1),
   };
@@ -89,8 +87,8 @@ function makeSprite(stops: [number, string][]) {
 
 export function DracarysSequence({ onDone }: { onDone: () => void }) {
   const rootRef = useRef<HTMLDivElement>(null);
-  const flyRef = useRef<HTMLDivElement>(null);
-  const roarRef = useRef<HTMLDivElement>(null);
+  const dragonRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
   const fireRefs = useRef<(HTMLDivElement | null)[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const doneRef = useRef(onDone);
@@ -125,21 +123,20 @@ export function DracarysSequence({ onDone }: { onDone: () => void }) {
       const unit = Math.max(W, H) / 1000;
       const fireK = t < FIRE_START ? 0 : t < FIRE_END ? 1 : 1 - seg(t, FIRE_END, 3.5);
 
-      // Dragon
-      const f = flyPose(t);
-      const fly = flyRef.current!;
-      fly.style.opacity = String(f.o);
-      fly.style.transform = `translate(-50%, calc(-50% + ${f.y}vh)) scale(${f.s}, ${f.s * f.sy})`;
-      const r = roarPose(t);
-      const roar = roarRef.current!;
-      roar.style.opacity = String(r.o);
-      roar.style.transform = `translate(-50%, -50%) scale(${r.s})`;
-      roar.style.filter = `brightness(${1 + fireK * (0.22 + 0.14 * Math.sin(t * 43))})`;
+      // Dragon (scaled around its mouth, so mouth = screen centre + offset)
+      const f = flight(t);
+      const dragon = dragonRef.current!;
+      dragon.style.opacity = String(f.o);
+      dragon.style.transform = `translate(calc(-${MOUTH.x * 100}% + ${f.x}vw), calc(-${MOUTH.y * 100}% + ${f.y}vh)) rotate(${f.rot}deg) scale(${f.s})`;
+      dragon.style.filter = `brightness(${1 + fireK * (0.18 + 0.12 * Math.sin(t * 43))})`;
+      const mx = W / 2 + (f.x / 100) * W;
+      const my = H / 2 + (f.y / 100) * H;
 
-      // Mouth position on screen (fire origin)
-      const rect = roar.getBoundingClientRect();
-      const mx = rect.left + rect.width * MOUTH.x;
-      const my = rect.top + rect.height * MOUTH.y;
+      // Fire gathering in the jaws before the breath
+      const gather = seg(t, 1.05, FIRE_START) * (1 - seg(t, FIRE_END - 0.2, FIRE_END + 0.3));
+      const glow = glowRef.current!;
+      glow.style.opacity = String(gather * (0.85 + Math.random() * 0.15));
+      glow.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%) scale(${0.4 + gather * 0.8 + f.s * 0.3})`;
 
       // Fireball stream
       for (let i = 0; i < FIRE_LAYERS; i++) {
@@ -150,31 +147,28 @@ export function DracarysSequence({ onDone }: { onDone: () => void }) {
           el.style.opacity = "0";
           continue;
         }
-        const flicker = 0.9 + Math.random() * 0.2;
-        el.style.opacity = String(p.o * flicker);
+        el.style.opacity = String(p.o * (0.9 + Math.random() * 0.2));
         el.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%) scale(${p.s}) rotate(${p.rot}deg)`;
       }
 
-      // Veil, heat and page shake
-      rootRef.current!.style.setProperty("--veil", String(seg(t, 0.1, 0.6) * 0.95 * (1 - seg(t, 3.15, 3.6))));
+      // Veil, heat and camera shake
+      rootRef.current!.style.setProperty("--veil", String(seg(t, 0.05, 0.5) * 0.95 * (1 - seg(t, 3.3, 3.8))));
       rootRef.current!.style.setProperty("--heat", String(fireK));
-      const shake = t > FIRE_START && t < FIRE_END ? 8 * (1 - seg(t, FIRE_START, FIRE_END) * 0.6) : 0;
+      const shake = t > FIRE_START && t < FIRE_END ? 7 * (1 - seg(t, FIRE_START, FIRE_END) * 0.5) : 0;
       root.style.setProperty("--shake-x", `${(Math.random() - 0.5) * shake}px`);
       root.style.setProperty("--shake-y", `${(Math.random() - 0.5) * shake}px`);
 
-      // Sparks & embers flying out of the blast toward the viewer
-      if (t > FIRE_START && t < FIRE_END) {
-        const count = Math.round(9 * seg(t, FIRE_START, FIRE_START + 0.2));
-        for (let i = 0; i < count; i++) {
-          const a = Math.random() * Math.PI * 2;
-          const sp = (300 + Math.random() * 1100) * unit;
-          sparks.push({
-            x: mx, y: my,
-            vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
-            age: 0, life: 0.5 + Math.random() * 0.9,
-            r: (2 + Math.random() * 6) * unit, hot: Math.random() > 0.4,
-          });
-        }
+      // Sparks: a few while the fire gathers, a storm during the breath
+      const rate = t > FIRE_START && t < FIRE_END ? 9 : gather > 0.2 && t < FIRE_START ? 1 : 0;
+      for (let i = 0; i < rate; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const sp = (t < FIRE_START ? 120 + Math.random() * 200 : 300 + Math.random() * 1100) * unit;
+        sparks.push({
+          x: mx, y: my,
+          vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+          age: 0, life: 0.5 + Math.random() * 0.9,
+          r: (2 + Math.random() * 6) * unit, hot: Math.random() > 0.4,
+        });
       }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
@@ -218,12 +212,10 @@ export function DracarysSequence({ onDone }: { onDone: () => void }) {
   return (
     <div ref={rootRef} className="dracarys" aria-hidden="true">
       <div className="dracarys__veil" />
-      <div ref={flyRef} className="dracarys__img dracarys__img--fly">
-        <img src={dragonFly} alt="" />
+      <div ref={dragonRef} className="dracarys__dragon" style={{ transformOrigin: `${MOUTH.x * 100}% ${MOUTH.y * 100}%` }}>
+        <img src={dragonBreath} alt="" />
       </div>
-      <div ref={roarRef} className="dracarys__img dracarys__img--roar">
-        <img src={dragonRoar} alt="" />
-      </div>
+      <div ref={glowRef} className="dracarys__gather" />
       {Array.from({ length: FIRE_LAYERS }, (_, i) => (
         <div key={i} ref={(el) => (fireRefs.current[i] = el)} className="dracarys__blast">
           <img src={fireBlast} alt="" />
