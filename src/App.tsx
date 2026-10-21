@@ -1,8 +1,9 @@
-import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { Command as CommandIcon, Menu, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CaseStudy } from "./components/CaseStudy";
 import { CommandPalette } from "./components/CommandPalette";
+import { DracarysSequence, preloadDracarys } from "./components/DracarysSequence";
 import { Hero } from "./components/Hero";
 import { Arsenal, Campaign, Chronicle, Contact, Footer, Marquee, Stats } from "./components/Sections";
 import { MagneticButton, Sigil } from "./components/ui";
@@ -39,6 +40,9 @@ export default function App() {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [breathing, setBreathing] = useState(false);
+  const [flying, setFlying] = useState(false);
+  const dracarysBusy = useRef(false);
+  const reduceMotion = useReducedMotion();
   const [toast, setToast] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const toastTimer = useRef<number>();
@@ -54,30 +58,49 @@ export default function App() {
     toastTimer.current = window.setTimeout(() => setToast(null), 2600);
   }, []);
 
+  // Full-screen fly-in + fire; reduced-motion visitors get the small breath on the throne instead.
   const dracarys = useCallback(() => {
-    setBreathing(true);
+    if (dracarysBusy.current) return;
+    dracarysBusy.current = true;
+    if (reduceMotion) {
+      setBreathing(true);
+      showToast("Dracarys! 🔥");
+      window.setTimeout(() => {
+        setBreathing(false);
+        dracarysBusy.current = false;
+      }, 1900);
+    } else {
+      setFlying(true);
+    }
+  }, [reduceMotion, showToast]);
+
+  const endDracarys = useCallback(() => {
+    setFlying(false);
+    dracarysBusy.current = false;
     showToast("Dracarys! 🔥");
-    window.setTimeout(() => setBreathing(false), 1900);
   }, [showToast]);
 
   // Typing "dracarys" anywhere (outside inputs) wakes the dragon.
   useEffect(() => {
     let buffer = "";
     const onKey = (e: KeyboardEvent) => {
-      const t = e.target as HTMLElement;
-      if (t.closest("input, textarea, [contenteditable]") || e.key.length !== 1) return;
+      const t = e.target;
+      if ((t instanceof Element && t.closest("input, textarea, [contenteditable]")) || e.key.length !== 1) return;
       buffer = (buffer + e.key.toLowerCase()).slice(-8);
       if (buffer === "dracarys") {
         buffer = "";
-        if (window.scrollY > window.innerHeight * 0.6) {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-          window.setTimeout(dracarys, 600);
-        } else dracarys();
+        dracarys();
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [dracarys]);
+
+  // Warm the dragon images once the page has settled.
+  useEffect(() => {
+    const id = window.setTimeout(preloadDracarys, 1500);
+    return () => window.clearTimeout(id);
+  }, []);
 
   // Cursor spotlight + nav background on scroll.
   useEffect(() => {
@@ -155,7 +178,7 @@ export default function App() {
       </AnimatePresence>
 
       <main>
-        <Hero breathing={breathing} onDragonClick={dracarys} />
+        <Hero breathing={breathing} flying={flying} onDragonClick={dracarys} />
         <Stats />
         <Work onOpen={setProject} />
         <Marquee />
@@ -169,9 +192,7 @@ export default function App() {
       <CaseStudy project={project} onClose={() => setProject(null)} onNavigate={setProject} />
       <CommandPalette open={paletteOpen} setOpen={setPaletteOpen} onOpenProject={setProject} onDracarys={dracarys} onToast={showToast} />
 
-      <AnimatePresence>
-        {breathing ? <motion.div key="flash" className="fire-flash" initial={{ opacity: 0 }} animate={{ opacity: [0, 0.6, 0] }} exit={{ opacity: 0 }} transition={{ duration: 1.4 }} aria-hidden="true" /> : null}
-      </AnimatePresence>
+      {flying ? <DracarysSequence onDone={endDracarys} /> : null}
       <AnimatePresence>
         {toast ? (
           <motion.div className="toast" role="status" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>

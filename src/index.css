@@ -237,7 +237,31 @@ kbd {
 .is-breathing .dt-wing--l { animation: beat-l 0.5s ease-in-out 3; }
 .is-breathing .dt-wing--r { animation: beat-r 0.5s ease-in-out 3; }
 .is-breathing .dt-eyes { animation: none; filter: drop-shadow(0 0 6px #ff4f8b) brightness(1.6); }
-.fire-flash { position: fixed; inset: 0; z-index: 40; pointer-events: none; background: radial-gradient(circle at 70% 40%, rgba(255, 179, 122, 0.5), rgba(255, 79, 139, 0.25) 40%, transparent 70%); }
+
+/* Dracarys cinematic (DracarysSequence.tsx) */
+.dracarys { position: fixed; inset: 0; z-index: 95; pointer-events: none; overflow: hidden; --veil: 0; --heat: 0; }
+.dracarys__veil { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, #0b0306, #000 75%); opacity: var(--veil); }
+.dracarys__img { position: absolute; left: 50%; top: 50%; opacity: 0; will-change: transform, opacity; }
+.dracarys__img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Feather the image edges into the black veil so the render's background never shows a seam. */
+.dracarys__img img {
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 78%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 78%, transparent 100%);
+}
+.dracarys__img--fly { width: min(118vw, 160vh); aspect-ratio: 1264 / 848; }
+.dracarys__img--roar { width: min(86vw, 86vh); aspect-ratio: 1; transform-origin: 50% 56%; }
+.dracarys__blast { position: absolute; left: 0; top: 0; width: 70vmax; aspect-ratio: 1; opacity: 0; mix-blend-mode: screen; will-change: transform, opacity; pointer-events: none; }
+.dracarys__blast img { display: block; width: 100%; height: 100%; -webkit-mask-image: radial-gradient(closest-side, #000 60%, transparent 100%); mask-image: radial-gradient(closest-side, #000 60%, transparent 100%); }
+.dracarys__fire { position: absolute; inset: 0; width: 100%; height: 100%; }
+.dracarys__heat { position: absolute; inset: 0; opacity: calc(var(--heat) * 0.5); background: radial-gradient(circle at 50% 55%, rgba(255, 150, 110, 0.18), rgba(255, 79, 139, 0.14) 45%, rgba(120, 10, 50, 0.35) 100%); }
+body.is-dracarys main, body.is-dracarys .footer { transform: translate(var(--shake-x, 0), var(--shake-y, 0)); }
+body.is-dracarys .spotlight { opacity: 0; }
+
+/* Hero dragon takes off from the throne while the cinematic plays */
+.is-flying .dt-layer--back { animation: takeoff 3.6s cubic-bezier(0.5, 0, 0.3, 1) both; }
+.is-flying .dt-wing--l { animation: beat-l 0.32s ease-in-out infinite; }
+.is-flying .dt-wing--r { animation: beat-r 0.32s ease-in-out infinite; }
+.is-flying .dt-eyes { animation: none; filter: drop-shadow(0 0 6px #ff4f8b) brightness(1.6); }
 
 /* ---------- Stats & marquee ---------- */
 .stats { position: relative; z-index: 2; border-block: 1px solid var(--line); background: var(--obsidian); }
@@ -431,6 +455,13 @@ kbd {
 @keyframes code-glow { 50% { filter: drop-shadow(0 0 8px #ff4f8b); } }
 @keyframes glow { 50% { opacity: 0.7; } }
 @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(-90px); opacity: 0; } }
+@keyframes takeoff {
+  0% { transform: none; opacity: 1; }
+  10% { transform: translateY(26px) scale(1.02); opacity: 1; }
+  24% { transform: translateY(-460px) scale(0.55); opacity: 0; }
+  86% { transform: translateY(-460px) scale(0.55); opacity: 0; }
+  100% { transform: none; opacity: 1; }
+}
 @keyframes burst {
   0% { opacity: 0; transform: rotate(var(--a)) translateY(0) scale(0.2); }
   15% { opacity: 1; }

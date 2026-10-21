@@ -9,12 +9,12 @@ import { memo } from "react";
 const W = 800;
 const CX = 400;
 const f = (n: number) => Math.round(n * 10) / 10;
-type Pt = [number, number];
+export type Pt = [number, number];
 
-const LEFT_WING: Pt[] = [[368, 312], [190, 128], [40, 96], [22, 250], [74, 392], [180, 470], [336, 430]];
-const RIGHT_WING: Pt[] = LEFT_WING.map(([x, y]) => [W - x, y]);
+export const LEFT_WING: Pt[] = [[368, 312], [190, 128], [40, 96], [22, 250], [74, 392], [180, 470], [336, 430]];
+export const RIGHT_WING: Pt[] = LEFT_WING.map(([x, y]) => [W - x, y]);
 
-function wingPath([S, Wr, T1, T2, T3, T4, B]: Pt[]) {
+export function wingPath([S, Wr, T1, T2, T3, T4, B]: Pt[]) {
   const mid = (a: Pt, b: Pt, k: number): Pt => [
     a[0] + (b[0] - a[0]) * 0.5 + (Wr[0] - (a[0] + b[0]) / 2) * k,
     a[1] + (b[1] - a[1]) * 0.5 + (Wr[1] - (a[1] + b[1]) / 2) * k,
@@ -90,9 +90,9 @@ function Wing({ pts, side }: { pts: Pt[]; side: "l" | "r" }) {
   );
 }
 
-export const DragonThrone = memo(function DragonThrone({ breathing = false }: { breathing?: boolean }) {
+export const DragonThrone = memo(function DragonThrone({ breathing = false, flying = false }: { breathing?: boolean; flying?: boolean }) {
   return (
-    <svg className={`dragon-throne${breathing ? " is-breathing" : ""}`} viewBox="0 0 800 800" fill="none" role="img" aria-label="A dragon spreading its wings behind a throne forged from blades, engraved with a code symbol">
+    <svg className={`dragon-throne${breathing ? " is-breathing" : ""}${flying ? " is-flying" : ""}`} viewBox="0 0 800 800" fill="none" role="img" aria-label="A dragon spreading its wings behind a throne forged from blades, engraved with a code symbol">
       <defs>
         <radialGradient id="dt-glow" cx="50%" cy="42%" r="50%">
           <stop offset="0" stopColor="#FF4F8B" stopOpacity="0.55" />

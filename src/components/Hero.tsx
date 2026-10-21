@@ -6,7 +6,7 @@ import { Chip, MagneticButton } from "./ui";
 
 const HEADLINE = ["I", "forge", "web", "apps", "worthy", "of", "the"];
 
-export function Hero({ breathing, onDragonClick }: { breathing: boolean; onDragonClick: () => void }) {
+export function Hero({ breathing, flying, onDragonClick }: { breathing: boolean; flying: boolean; onDragonClick: () => void }) {
   const artRef = useRef<HTMLDivElement>(null);
   const frame = useRef(0);
   const reduce = useReducedMotion();
@@ -78,7 +78,7 @@ export function Hero({ breathing, onDragonClick }: { breathing: boolean; onDrago
           transition={{ duration: 1.4, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <button type="button" className="hero__dragon" onClick={onDragonClick} aria-label="Wake the dragon">
-            <DragonThrone breathing={breathing} />
+            <DragonThrone breathing={breathing} flying={flying} />
           </button>
           <p className="hero__hint" aria-hidden="true">
             click the dragon — or type <kbd>dracarys</kbd>
