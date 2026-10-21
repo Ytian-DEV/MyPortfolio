@@ -4,6 +4,7 @@ import mapaguapa from "./assets/imgURL/mapaguapa.webp";
 import amaranth from "./assets/imgURL/amaranth.webp";
 import invitation from "./assets/imgURL/birthday-invitation.webp";
 import ticTacToe from "./assets/imgURL/tictactoe.webp";
+import lilyFlowers from "./assets/imgURL/lily-flowers.webp";
 import bmLogIn from "./assets/images/BoardMap/loginpage.webp";
 import bmStudentMap from "./assets/images/BoardMap/studentdashboard-mapview.webp";
 import bmStudentMapFilter from "./assets/images/BoardMap/studentdashboard-mapview-filter.webp";
@@ -183,6 +184,29 @@ const ALL_PROJECTS: Project[] = [
     gallery: [{ src: amaranth, caption: "Homepage — top story & most read" }],
   },
   {
+    id: "lily",
+    index: "",
+    title: "Lily Flowers",
+    kicker: "Inventory & invoicing",
+    period: "2026",
+    category: "fullstack",
+    summary:
+      "Inventory and invoice management for a Baybay City flower shop — orders, payments, deliveries, customers and a bouquet catalog, with a live revenue dashboard.",
+    problem:
+      "The shop tracked bouquet orders, deposits and delivery dates by hand, so balances were missed and nobody could see at a glance what was due this week.",
+    role: "Full-stack developer — data model, invoicing flow, dashboard and admin UI.",
+    built: [
+      "Order flow that issues dated invoice numbers (INV-YYYYMMDD-####) and tracks each order from Confirmed → Preparing → Ready",
+      "Payments with outstanding balances, so the shop sees exactly what is left to collect",
+      "Dashboard: revenue this month, balance to collect, open orders, deliveries this week and a 6-month revenue chart",
+      "Bouquet catalog with best-sellers, plus customer records and staff accounts with roles",
+    ],
+    stack: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
+    live: "https://lily-flower-invoice-management.vercel.app/",
+    cover: lilyFlowers,
+    gallery: [{ src: lilyFlowers, caption: "Staff sign-in" }],
+  },
+  {
     id: "invitation",
     index: "05",
     title: "e-Invitation + Admin",
@@ -291,7 +315,7 @@ const ALL_PROJECTS: Project[] = [
 ];
 
 /** Display order — the first entry is numbered 01. */
-const PROJECT_ORDER = ["mapaguapa", "amaranth", "boardmap", "reseato", "invitation", "tictactoe", "kheryne", "ryde"];
+const PROJECT_ORDER = ["mapaguapa", "amaranth", "boardmap", "reseato", "lily", "invitation", "tictactoe", "kheryne", "ryde"];
 
 export const PROJECTS: Project[] = PROJECT_ORDER.map((id, i) => ({
   ...ALL_PROJECTS.find((p) => p.id === id)!,
@@ -306,7 +330,7 @@ export const FILTERS: { id: "all" | ProjectCategory; label: string }[] = [
 ];
 
 export const STATS = [
-  { value: 5, suffix: "", pad: true, label: "Production apps live" },
+  { value: 6, suffix: "", pad: true, label: "Production apps live" },
   { value: 2, suffix: "+ yrs", label: "Building for the web" },
   { value: 12, suffix: "", label: "Technologies in the arsenal" },
   { value: 4, suffix: "th yr", label: "BS Computer Science · VSU" },

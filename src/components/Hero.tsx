@@ -54,8 +54,8 @@ export function Hero({ breathing, flying, onDragonClick }: { breathing: boolean;
           </h1>
 
           <motion.p className="hero__sub" {...word(11)}>
-            React, TypeScript &amp; Supabase — from database schema to pixel-perfect interface. Five
-            production apps shipped for students, restaurants and campus organisations.
+            React, TypeScript &amp; Supabase — from database schema to pixel-perfect interface. Six
+            production apps shipped for students, restaurants, a flower shop and campus organisations.
           </motion.p>
 
           <motion.div className="hero__ctas" {...word(12)}>
