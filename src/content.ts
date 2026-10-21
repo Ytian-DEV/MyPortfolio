@@ -1,7 +1,7 @@
 import boardmapV2 from "./assets/imgURL/boardmap-v2.webp";
 import reseato from "./assets/imgURL/reseato-cebu.webp";
 import mapaguapa from "./assets/imgURL/mapaguapa.webp";
-import amaranth from "./assets/imgURL/amaranth-dvm6.webp";
+import amaranth from "./assets/imgURL/amaranth.webp";
 import invitation from "./assets/imgURL/birthday-invitation.webp";
 import ticTacToe from "./assets/imgURL/tictactoe.webp";
 import bmLogIn from "./assets/images/BoardMap/loginpage.webp";
@@ -36,7 +36,7 @@ export const PROFILE = {
   fullName: "Christian Earl James Boyles",
   role: "Full-Stack Developer",
   location: "Baybay City, Philippines",
-  email: "christianboyles0143@gmail.com",
+  email: "christian02613@gmail.com",
   phone: "+63 915 211 1698",
   phoneHref: "tel:+639152111698",
   github: "https://github.com/Ytian-DEV",
@@ -158,7 +158,7 @@ const ALL_PROJECTS: Project[] = [
     stack: ["React", "TypeScript", "Supabase", "Maps", "Tailwind CSS"],
     live: "https://mapaguapa.vercel.app/",
     cover: mapaguapa,
-    gallery: [{ src: mapaguapa, caption: "Landing & sign-in" }],
+    gallery: [{ src: mapaguapa, caption: "Sign in — a room near campus" }],
   },
   {
     id: "amaranth",
@@ -178,9 +178,9 @@ const ALL_PROJECTS: Project[] = [
       "Responsive layouts for phone-first readers",
     ],
     stack: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
-    live: "https://amaranth-dvm6.vercel.app/",
+    live: "https://amaranth-iota.vercel.app/",
     cover: amaranth,
-    gallery: [{ src: amaranth, caption: "Latest articles" }],
+    gallery: [{ src: amaranth, caption: "Homepage — top story & most read" }],
   },
   {
     id: "invitation",
