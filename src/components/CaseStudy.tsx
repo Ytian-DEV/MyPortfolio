@@ -224,7 +224,7 @@ export function CaseStudy({ project, onClose, onSelectProject, onToast }: CaseSt
 
                   <div
                     className={`gallery-viewport${
-                      currentSlide.portrait || project.mobile ? " is-portrait" : ""
+                      (currentSlide.portrait ?? project.mobile) ? " is-portrait" : ""
                     }`}
                   >
                     <img src={currentSlide.src} alt={`${project.title} — ${currentSlide.caption}`} />

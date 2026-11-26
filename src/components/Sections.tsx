@@ -1,7 +1,7 @@
 import { ArrowUp, ArrowUpRight, Check, Copy, FileText, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import portrait from "../assets/profile-headshot.webp";
-import { CAPABILITIES, EXPERIENCE, PROFILE, SPOTLIGHT_MILESTONE } from "../content";
+import { CAPABILITIES, CREDENTIALS, EXPERIENCE, PROFILE } from "../content";
 
 export function CapabilitiesSection() {
   return (
@@ -18,8 +18,7 @@ export function CapabilitiesSection() {
             </h2>
           </div>
           <p className="section-summary">
-            Working across UI/UX design, web and mobile frontend runtimes, and backend APIs lets me bridge product
-            intent and technical execution without handoff translation loss.
+            End-to-end execution across product design, web and mobile frontends, and backend services.
           </p>
         </header>
 
@@ -27,31 +26,14 @@ export function CapabilitiesSection() {
           {CAPABILITIES.map((pillar) => (
             <article key={pillar.index} className="cap-col">
               <div>
-                <div className="cap-col__head">
-                  <span className="mono-meta mono-meta--accent">PILLAR {pillar.index}</span>
-                  <h3 className="cap-col__title">{pillar.title}</h3>
-                  <p className="mono-meta">{pillar.subtitle}</p>
-                </div>
-
-                <p className="cap-col__desc">{pillar.description}</p>
-
-                <ul className="cap-practices">
-                  {pillar.practices.map((practice) => (
-                    <li key={practice}>{practice}</li>
-                  ))}
-                </ul>
+                <span className="mono-meta mono-meta--accent">{pillar.index}</span>
+                <h3 className="cap-col__title">{pillar.title}</h3>
+                <p className="cap-col__desc">{pillar.blurb}</p>
               </div>
 
               <ul className="cap-tools" aria-label={`${pillar.title} tools and technologies`}>
                 {pillar.tools.map((tool) => (
-                  <li
-                    key={tool}
-                    className={`tag${
-                      tool === "React Native" || tool === "Flutter" || tool === "Node.js / Express" || tool === "Python"
-                        ? " tag--accent"
-                        : ""
-                    }`}
-                  >
+                  <li key={tool} className="tag">
                     {tool}
                   </li>
                 ))}
@@ -117,13 +99,6 @@ export function ExperienceSection() {
           </aside>
 
           <div>
-            <article className="philsa-card" aria-label="Featured 2026 national milestone">
-              <p className="mono-meta mono-meta--accent">{SPOTLIGHT_MILESTONE.badge}</p>
-              <h3 className="philsa-card__title">{SPOTLIGHT_MILESTONE.title}</h3>
-              <p className="mono-meta">{SPOTLIGHT_MILESTONE.org}</p>
-              <p className="philsa-card__summary">{SPOTLIGHT_MILESTONE.summary}</p>
-            </article>
-
             <div className="ledger" role="list" aria-label="Experience and education timeline">
               {EXPERIENCE.map((item) => (
                 <div key={item.role + item.period} className="ledger__row" role="listitem">
@@ -142,6 +117,42 @@ export function ExperienceSection() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            <div className="certs-block" aria-labelledby="certs-heading">
+              <h3 id="certs-heading" className="certs-block__title">
+                Honors &amp; Credentials
+              </h3>
+
+              <div className="creds-register" role="list">
+                {CREDENTIALS.map((cred) => (
+                  <div key={cred.title} className="creds-row" role="listitem">
+                    <p className="mono-meta creds-row__date">{cred.date}</p>
+
+                    <div className="creds-row__body">
+                      <h4 className="ledger__role">{cred.title}</h4>
+                      <p className="ledger__org">{cred.issuer}</p>
+                      {cred.summary ? <p className="ledger__details">{cred.summary}</p> : null}
+                    </div>
+
+                    <div className="creds-row__meta">
+                      {cred.certificateUrl ? (
+                        <a
+                          href={cred.certificateUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn--ghost"
+                        >
+                          Certificate PDF
+                          <ArrowUpRight size={13} aria-hidden="true" />
+                        </a>
+                      ) : (
+                        <span className="mono-meta">{cred.note}</span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -342,10 +353,6 @@ export function Colophon() {
       <div className="container colophon__inner">
         <p className="mono-meta">
           © {new Date().getFullYear()} {PROFILE.fullName} · Baybay City, Philippines
-        </p>
-
-        <p className="mono-meta">
-          Set in Instrument Serif, Plus Jakarta Sans &amp; JetBrains Mono · Built with React &amp; TypeScript
         </p>
 
         <a href="#top" className="btn btn--ghost">

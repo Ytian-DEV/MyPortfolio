@@ -24,13 +24,32 @@ import khWinLive from "./assets/images/Kheryne/windows-live.webp";
 import khWinReport from "./assets/images/Kheryne/windows-report.webp";
 import khWinWorkspace from "./assets/images/Kheryne/windows-workspace.webp";
 
-import rydeHomeDark from "./assets/images/Ryde/home-page-dark-theme.webp";
-import rydeHomeLight from "./assets/images/Ryde/home-page-light-theme.webp";
-import rydeLoginDark from "./assets/images/Ryde/login-page-dark-theme.webp";
-import rydeOtpLight from "./assets/images/Ryde/otp-page-light-theme.webp";
-import rydePayment from "./assets/images/Ryde/payment-method-page-light-theme.webp";
-import rydeTime from "./assets/images/Ryde/select-time-page-light-theme.webp";
-import rydePickup from "./assets/images/Ryde/set-pick-up-location-page-light-theme.webp";
+import rydeLogin from "./assets/images/Ryde/02-phone-login.webp";
+import rydeOtp from "./assets/images/Ryde/03-otp-verification.webp";
+import rydeHomeLight from "./assets/images/Ryde/05-home-map-light.webp";
+import rydePickupSearch from "./assets/images/Ryde/06-pickup-destination.webp";
+import rydeTiersLight from "./assets/images/Ryde/07-ride-tiers-light.webp";
+import rydePaymentSchedule from "./assets/images/Ryde/08-payment-schedule.webp";
+import rydeLiveLight from "./assets/images/Ryde/10-live-tracking-light.webp";
+import rydeSummaryRating from "./assets/images/Ryde/11-ride-summary-rating.webp";
+import rydeHomeDark from "./assets/images/Ryde/15-home-map-dark.webp";
+import rydeTiersDark from "./assets/images/Ryde/16-ride-tiers-dark.webp";
+import rydeLiveDark from "./assets/images/Ryde/17-live-tracking-dark.webp";
+import rydeProfileDark from "./assets/images/Ryde/18-profile-settings-dark.webp";
+
+import agapayCropSuggestions from "./assets/images/Agapay/farmer-crop-suggestions.webp";
+import agapayHomeDark from "./assets/images/Agapay/farmer-home-dark.webp";
+import agapayHomeLight from "./assets/images/Agapay/farmer-home-light.webp";
+import agapayMapDark from "./assets/images/Agapay/farmer-map-dark.webp";
+import agapayMapLight from "./assets/images/Agapay/farmer-map-light.webp";
+import agapayPlantingWindow from "./assets/images/Agapay/farmer-planting-window.webp";
+import agapaySmsPreview from "./assets/images/Agapay/farmer-sms-preview.webp";
+import agapayYieldEstimate from "./assets/images/Agapay/farmer-yield-estimate.webp";
+import agapayLiveLgu from "./assets/images/Agapay/live-lgu-dashboard.webp";
+import agapayLiveWelcome from "./assets/images/Agapay/live-welcome.webp";
+
+import carevendCatalog from "./assets/images/CareVend/kiosk-slot-catalog.webp";
+import carevendHome from "./assets/images/CareVend/kiosk-triage-home.webp";
 
 export const PROFILE = {
   name: "Christian Boyles",
@@ -70,6 +89,7 @@ export interface Project {
   disciplineLabel: string;
   featured: boolean;
   mobile?: boolean;
+  tabletPortrait?: boolean;
   summary: string;
   problem: string;
   role: string;
@@ -85,6 +105,52 @@ export interface Project {
 }
 
 const RAW_PROJECTS: Omit<Project, "index">[] = [
+  {
+    id: "agapay",
+    title: "Agapay",
+    subtitle: "Hyper-Local Planting & Climate Decision App for Filipino Farmers",
+    period: "2026",
+    year: "2026",
+    category: "fullstack",
+    disciplineLabel: "Full-Stack Mobile App & UI/UX",
+    featured: true,
+    mobile: true,
+    summary:
+      "A mobile-first agricultural decision application for Filipino farmers—delivering field-level planting windows, 1 km suitability grids, offline sync, and SMS advisories, paired with an RA 10173-compliant LGU dashboard.",
+    problem:
+      "Smallholder farmers make high-stakes planting decisions amid unpredictable rainfall and waterlogging without hyper-local guidance, while municipal offices lack privacy-safe visibility into barangay crop crowding.",
+    role: "Product Designer & Full-Stack Developer — designed the multi-plan iOS 26 UI system in Figma (codenamed BukidTech) and built the live application.",
+    architectureNote:
+      "Pairs an offline-capable, multilingual farmer mobile interface (with sync queues and SMS fallback) alongside a companion LGU workspace enforcing RA 10173 Data Privacy suppression (<5 reporting farmers) and CSV/PDF export.",
+    built: [
+      "Farmer mobile app surfacing GO / WAIT / AVOID planting windows, 7-day rainfall & waterlogging checks, crop rankings, and yield estimates",
+      "Interactive spatial suitability grid across Baybay City barangays (Rain, Soil, Flood, and Suitability layers)",
+      "Offline preview mode, field sync status, and SMS advisory fallback designed for low-connectivity farm parcels",
+      "Companion City Agriculture Office (LGU) workspace monitoring barangay crop crowding and planted hectares with RA 10173 privacy suppression",
+    ],
+    stack: ["React", "TypeScript", "Mobile Web / App", "Offline-First UX", "Spatial Maps", "Figma", "Light & Dark Modes"],
+    metrics: [
+      { label: "Primary UX", value: "Farmer Mobile App" },
+      { label: "Resilience", value: "Offline + SMS Ready" },
+      { label: "Privacy", value: "RA 10173 Aggregated" },
+    ],
+    live: "https://agapay-tau.vercel.app/",
+    figma: "https://www.figma.com/design/uzxr3AUL2so9ADoJQfUgG4/BukidTech-%E2%80%93-iOS-26-App-Design?node-id=0-1&t=3eihe5d52qOvpWNo-1",
+    cover: agapayLiveWelcome,
+    secondaryPreviews: [agapayHomeLight, agapayMapLight],
+    gallery: [
+      { src: agapayLiveWelcome, caption: "Agapay mobile entry — Multilingual, offline preview & SMS access", group: "Farmer App", portrait: true },
+      { src: agapayHomeLight, caption: "Farmer home — Planting window, waterlogging & 7-day rain outlook", group: "Farmer App", portrait: true },
+      { src: agapayMapLight, caption: "1 km suitability grid (GO / WAIT / AVOID) — Brgy. Gabas", group: "Farmer App", portrait: true },
+      { src: agapayPlantingWindow, caption: "Daily planting window & soil drainage guidance", group: "Farmer App", portrait: true },
+      { src: agapayCropSuggestions, caption: "Crop suitability ranking & recommendations", group: "Farmer App", portrait: true },
+      { src: agapayYieldEstimate, caption: "Projected harvest & yield estimator", group: "Farmer App", portrait: true },
+      { src: agapaySmsPreview, caption: "Low-connectivity SMS advisory thread", group: "Farmer App", portrait: true },
+      { src: agapayHomeDark, caption: "Dark mode — Farmer planting window & rainfall dashboard", group: "Dark Mode", portrait: true },
+      { src: agapayMapDark, caption: "Dark mode — Barangay suitability map", group: "Dark Mode", portrait: true },
+      { src: agapayLiveLgu, caption: "Companion LGU Workspace — Barangay crowding map & planted hectares", group: "LGU Companion", portrait: false },
+    ],
+  },
   {
     id: "kheryne",
     title: "Kheryne",
@@ -162,42 +228,50 @@ const RAW_PROJECTS: Omit<Project, "index">[] = [
   },
   {
     id: "ryde",
-    title: "Ryde",
-    subtitle: "End-to-End Mobility & Ride-Booking Blueprint",
-    period: "2026",
+    title: "Ryde.",
+    subtitle: "Campus Ride-Hailing & Multi-Service App · VSU Baybay (Dev Build)",
+    period: "2026 – Present",
     year: "2026",
-    category: "design",
-    disciplineLabel: "UI/UX System · Mobile",
+    category: "fullstack",
+    disciplineLabel: "App Dev & UI/UX System · In Dev",
     featured: true,
     mobile: true,
     summary:
-      "A 17-screen mobile ride-booking experience streamlining onboarding, OTP verification, spatial pickup pinning, ride scheduling, and payment across dual light and dark theme systems.",
+      "A localized mobility and delivery app built around VSU Baybay—combining Motor, Taxi, Food, and local errand booking with live driver tracking, GCash checkout, and an 18-screen Liquid Glass UI system.",
     problem:
-      "Commuter ride-hailing apps frequently lose users in multi-step address confirmation and fare-payment friction before a booking is ever dispatched.",
-    role: "Product & UI/UX Designer — mapped the user journey, component library, and developer handoff specs in Figma.",
+      "Commuters and students around VSU Baybay rely on informal rides and scattered chat groups without upfront fare tiers, live driver ETAs, or trip safety tools.",
+    role: "Product Designer & Developer — authored the 18-screen iOS 26 Liquid Glass system in Figma and engineered the working application in active development.",
     architectureNote:
-      "Constructed with strict auto-layout constraints, semantic color variables for instant light/dark parity, and progressive disclosure to keep primary thumb actions reachable.",
+      "Translated from a tokenized Liquid Glass Figma design system (full light & dark parity) into an interactive app build covering OTP auth, VSU/Baybay spatial pinning, fare-tier sheets, live trip tracking, and Safety SOS.",
     built: [
-      "Complete 17-screen commuter journey from phone OTP verification to live pickup pinning, scheduled departures, and payment selection",
-      "Semantic token architecture supporting high-legibility daylight maps and low-glare night riding surfaces",
-      "Implementation-ready component states prepared for React Native or Flutter engineering handoff",
+      "Multi-service booking hub supporting Motor, Taxi, Food, and local Services with instant VSU Baybay quick-pins (DCST, VSU Hospital, 7/11 Utod)",
+      "Active dev build implementing the end-to-end trip lifecycle: phone OTP verification, route search, ride-tier & schedule selection, live driver arrival tracking, and ratings",
+      "18-screen iOS 26 Liquid Glass design system in Figma engineered with full daylight and low-glare dark mode parity",
+      "Integrated commuter payment and trust workflows including GCash checkout, verified driver profiles, trip sharing, and Safety SOS",
     ],
-    stack: ["Figma", "Mobile UX", "Design Systems", "Interactive Prototyping", "Light & Dark Themes"],
+    stack: ["React", "TypeScript", "Mobile Web / App", "Maps", "Figma", "Design Systems", "Light & Dark Modes"],
     metrics: [
-      { label: "Scope", value: "17 Core Screens" },
-      { label: "Themes", value: "Dual Light / Dark" },
-      { label: "Target", value: "Mobile Handoff Ready" },
+      { label: "Build State", value: "In Active Dev" },
+      { label: "UI System", value: "18 Production Screens" },
+      { label: "Locale", value: "VSU · Baybay City" },
     ],
-    cover: rydeHomeDark,
-    secondaryPreviews: [rydeHomeLight, rydePickup, rydePayment],
+    // Attach your dev live web URL here when ready: live: "https://...",
+    figma: "https://www.figma.com/design/FJbTiEChKqH4h2rAMHfsYg/Ryde.-app?node-id=0-1&t=srmMfrVtVFGE27sK-1",
+    cover: rydeHomeLight,
+    secondaryPreviews: [rydeHomeDark, rydeLiveLight],
     gallery: [
-      { src: rydeHomeDark, caption: "Home & map search — Dark theme", group: "Dark Theme", portrait: true },
-      { src: rydeLoginDark, caption: "Onboarding & sign-in — Dark theme", group: "Dark Theme", portrait: true },
-      { src: rydeHomeLight, caption: "Home & quick destinations — Light theme", group: "Light Flow", portrait: true },
-      { src: rydeOtpLight, caption: "OTP verification — Light theme", group: "Light Flow", portrait: true },
-      { src: rydePickup, caption: "Spatial pickup pin confirmation", group: "Booking Steps", portrait: true },
-      { src: rydeTime, caption: "Scheduled ride time selector", group: "Booking Steps", portrait: true },
-      { src: rydePayment, caption: "Payment method & fare breakdown", group: "Booking Steps", portrait: true },
+      { src: rydeHomeLight, caption: "Home map & multi-service quick book (VSU Baybay)", group: "Booking Flow", portrait: true },
+      { src: rydePickupSearch, caption: "Pickup & destination spatial search", group: "Booking Flow", portrait: true },
+      { src: rydeTiersLight, caption: "Ride tier & upfront fare selection sheet", group: "Booking Flow", portrait: true },
+      { src: rydePaymentSchedule, caption: "GCash payment & scheduled departure sheet", group: "Booking Flow", portrait: true },
+      { src: rydeLiveLight, caption: "Live driver arrival tracking & Safety SOS", group: "Live Trip", portrait: true },
+      { src: rydeSummaryRating, caption: "Completed trip summary & driver rating", group: "Live Trip", portrait: true },
+      { src: rydeHomeDark, caption: "Dark mode — Home map & service switcher", group: "Dark Mode", portrait: true },
+      { src: rydeTiersDark, caption: "Dark mode — Ride tiers & fare sheet", group: "Dark Mode", portrait: true },
+      { src: rydeLiveDark, caption: "Dark mode — Live route tracking", group: "Dark Mode", portrait: true },
+      { src: rydeProfileDark, caption: "Dark mode — Commuter profile & settings", group: "Dark Mode", portrait: true },
+      { src: rydeLogin, caption: "Phone number sign-in", group: "Onboarding", portrait: true },
+      { src: rydeOtp, caption: "SMS OTP verification", group: "Onboarding", portrait: true },
     ],
   },
   {
@@ -230,6 +304,43 @@ const RAW_PROJECTS: Omit<Project, "index">[] = [
     live: "https://amaranth-iota.vercel.app/",
     cover: amaranth,
     gallery: [{ src: amaranth, caption: "Amaranth — Lead story hierarchy & most-read editorial feed" }],
+  },
+  {
+    id: "carevend",
+    title: "CareVend",
+    subtitle: "Campus OTC Health & Hygiene Kiosk · Portrait iPad",
+    period: "2026",
+    year: "2026",
+    category: "fullstack",
+    disciplineLabel: "Portrait iPad Kiosk & Web App",
+    featured: true,
+    tabletPortrait: true,
+    summary:
+      "A vertical iPad self-service health and menstrual hygiene vending kiosk—guiding students through quick symptom and contraindication checks before dispensing OTC essentials or escalating to the school clinic.",
+    problem:
+      "Students needing basic first-aid, pain relief, or menstrual care on campus face clinic queues or after-hours closures, yet unguided vending risks unsafe medication choices.",
+    role: "Product Designer & Frontend/Full-Stack Engineer — designed the portrait iPad touch interface, clinical safety decision tree, and 9-slot dispensing flow.",
+    architectureNote:
+      "Engineered specifically for vertical iPad touch targets—modeling branching symptom-and-allergy safety checks (escalating to the school nurse on contraindications) alongside live 9-slot (`A1–C3`) inventory state, ingredient card flips, and checkout simulation.",
+    built: [
+      "Portrait iPad touchscreen triage across 7 campus health & hygiene needs with allergy and recent-dose contraindication safeguards",
+      "Automatic school clinic nurse escalation whenever high-risk symptoms or medication conflicts are detected",
+      "Interactive 9-slot (`A1–C3`) vending machine grid with live stock counts, inline active-ingredient card flips, and sticky multi-item cart",
+      "End-to-end kiosk checkout and slot-dispensing flow with operator one-tap slot restocking and fullscreen kiosk mode",
+    ],
+    stack: ["React", "TypeScript", "Portrait iPad UX", "State Machines", "Tailwind CSS"],
+    metrics: [
+      { label: "Form Factor", value: "Portrait iPad Kiosk" },
+      { label: "Inventory", value: "9 Physical Slots (A1–C3)" },
+      { label: "Safety", value: "Contraindication Triage" },
+    ],
+    live: "https://carevend.vercel.app/",
+    cover: carevendHome,
+    secondaryPreviews: [carevendCatalog],
+    gallery: [
+      { src: carevendHome, caption: "Portrait iPad home — 2×4 symptom & hygiene need triage", portrait: true },
+      { src: carevendCatalog, caption: "Portrait iPad 9-slot (A1–C3) catalog — Stock, ingredient inspect & cart", portrait: true },
+    ],
   },
   {
     id: "boardmap",
@@ -342,50 +453,27 @@ export const WORK_FILTERS: { id: "all" | ProjectCategory; label: string }[] = [
 export interface CapabilityPillar {
   index: string;
   title: string;
-  subtitle: string;
-  description: string;
-  practices: string[];
+  blurb: string;
   tools: string[];
 }
 
 export const CAPABILITIES: CapabilityPillar[] = [
   {
     index: "01",
-    title: "UI/UX & Design Systems",
-    subtitle: "Research flows, token architecture & prototyping",
-    description:
-      "I design interfaces with implementation in mind—mapping edge cases, semantic color tokens, and WCAG contrast before writing component code.",
-    practices: [
-      "Multi-platform user flows & wireframing (Web, Android, Windows)",
-      "Tokenized light/dark component libraries & auto-layout specs",
-      "WCAG AA/AAA contrast, keyboard focus order & clear hierarchy",
-    ],
-    tools: ["Figma", "Design Systems", "Prototyping", "UX Flows", "Information Architecture"],
+    title: "UI/UX & Design",
+    blurb: "Multi-platform flows, design tokens, and prototypes built for clean handoff.",
+    tools: ["Figma", "Design Systems", "Prototyping", "UX Flows", "Wireframing", "WCAG Accessibility"],
   },
   {
     index: "02",
-    title: "Frontend & Mobile Engineering",
-    subtitle: "Typed web & cross-platform native interfaces",
-    description:
-      "Clean, predictable component architecture across modern React web apps and cross-platform mobile runtimes—tuned for fast load times and tactile responsiveness.",
-    practices: [
-      "Strict TypeScript state modeling & reusable UI primitives",
-      "Cross-platform mobile interfaces in React Native & Flutter",
-      "Accessible modals, keyboard shortcuts & reduced-motion support",
-    ],
+    title: "Frontend & Mobile",
+    blurb: "Fast, typed interfaces across modern web browsers and mobile devices.",
     tools: ["React", "Next.js", "TypeScript", "React Native", "Flutter", "Tailwind CSS", "Vite"],
   },
   {
     index: "03",
-    title: "Backend, Data & Infrastructure",
-    subtitle: "Relational schemas, APIs, auth & realtime sync",
-    description:
-      "Production data models and API services that keep multi-role applications secure, consistent, and responsive under real user traffic.",
-    practices: [
-      "RESTful services & middleware with Node.js, Express & Python",
-      "PostgreSQL schema design, Row-Level Security (RLS) & Realtime channels",
-      "Geospatial queries (Leaflet), auth flows & zero-downtime Vercel deploys",
-    ],
+    title: "Backend & Data",
+    blurb: "APIs, auth, and relational schemas engineered for production reliability.",
     tools: [
       "Node.js / Express",
       "Python",
@@ -401,14 +489,6 @@ export const CAPABILITIES: CapabilityPillar[] = [
   },
 ];
 
-export const SPOTLIGHT_MILESTONE = {
-  badge: "RECOGNITION · NOV 23, 2026",
-  title: "National Finalist — Space Business Innovation Camp 2026",
-  org: "Philippine Space Agency (PhilSA)",
-  summary:
-    "Selected from competing teams nationwide to advance to the Final Demo Day on November 23, 2026—translating space-data and technical systems into a viable product pitch and live demonstration.",
-};
-
 export interface ExperienceEntry {
   period: string;
   role: string;
@@ -419,15 +499,6 @@ export interface ExperienceEntry {
 }
 
 export const EXPERIENCE: ExperienceEntry[] = [
-  {
-    period: "Nov 2026",
-    role: "Finalist — Space Business Innovation Camp 2026",
-    org: "Philippine Space Agency (PhilSA)",
-    type: "National Innovation Cohort",
-    highlight: true,
-    details:
-      "Earned a finalist berth among teams nationwide, culminating in the Final Demo presentation on November 23, 2026.",
-  },
   {
     period: "May 2025 – Present",
     role: "Full-Stack Software Engineer",
@@ -453,12 +524,36 @@ export const EXPERIENCE: ExperienceEntry[] = [
     details:
       "Completing undergraduate coursework in software engineering, database management systems, algorithms, data structures, and web/mobile development.",
   },
+];
+
+export interface CredentialItem {
+  title: string;
+  issuer: string;
+  date: string;
+  note: string;
+  summary?: string;
+  certificateUrl?: string;
+}
+
+export const CREDENTIALS: CredentialItem[] = [
   {
-    period: "2025",
-    role: "Data Science Certifications",
-    org: "HarvardX · Cisco Networking Academy",
-    type: "Credentials",
-    details:
-      "Completed HarvardX Data Science: R Basics (PH125.1x) and Cisco NetAcad Introduction to Data Science.",
+    title: "Space Business Innovation Camp · National Finalist",
+    issuer: "Philippine Space Agency (PhilSA)",
+    date: "Nov 23, 2026",
+    note: "Finalist",
+    summary: "Selected among competing teams nationwide to present at the Final Demo Day.",
+  },
+  {
+    title: "Introduction to Data Science",
+    issuer: "Cisco Networking Academy",
+    date: "Sep 12, 2025",
+    note: "Certificate",
+    certificateUrl: "/certificates/introduction-to-data-science-cisco.pdf",
+  },
+  {
+    title: "Data Science: R Basics",
+    issuer: "HarvardX · edX",
+    date: "2025",
+    note: "PH125.1x",
   },
 ];

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +8,7 @@
       name="description"
       content="Portfolio of Christian Boyles, a product-minded Junior Software Engineer in the Philippines specializing in UI/UX systems, frontend architecture, and backend engineering."
     />
-    <meta name="theme-color" content="#F6F3EC" id="meta-theme-color" />
+    <meta name="theme-color" content="#121110" id="meta-theme-color" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <meta property="og:type" content="website" />
@@ -22,15 +22,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
     <script>
       (function () {
         try {
-          var saved = localStorage.getItem("cb-theme");
-          var theme = saved === "dark" || saved === "light" ? saved : "light";
+          localStorage.removeItem("cb-theme");
+          var saved = localStorage.getItem("cb-theme-v2");
+          var theme = saved === "light" || saved === "dark" ? saved : "dark";
           document.documentElement.setAttribute("data-theme", theme);
           var meta = document.getElementById("meta-theme-color");
           if (meta) meta.setAttribute("content", theme === "dark" ? "#121110" : "#F6F3EC");

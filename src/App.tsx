@@ -11,8 +11,8 @@ import { PROJECTS, type Project } from "./content";
 const OBSERVED_SECTIONS = ["top", "work", "stack", "experience", "contact"];
 
 function readInitialTheme(): "light" | "dark" {
-  if (typeof document === "undefined") return "light";
-  return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  if (typeof document === "undefined") return "dark";
+  return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
 }
 
 function readProjectFromHash(): Project | null {
@@ -41,7 +41,7 @@ export default function App() {
       const next = prev === "light" ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", next);
       try {
-        localStorage.setItem("cb-theme", next);
+        localStorage.setItem("cb-theme-v2", next);
       } catch {
         // Ignore storage errors in private mode
       }
@@ -103,7 +103,7 @@ export default function App() {
       />
 
       <main>
-        <Hero onToast={showToast} />
+        <Hero onToast={showToast} onOpenProject={openProject} />
         <Work onOpenProject={openProject} />
         <CapabilitiesSection />
         <ExperienceSection />

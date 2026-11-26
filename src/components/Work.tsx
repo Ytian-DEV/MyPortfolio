@@ -30,7 +30,14 @@ function ProjectVisualStage({ project, onOpen }: { project: Project; onOpen: () 
             <span />
             <span />
           </span>
-          <span>Mobile System · {project.gallery.length} Screens</span>
+          <span>
+            {project.id === "agapay"
+              ? "Live Mobile App · Offline + SMS Ready"
+              : project.id === "ryde"
+                ? "Dev Build · iOS 26 Liquid Glass"
+                : "Mobile System"}{" "}
+            · {project.gallery.length} Screens
+          </span>
         </div>
         <div className="stage-triptych">
           {screens.map((src, idx) => (
@@ -38,6 +45,39 @@ function ProjectVisualStage({ project, onOpen }: { project: Project; onOpen: () 
               <img
                 src={src}
                 alt={`${project.title} mobile screen preview ${idx + 1}`}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ))}
+        </div>
+      </button>
+    );
+  }
+
+  if (project.tabletPortrait && project.secondaryPreviews?.[0]) {
+    const tablets = [project.cover, project.secondaryPreviews[0]];
+    return (
+      <button
+        type="button"
+        className="stage-card"
+        onClick={onOpen}
+        aria-label={`Open ${project.title} case study (${project.gallery.length} screens)`}
+      >
+        <div className="stage-card__bar">
+          <span className="stage-dots" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
+          <span>Portrait iPad Kiosk · {project.gallery.length} Screens</span>
+        </div>
+        <div className="stage-tablet-duo">
+          {tablets.map((src, idx) => (
+            <div key={idx} className="stage-tablet">
+              <img
+                src={src}
+                alt={`${project.title} portrait iPad screen ${idx + 1}`}
                 loading="lazy"
                 decoding="async"
               />
@@ -66,12 +106,12 @@ function ProjectVisualStage({ project, onOpen }: { project: Project; onOpen: () 
         </div>
         <div className="stage-hybrid">
           <div className="stage-frame">
-            <img src={project.cover} alt={`${project.title} Windows workspace`} loading="lazy" decoding="async" />
+            <img src={project.cover} alt={`${project.title} desktop workspace`} loading="lazy" decoding="async" />
           </div>
           <div className="stage-hybrid__inset">
             <img
               src={project.secondaryPreviews[0]}
-              alt={`${project.title} Android eyepiece live scan`}
+              alt={`${project.title} companion mobile screen`}
               loading="lazy"
               decoding="async"
             />
