@@ -1,245 +1,357 @@
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring } from "framer-motion";
-import { Check, Code2, Copy, Database, Mail, Phone, Sparkles } from "lucide-react";
-import { useRef, useState, type FormEvent } from "react";
+import { ArrowUp, ArrowUpRight, Check, Copy, FileText, Send } from "lucide-react";
+import { useState, type FormEvent } from "react";
 import portrait from "../assets/profile-headshot.webp";
-import { ARSENAL, CAMPAIGN, MARQUEE, PROFILE, STATS, TIMELINE } from "../content";
-import { Chip, CountUp, Eyebrow, GithubIcon, MagneticButton, Reveal, Sigil } from "./ui";
+import { CAPABILITIES, EXPERIENCE, PROFILE, SPOTLIGHT_MILESTONE } from "../content";
 
-export function Stats() {
+export function CapabilitiesSection() {
   return (
-    <section className="stats" aria-label="At a glance">
-      <div className="container stats__row">
-        {STATS.map((s, i) => (
-          <Reveal key={s.label} delay={i * 0.08} className="stat">
-            <p className="stat__value">
-              <CountUp to={s.value} pad={s.pad} />
-              {s.suffix ? <span className="fire">{s.suffix}</span> : null}
+    <section id="stack" className="section-band section-band--alt" aria-labelledby="stack-heading">
+      <div className="container">
+        <header className="section-intro">
+          <div>
+            <p className="section-kicker mono-meta">
+              <span className="section-kicker__tick" aria-hidden="true" />
+              02 // Capabilities &amp; Stack
             </p>
-            <p className="label">{s.label}</p>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export function Marquee() {
-  const items = [...MARQUEE, ...MARQUEE];
-  return (
-    <div className="marquee" aria-hidden="true">
-      <div className="marquee__track">
-        {items.map((m, i) => (
-          <span key={i} className="marquee__item">
-            {m} <span className="marquee__sep">✦</span>
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-const ICONS = { code: Code2, database: Database, star: Sparkles };
-
-export function Arsenal() {
-  return (
-    <section id="stack" className="section">
-      <div className="container">
-        <Reveal as="header" className="section__head">
-          <div>
-            <Eyebrow numeral="II">The arsenal</Eyebrow>
-            <h2 className="display">Weapons of choice</h2>
+            <h2 id="stack-heading" className="serif-section">
+              From Figma token to <em>relational query</em>.
+            </h2>
           </div>
-          <p className="muted section__desc">A modern, type-safe stack that takes an idea from Figma frame to production URL.</p>
-        </Reveal>
-        <div className="arsenal">
-          {ARSENAL.map((a, i) => {
-            const Icon = ICONS[a.icon];
-            return (
-              <Reveal key={a.title} delay={i * 0.1} as="article" className="panel arsenal__card">
-                <span className="icon-box"><Icon size={22} /></span>
-                <h3 className="heading">{a.title}</h3>
-                <p className="muted">{a.blurb}</p>
-                <div className="chips">{a.items.map((it) => <Chip key={it}>{it}</Chip>)}</div>
-              </Reveal>
-            );
-          })}
+          <p className="section-summary">
+            Working across UI/UX design, web and mobile frontend runtimes, and backend APIs lets me bridge product
+            intent and technical execution without handoff translation loss.
+          </p>
+        </header>
+
+        <div className="cap-matrix">
+          {CAPABILITIES.map((pillar) => (
+            <article key={pillar.index} className="cap-col">
+              <div>
+                <div className="cap-col__head">
+                  <span className="mono-meta mono-meta--accent">PILLAR {pillar.index}</span>
+                  <h3 className="cap-col__title">{pillar.title}</h3>
+                  <p className="mono-meta">{pillar.subtitle}</p>
+                </div>
+
+                <p className="cap-col__desc">{pillar.description}</p>
+
+                <ul className="cap-practices">
+                  {pillar.practices.map((practice) => (
+                    <li key={practice}>{practice}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <ul className="cap-tools" aria-label={`${pillar.title} tools and technologies`}>
+                {pillar.tools.map((tool) => (
+                  <li
+                    key={tool}
+                    className={`tag${
+                      tool === "React Native" || tool === "Flutter" || tool === "Node.js / Express" || tool === "Python"
+                        ? " tag--accent"
+                        : ""
+                    }`}
+                  >
+                    {tool}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-export function Campaign() {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 75%", "end 55%"] });
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 24 });
-  const [active, setActive] = useState(reduce ? CAMPAIGN.length - 1 : -1);
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    if (!reduce) setActive(Math.min(CAMPAIGN.length - 1, Math.floor(v * CAMPAIGN.length * 0.999)));
-  });
-
+export function ExperienceSection() {
   return (
-    <section id="process" className="section section--alt">
+    <section id="experience" className="section-band" aria-labelledby="experience-heading">
       <div className="container">
-        <Reveal as="header" className="section__head">
+        <header className="section-intro">
           <div>
-            <Eyebrow numeral="III">The campaign</Eyebrow>
-            <h2 className="display">How I take a realm</h2>
+            <p className="section-kicker mono-meta">
+              <span className="section-kicker__tick" aria-hidden="true" />
+              03 // Background &amp; Recognition
+            </p>
+            <h2 id="experience-heading" className="serif-section">
+              Product sensibility backed by <em>shipping habits</em>.
+            </h2>
           </div>
-          <p className="muted section__desc">Four stages, every project. No surprises for clients, no rewrites for teams.</p>
-        </Reveal>
-        <div className="campaign" ref={ref}>
-          <div className="campaign__track" aria-hidden="true">
-            <motion.div className="campaign__fill" style={{ scaleX: reduce ? 1 : scaleX }} />
-          </div>
-          <ol className="campaign__steps">
-            {CAMPAIGN.map((s, i) => (
-              <li key={s.n} className={`step${i <= active ? " is-lit" : ""}${i === active ? " is-current" : ""}`}>
-                <span className="step__num">{s.n}</span>
-                <h3 className="heading">{s.title}</h3>
-                <p className="muted">{s.text}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
-    </section>
-  );
-}
+          <p className="section-summary">
+            Currently in my 4th year of BS Computer Science at Visayas State University, building software for real
+            campus communities, researchers, and local businesses.
+          </p>
+        </header>
 
-export function Chronicle() {
-  return (
-    <section id="journey" className="section">
-      <div className="container">
-        <Reveal as="header" className="section__head">
-          <div>
-            <Eyebrow numeral="IV">The chronicle</Eyebrow>
-            <h2 className="display">The developer behind the dragon</h2>
-          </div>
-        </Reveal>
-        <div className="chronicle">
-          <Reveal as="article" className="panel about">
-            <div className="about__photo">
-              <img src={portrait} alt={`Portrait of ${PROFILE.fullName}`} loading="lazy" decoding="async" />
+        <div className="about-layout">
+          <aside className="portrait-sheet" aria-label="About Christian Boyles">
+            <div className="portrait-frame">
+              <img
+                src={portrait}
+                alt={`Portrait of ${PROFILE.fullName}`}
+                loading="lazy"
+                decoding="async"
+              />
             </div>
-            <h3 className="heading heading--sans">{PROFILE.fullName}</h3>
-            <p className="muted">
-              Fourth-year Computer Science student at Visayas State University who fell in love with
-              shipping. I started on the front-end in 2024, grew into full-stack in 2025, and now build
-              products end-to-end — schema, API, interface and deploy.
-            </p>
-            <p className="accent">“I care about the details users never notice — because they'd notice if they were missing.”</p>
-          </Reveal>
-          <Reveal delay={0.1} className="panel timeline">
-            <p className="label label--fire">Campaign log</p>
-            <ol>
-              {TIMELINE.map((t) => (
-                <li key={t.role} className={`timeline__item${t.active ? " is-active" : ""}`}>
-                  <span className="timeline__dot" aria-hidden="true" />
-                  <p className="label label--dim timeline__when">{t.when}</p>
+
+            <div className="portrait-caption">
+              <div>
+                <p style={{ fontWeight: 700, fontSize: 15 }}>{PROFILE.fullName}</p>
+                <p className="mono-meta">{PROFILE.education}</p>
+              </div>
+              <span className="tag tag--accent">PH · UTC+8</span>
+            </div>
+
+            <div className="bio-copy">
+              <p>
+                I started on the frontend in 2024, expanded into product systems and full-stack architecture in 2025,
+                and now take projects from initial user interviews and Figma prototypes all the way to PostgreSQL
+                schemas, Express/Supabase backends, and deployed web or mobile interfaces.
+              </p>
+              <p>
+                I care deeply about the quiet details—legible hierarchy, keyboard accessibility, predictable state, and
+                data models that prevent bugs before they reach the UI.
+              </p>
+            </div>
+          </aside>
+
+          <div>
+            <article className="philsa-card" aria-label="Featured 2026 national milestone">
+              <p className="mono-meta mono-meta--accent">{SPOTLIGHT_MILESTONE.badge}</p>
+              <h3 className="philsa-card__title">{SPOTLIGHT_MILESTONE.title}</h3>
+              <p className="mono-meta">{SPOTLIGHT_MILESTONE.org}</p>
+              <p className="philsa-card__summary">{SPOTLIGHT_MILESTONE.summary}</p>
+            </article>
+
+            <div className="ledger" role="list" aria-label="Experience and education timeline">
+              {EXPERIENCE.map((item) => (
+                <div key={item.role + item.period} className="ledger__row" role="listitem">
                   <div>
-                    <h3 className="timeline__role">
-                      {t.role} <span className="timeline__org">· {t.org}</span>
-                    </h3>
-                    <p className="muted small">{t.text}</p>
+                    <p className="mono-meta" style={{ color: item.highlight ? "var(--ink)" : undefined }}>
+                      {item.period}
+                    </p>
+                    <span className="tag" style={{ marginTop: 6 }}>
+                      {item.type}
+                    </span>
                   </div>
-                </li>
+                  <div>
+                    <h3 className="ledger__role">{item.role}</h3>
+                    <p className="ledger__org">{item.org}</p>
+                    <p className="ledger__details">{item.details}</p>
+                  </div>
+                </div>
               ))}
-            </ol>
-          </Reveal>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-export function Contact({ onToast }: { onToast: (msg: string) => void }) {
-  const [copied, setCopied] = useState(false);
+interface ContactProps {
+  onToast: (message: string) => void;
+}
 
-  const copyEmail = async () => {
+export function ContactSection({ onToast }: ContactProps) {
+  const [copiedField, setCopiedField] = useState<"email" | "phone" | null>(null);
+
+  const copyValue = async (field: "email" | "phone", value: string, label: string) => {
     try {
-      await navigator.clipboard.writeText(PROFILE.email);
-      setCopied(true);
-      onToast("Email copied — the raven is ready.");
-      setTimeout(() => setCopied(false), 2000);
+      await navigator.clipboard.writeText(value);
+      setCopiedField(field);
+      onToast(`Copied ${label} to clipboard`);
+      window.setTimeout(() => setCopiedField(null), 2000);
     } catch {
-      window.location.href = `mailto:${PROFILE.email}`;
+      onToast(value);
     }
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const name = String(data.get("name") || "").trim();
-    const from = String(data.get("email") || "").trim();
-    const message = String(data.get("message") || "").trim();
-    const subject = encodeURIComponent(`Portfolio inquiry from ${name || "a visitor"}`);
-    const body = encodeURIComponent(`${message}\n\n— ${name}${from ? ` (${from})` : ""}`);
+    const form = new FormData(e.currentTarget);
+    const name = String(form.get("name") || "").trim();
+    const email = String(form.get("email") || "").trim();
+    const message = String(form.get("message") || "").trim();
+    const subject = encodeURIComponent(`Software Engineering Inquiry — ${name || "Portfolio Visitor"}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name}${email ? ` (${email})` : ""}`);
     window.location.href = `mailto:${PROFILE.email}?subject=${subject}&body=${body}`;
-    onToast("Opening your mail app…");
+    onToast("Opening your email client…");
   };
 
   return (
-    <section id="contact" className="section section--contact">
-      <div className="container">
-        <Reveal className="raven">
-          <div className="raven__pitch">
-            <Eyebrow numeral="V">Send a raven</Eyebrow>
-            <h2 className="display">
-              Have a realm that needs <span className="fire">building?</span>
-            </h2>
-            <p className="muted lead">Hiring for a full-stack or front-end role, or need a product built? I reply within 24 hours.</p>
-            <ul className="lines">
-              <li>
-                <Mail size={20} className="fire" />
-                <span className="label label--dim">Email</span>
-                <a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a>
-                <button type="button" className="icon-btn icon-btn--sm" onClick={copyEmail} aria-label="Copy email address">
-                  {copied ? <Check size={16} /> : <Copy size={16} />}
-                </button>
-              </li>
-              <li>
-                <Phone size={20} className="fire" />
-                <span className="label label--dim">Phone</span>
-                <a href={PROFILE.phoneHref}>{PROFILE.phone}</a>
-              </li>
-              <li>
-                <span className="fire"><GithubIcon /></span>
-                <span className="label label--dim">GitHub</span>
-                <a href={PROFILE.github} target="_blank" rel="noreferrer">{PROFILE.githubLabel}</a>
-              </li>
-            </ul>
+    <section id="contact" className="section-band" aria-labelledby="contact-heading">
+      <div className="container contact-layout">
+        <div>
+          <p className="section-kicker mono-meta">
+            <span className="section-kicker__tick" aria-hidden="true" />
+            04 // Contact
+          </p>
+          <h2 id="contact-heading" className="serif-section" style={{ marginBottom: 16 }}>
+            Let’s build software that <em>holds up</em> in the real world.
+          </h2>
+          <p style={{ color: "var(--ink-2)", fontSize: 16, maxWidth: "48ch" }}>
+            Open to junior software engineering roles (UI/UX, frontend, or full-stack), internships, and select product
+            collaborations. I typically respond within 24 hours.
+          </p>
+
+          <div className="contact-list">
+            <div className="contact-row">
+              <div className="contact-row__left">
+                <span className="mono-meta">EMAIL</span>
+                <a href={`mailto:${PROFILE.email}`} className="contact-row__val">
+                  {PROFILE.email}
+                </a>
+              </div>
+              <button
+                type="button"
+                className="btn btn--ghost"
+                onClick={() => copyValue("email", PROFILE.email, "email address")}
+              >
+                {copiedField === "email" ? <Check size={14} aria-hidden="true" /> : <Copy size={14} aria-hidden="true" />}
+                {copiedField === "email" ? "Copied" : "Copy"}
+              </button>
+            </div>
+
+            <div className="contact-row">
+              <div className="contact-row__left">
+                <span className="mono-meta">PHONE · PH</span>
+                <a href={PROFILE.phoneHref} className="contact-row__val">
+                  {PROFILE.phone}
+                </a>
+              </div>
+              <button
+                type="button"
+                className="btn btn--ghost"
+                onClick={() => copyValue("phone", PROFILE.phone, "phone number")}
+              >
+                {copiedField === "phone" ? <Check size={14} aria-hidden="true" /> : <Copy size={14} aria-hidden="true" />}
+                {copiedField === "phone" ? "Copied" : "Copy"}
+              </button>
+            </div>
+
+            <div className="contact-row">
+              <div className="contact-row__left">
+                <span className="mono-meta">GITHUB</span>
+                <a
+                  href={PROFILE.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-row__val"
+                >
+                  {PROFILE.githubLabel}
+                </a>
+              </div>
+              <a
+                href={PROFILE.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--ghost"
+              >
+                Profile
+                <ArrowUpRight size={14} aria-hidden="true" />
+              </a>
+            </div>
+
+            <div className="contact-row">
+              <div className="contact-row__left">
+                <span className="mono-meta">RESUME / CV</span>
+                <span style={{ fontSize: 14.5, color: "var(--ink-2)" }}>
+                  {PROFILE.resumeUrl ? "Updated PDF ready for download" : "Finalizing updated 2026 PDF — available on request"}
+                </span>
+              </div>
+              {PROFILE.resumeUrl ? (
+                <a href={PROFILE.resumeUrl} target="_blank" rel="noopener noreferrer" className="btn btn--ghost">
+                  <FileText size={14} aria-hidden="true" />
+                  Download
+                </a>
+              ) : (
+                <a
+                  href={`mailto:${PROFILE.email}?subject=${encodeURIComponent("Resume Request — Christian Boyles")}`}
+                  className="btn btn--ghost"
+                >
+                  <FileText size={14} aria-hidden="true" />
+                  Request Copy
+                </a>
+              )}
+            </div>
           </div>
-          <form className="raven__form" onSubmit={onSubmit}>
-            <label>
-              <span className="label">Your name</span>
-              <input name="name" autoComplete="name" placeholder="Daenerys from Acme Inc." required />
-            </label>
-            <label>
-              <span className="label">Email</span>
-              <input name="email" type="email" autoComplete="email" placeholder="you@company.com" required />
-            </label>
-            <label>
-              <span className="label">Message</span>
-              <textarea name="message" rows={4} placeholder="Tell me about the realm you're building…" required />
-            </label>
-            <MagneticButton type="submit" className="btn--block">Send the raven</MagneticButton>
-          </form>
-        </Reveal>
+        </div>
+
+        <form className="inquiry-card" onSubmit={handleSubmit} aria-label="Send a direct message">
+          <p className="mono-meta mono-meta--accent" style={{ marginBottom: 16 }}>
+            DIRECT DISPATCH
+          </p>
+          <div className="form-grid">
+            <div className="field">
+              <label htmlFor="contact-name" className="mono-meta">
+                Your Name
+              </label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                placeholder="Alex Rivera · Engineering Manager"
+                required
+              />
+            </div>
+
+            <div className="field">
+              <label htmlFor="contact-email" className="mono-meta">
+                Email Address
+              </label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="alex@company.com"
+                required
+              />
+            </div>
+
+            <div className="field">
+              <label htmlFor="contact-message" className="mono-meta">
+                Role or Project Context
+              </label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows={4}
+                placeholder="Tell me about the team, product problem, or timeline…"
+                required
+              />
+            </div>
+
+            <button type="submit" className="btn btn--primary" style={{ width: "100%" }}>
+              Compose Email
+              <Send size={14} aria-hidden="true" />
+            </button>
+          </div>
+        </form>
       </div>
     </section>
   );
 }
 
-export function Footer() {
+export function Colophon() {
   return (
-    <footer className="footer">
-      <div className="container footer__row">
-        <p className="footer__brand">
-          <Sigil size={28} /> © {new Date().getFullYear()} {PROFILE.name} — forged with React &amp; TypeScript.
+    <footer className="colophon">
+      <div className="container colophon__inner">
+        <p className="mono-meta">
+          © {new Date().getFullYear()} {PROFILE.fullName} · Baybay City, Philippines
         </p>
-        <a href="#top" className="label label--blush">Back to the throne ↑</a>
+
+        <p className="mono-meta">
+          Set in Instrument Serif, Plus Jakarta Sans &amp; JetBrains Mono · Built with React &amp; TypeScript
+        </p>
+
+        <a href="#top" className="btn btn--ghost">
+          Top
+          <ArrowUp size={13} aria-hidden="true" />
+        </a>
       </div>
     </footer>
   );

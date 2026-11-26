@@ -1,139 +1,349 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Figma, Link2, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { PROJECTS, type Project } from "../content";
-import { Chip, MagneticButton } from "./ui";
 
-export function CaseStudy({ project, onClose, onNavigate }: { project: Project | null; onClose: () => void; onNavigate: (p: Project) => void }) {
-  return (
-    <AnimatePresence>
-      {project ? <Dialog key={project.id} project={project} onClose={onClose} onNavigate={onNavigate} /> : null}
-    </AnimatePresence>
-  );
+interface CaseStudyProps {
+  project: Project | null;
+  onClose: () => void;
+  onSelectProject: (project: Project) => void;
+  onToast: (message: string) => void;
 }
 
-function Dialog({ project, onClose, onNavigate }: { project: Project; onClose: () => void; onNavigate: (p: Project) => void }) {
-  const [slide, setSlide] = useState(0);
-  const closeRef = useRef<HTMLButtonElement>(null);
-  const count = project.gallery.length;
-  const idx = PROJECTS.findIndex((p) => p.id === project.id);
-  const next = PROJECTS[(idx + 1) % PROJECTS.length];
+export function CaseStudy({ project, onClose, onSelectProject, onToast }: CaseStudyProps) {
+  const [activeGroup, setActiveGroup] = useState<string>("All");
+  const [slideIndex, setSlideIndex] = useState<number>(0);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const prevOverflow = document.body.style.overflow;
-    const prevFocus = document.activeElement as HTMLElement | null;
-    document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (count > 1 && e.key === "ArrowRight") setSlide((s) => (s + 1) % count);
-      if (count > 1 && e.key === "ArrowLeft") setSlide((s) => (s - 1 + count) % count);
+    setActiveGroup("All");
+    setSlideIndex(0);
+  }, [project?.id]);
+
+  const groups = useMemo(() => {
+    if (!project) return [];
+    const unique = Array.from(new Set(project.gallery.map((g) => g.group).filter(Boolean))) as string[];
+    return unique.length > 1 ? ["All", ...unique] : [];
+  }, [project]);
+
+  const filteredSlides = useMemo(() => {
+    if (!project) return [];
+    if (activeGroup === "All") return project.gallery;
+    return project.gallery.filter((g) => g.group === activeGroup);
+  }, [project, activeGroup]);
+
+  const currentSlide = filteredSlides[slideIndex] ?? filteredSlides[0];
+
+  useEffect(() => {
+    if (!project) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    document.body.classList.add("lock-scroll");
+    window.setTimeout(() => closeBtnRef.current?.focus(), 30);
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key === "ArrowRight" && filteredSlides.length > 1) {
+        setSlideIndex((prev) => (prev + 1) % filteredSlides.length);
+      } else if (e.key === "ArrowLeft" && filteredSlides.length > 1) {
+        setSlideIndex((prev) => (prev - 1 + filteredSlides.length) % filteredSlides.length);
+      } else if (e.key === "Tab" && panelRef.current) {
+        const focusables = panelRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
-    window.addEventListener("keydown", onKey);
+
+    window.addEventListener("keydown", onKeyDown);
     return () => {
-      document.body.style.overflow = prevOverflow;
-      window.removeEventListener("keydown", onKey);
-      prevFocus?.focus?.();
+      document.body.classList.remove("lock-scroll");
+      window.removeEventListener("keydown", onKeyDown);
+      previousFocus?.focus?.();
     };
-  }, [count, onClose]);
+  }, [project, filteredSlides.length, onClose]);
+
+  const handleCopyShareLink = async () => {
+    if (!project) return;
+    const url = `${window.location.origin}${window.location.pathname}#project=${project.id}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      onToast(`Copied direct link to ${project.title}`);
+    } catch {
+      onToast(url);
+    }
+  };
+
+  const projectIdx = project ? PROJECTS.findIndex((p) => p.id === project.id) : -1;
+  const prevProject = projectIdx >= 0 ? PROJECTS[(projectIdx - 1 + PROJECTS.length) % PROJECTS.length] : null;
+  const nextProject = projectIdx >= 0 ? PROJECTS[(projectIdx + 1) % PROJECTS.length] : null;
 
   return (
-    <motion.div className="cs" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
-      <motion.div
-        className="cs__panel"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="cs-title"
-        initial={{ y: 60, opacity: 0, scale: 0.98 }}
-        animate={{ y: 0, opacity: 1, scale: 1 }}
-        exit={{ y: 40, opacity: 0 }}
-        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button ref={closeRef} type="button" className="icon-btn cs__close" onClick={onClose} aria-label="Close case study">
-          <X size={20} />
-        </button>
+    <AnimatePresence>
+      {project ? (
+        <motion.div
+          className="drawer-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) onClose();
+          }}
+        >
+          <motion.div
+            ref={panelRef}
+            className="drawer-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="case-study-title"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", stiffness: 340, damping: 34 }}
+          >
+            <div className="drawer-topbar">
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <span className="mono-meta mono-meta--accent">CASE STUDY {project.index}</span>
+                <span className="mono-meta">· {project.disciplineLabel}</span>
+              </div>
 
-        <header className="cs__head">
-          <p className="label label--fire">
-            Case study {project.index} — {project.kicker}
-          </p>
-          <h2 id="cs-title" className="display">{project.title}</h2>
-          <p className="label label--dim">{project.period}</p>
-        </header>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <button
+                  type="button"
+                  className="tool-btn"
+                  onClick={handleCopyShareLink}
+                  title="Copy shareable case study URL"
+                >
+                  <Link2 size={13} aria-hidden="true" />
+                  <span>Share URL</span>
+                </button>
 
-        <div className={`cs__gallery${project.mobile ? " cs__gallery--mobile" : ""}`}>
-          <div className="cs__stage">
-            <AnimatePresence mode="wait">
-              <motion.figure
-                key={slide}
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -30 }}
-                transition={{ duration: 0.35 }}
-              >
-                <img src={project.gallery[slide].src} alt={project.gallery[slide].caption} decoding="async" />
-                <figcaption>{project.gallery[slide].caption}</figcaption>
-              </motion.figure>
-            </AnimatePresence>
-            {count > 1 ? (
-              <>
-                <button type="button" className="icon-btn cs__nav cs__nav--l" onClick={() => setSlide((s) => (s - 1 + count) % count)} aria-label="Previous image">
-                  <ChevronLeft size={20} />
+                <button
+                  ref={closeBtnRef}
+                  type="button"
+                  className="tool-btn"
+                  onClick={onClose}
+                  aria-label="Close case study drawer"
+                >
+                  <X size={15} aria-hidden="true" />
+                  <span>Close</span>
                 </button>
-                <button type="button" className="icon-btn cs__nav cs__nav--r" onClick={() => setSlide((s) => (s + 1) % count)} aria-label="Next image">
-                  <ChevronRight size={20} />
-                </button>
-                <span className="cs__count">{slide + 1} / {count}</span>
-              </>
-            ) : null}
-          </div>
-          {count > 1 ? (
-            <div className="cs__thumbs">
-              {project.gallery.map((g, i) => (
-                <button key={g.caption} type="button" className={`cs__thumb${i === slide ? " is-active" : ""}`} onClick={() => setSlide(i)} aria-label={`Show ${g.caption}`}>
-                  <img src={g.src} alt="" loading="lazy" />
-                </button>
-              ))}
+              </div>
             </div>
-          ) : null}
-        </div>
 
-        <div className="cs__grid">
-          <section>
-            <h3 className="label label--fire">The problem</h3>
-            <p>{project.problem}</p>
-            <h3 className="label label--fire">My role</h3>
-            <p>{project.role}</p>
-          </section>
-          <section>
-            <h3 className="label label--fire">What I built</h3>
-            <ul className="cs__list">
-              {project.built.map((b) => <li key={b}>{b}</li>)}
-            </ul>
-            <div className="chips">{project.stack.map((s) => <Chip key={s}>{s}</Chip>)}</div>
-          </section>
-        </div>
+            <div className="drawer-scroll">
+              <header className="drawer-header">
+                <p className="mono-meta" style={{ marginBottom: 8 }}>
+                  {project.period}
+                </p>
+                <h2 id="case-study-title" className="serif-section" style={{ marginBottom: 8 }}>
+                  {project.title}
+                </h2>
+                <p style={{ fontSize: 17, color: "var(--ink-2)", maxWidth: "62ch" }}>{project.summary}</p>
 
-        <footer className="cs__foot">
-          <div className="row">
-            {project.live ? (
-              <MagneticButton href={project.live} target="_blank" rel="noreferrer" icon={<ArrowUpRight size={18} />}>
-                Visit live site
-              </MagneticButton>
+                <div className="drawer-links">
+                  {project.live ? (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn--accent"
+                    >
+                      Open Live App
+                      <ArrowUpRight size={15} aria-hidden="true" />
+                    </a>
+                  ) : null}
+
+                  {project.figma ? (
+                    <a
+                      href={project.figma}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn--outline"
+                    >
+                      <Figma size={14} aria-hidden="true" />
+                      Inspect in Figma
+                    </a>
+                  ) : null}
+                </div>
+              </header>
+
+              {currentSlide ? (
+                <section className="gallery-box" aria-label={`${project.title} interface gallery`}>
+                  {groups.length > 0 || filteredSlides.length > 1 ? (
+                    <div className="gallery-box__controls">
+                      {groups.length > 0 ? (
+                        <div className="gallery-groups" role="tablist" aria-label="Filter screens by surface">
+                          {groups.map((grp) => {
+                            const count =
+                              grp === "All"
+                                ? project.gallery.length
+                                : project.gallery.filter((g) => g.group === grp).length;
+                            return (
+                              <button
+                                key={grp}
+                                type="button"
+                                role="tab"
+                                aria-selected={activeGroup === grp}
+                                className={`group-chip${activeGroup === grp ? " is-active" : ""}`}
+                                onClick={() => {
+                                  setActiveGroup(grp);
+                                  setSlideIndex(0);
+                                }}
+                              >
+                                {grp} ({count})
+                              </button>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <span className="mono-meta">Interface Gallery</span>
+                      )}
+
+                      {filteredSlides.length > 1 ? (
+                        <span className="mono-meta">
+                          {slideIndex + 1} / {filteredSlides.length} (Use ← → keys)
+                        </span>
+                      ) : null}
+                    </div>
+                  ) : null}
+
+                  <div
+                    className={`gallery-viewport${
+                      currentSlide.portrait || project.mobile ? " is-portrait" : ""
+                    }`}
+                  >
+                    <img src={currentSlide.src} alt={`${project.title} — ${currentSlide.caption}`} />
+                  </div>
+
+                  <div className="gallery-caption-bar">
+                    <p className="mono-meta" style={{ color: "var(--ink)" }}>
+                      {currentSlide.caption}
+                    </p>
+
+                    {filteredSlides.length > 1 ? (
+                      <div className="gallery-nav-btns">
+                        <button
+                          type="button"
+                          className="tool-btn"
+                          onClick={() =>
+                            setSlideIndex((prev) => (prev - 1 + filteredSlides.length) % filteredSlides.length)
+                          }
+                          aria-label="Previous screen"
+                        >
+                          <ChevronLeft size={15} aria-hidden="true" />
+                        </button>
+                        <button
+                          type="button"
+                          className="tool-btn"
+                          onClick={() => setSlideIndex((prev) => (prev + 1) % filteredSlides.length)}
+                          aria-label="Next screen"
+                        >
+                          <ChevronRight size={15} aria-hidden="true" />
+                        </button>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  {filteredSlides.length > 1 ? (
+                    <div className="gallery-thumbs" role="list">
+                      {filteredSlides.map((slide, idx) => (
+                        <button
+                          key={slide.caption + idx}
+                          type="button"
+                          className={`gallery-thumb${idx === slideIndex ? " is-active" : ""}`}
+                          onClick={() => setSlideIndex(idx)}
+                          aria-label={`View screen ${idx + 1}: ${slide.caption}`}
+                        >
+                          <img src={slide.src} alt="" loading="lazy" />
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </section>
+              ) : null}
+
+              <div className="drawer-columns">
+                <div className="spec-card">
+                  <h3>01 // The Problem</h3>
+                  <p>{project.problem}</p>
+                </div>
+                <div className="spec-card">
+                  <h3>02 // Role &amp; Ownership</h3>
+                  <p>{project.role}</p>
+                </div>
+              </div>
+
+              <div className="spec-card" style={{ marginBottom: 24 }}>
+                <h3>03 // System &amp; Design Architecture</h3>
+                <p>{project.architectureNote}</p>
+              </div>
+
+              <div className="spec-card" style={{ marginBottom: 24 }}>
+                <h3>04 // Key Deliverables</h3>
+                <ul className="built-list">
+                  {project.built.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <p className="mono-meta" style={{ marginBottom: 10 }}>
+                  STACK &amp; METHODS
+                </p>
+                <ul className="spread__tags">
+                  {project.stack.map((tech) => (
+                    <li key={tech} className="tag">
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {prevProject && nextProject ? (
+              <footer className="drawer-footer">
+                <button
+                  type="button"
+                  className="btn btn--ghost"
+                  onClick={() => onSelectProject(prevProject)}
+                >
+                  <ArrowLeft size={14} aria-hidden="true" />
+                  {prevProject.title}
+                </button>
+
+                <span className="mono-meta">
+                  {project.index} / {String(PROJECTS.length).padStart(2, "0")}
+                </span>
+
+                <button
+                  type="button"
+                  className="btn btn--ghost"
+                  onClick={() => onSelectProject(nextProject)}
+                >
+                  {nextProject.title}
+                  <ArrowRight size={14} aria-hidden="true" />
+                </button>
+              </footer>
             ) : null}
-            {project.extraLink ? (
-              <MagneticButton variant="ghost" href={project.extraLink.href} target="_blank" rel="noreferrer" icon={<ArrowUpRight size={18} />}>
-                {project.extraLink.label}
-              </MagneticButton>
-            ) : null}
-          </div>
-          <button type="button" className="cs__next" onClick={() => onNavigate(next)}>
-            <span className="label label--dim">Next realm</span>
-            <span className="cs__next-title">{next.title} →</span>
-          </button>
-        </footer>
-      </motion.div>
-    </motion.div>
+          </motion.div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 }
