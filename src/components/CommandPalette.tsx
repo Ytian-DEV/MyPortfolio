@@ -1,101 +1,175 @@
 import { Command } from "cmdk";
-import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, Copy, FolderOpen, Hash, Moon, Phone, Search, Sun, X } from "lucide-react";
 import { useEffect } from "react";
 import { PROFILE, PROJECTS, type Project } from "../content";
+import { NAV_ITEMS } from "./Header";
 
-interface Props {
+interface CommandPaletteProps {
   open: boolean;
-  setOpen: (v: boolean) => void;
-  onOpenProject: (p: Project) => void;
-  onDracarys: () => void;
-  onToast: (msg: string) => void;
+  onOpenChange: (open: boolean) => void;
+  theme: "light" | "dark";
+  onToggleTheme: () => void;
+  onOpenProject: (project: Project) => void;
+  onToast: (message: string) => void;
 }
 
-const SECTIONS = [
-  ["#work", "Selected conquests", "Work"],
-  ["#stack", "The arsenal", "Stack"],
-  ["#process", "The campaign", "Process"],
-  ["#journey", "The chronicle", "Journey"],
-  ["#contact", "Send a raven", "Contact"],
-] as const;
-
-export function CommandPalette({ open, setOpen, onOpenProject, onDracarys, onToast }: Props) {
+export function CommandPalette({
+  open,
+  onOpenChange,
+  theme,
+  onToggleTheme,
+  onOpenProject,
+  onToast,
+}: CommandPaletteProps) {
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
+    const onKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        setOpen(!open);
+        onOpenChange(!open);
+      } else if (e.key === "Escape" && open) {
+        onOpenChange(false);
       }
-      if (e.key === "Escape" && open) setOpen(false);
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, setOpen]);
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, onOpenChange]);
 
-  const run = (fn: () => void) => () => {
-    setOpen(false);
+  if (!open) return null;
+
+  const runAndClose = (fn: () => void) => {
+    onOpenChange(false);
     fn();
   };
-  const go = (hash: string) => document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <AnimatePresence>
-      {open ? (
-        <motion.div className="cmdk-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setOpen(false)}>
-          <motion.div
-            initial={{ opacity: 0, y: -16, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Command label="Command menu" className="cmdk">
-              <Command.Input autoFocus placeholder="Where shall the raven fly?" />
-              <Command.List>
-                <Command.Empty>No realm by that name.</Command.Empty>
-                <Command.Group heading="Navigate">
-                  {SECTIONS.map(([hash, label, short]) => (
-                    <Command.Item key={hash} value={`${short} ${label}`} onSelect={run(() => go(hash))}>
-                      <span>{label}</span>
-                      <span className="cmdk__hint">{short}</span>
-                    </Command.Item>
-                  ))}
-                </Command.Group>
-                <Command.Group heading="Case studies">
-                  {PROJECTS.map((p) => (
-                    <Command.Item key={p.id} value={`${p.title} ${p.kicker}`} onSelect={run(() => onOpenProject(p))}>
-                      <span>{p.title}</span>
-                      <span className="cmdk__hint">{p.kicker}</span>
-                    </Command.Item>
-                  ))}
-                </Command.Group>
-                <Command.Group heading="Actions">
-                  <Command.Item
-                    value="copy email"
-                    onSelect={run(() => {
-                      navigator.clipboard?.writeText(PROFILE.email).then(
-                        () => onToast("Email copied — the raven is ready."),
-                        () => onToast(PROFILE.email),
-                      );
-                    })}
-                  >
-                    <span>Copy email address</span>
-                    <span className="cmdk__hint">{PROFILE.email}</span>
-                  </Command.Item>
-                  <Command.Item value="github open" onSelect={run(() => window.open(PROFILE.github, "_blank", "noopener"))}>
-                    <span>Open GitHub</span>
-                    <span className="cmdk__hint">Ytian-DEV</span>
-                  </Command.Item>
-                  <Command.Item value="dracarys fire dragon" onSelect={run(onDracarys)}>
-                    <span>Dracarys</span>
-                    <span className="cmdk__hint">🔥</span>
-                  </Command.Item>
-                </Command.Group>
-              </Command.List>
-            </Command>
-          </motion.div>
-        </motion.div>
-      ) : null}
-    </AnimatePresence>
+    <div
+      className="cmdk-backdrop"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onOpenChange(false);
+      }}
+    >
+      <div className="cmdk-dialog" role="dialog" aria-modal="true" aria-label="Quick navigation and actions">
+        <Command label="Command Menu">
+          <div className="cmdk-input-row">
+            <Search size={16} className="mono-meta" aria-hidden="true" />
+            <Command.Input autoFocus placeholder="Jump to a case study, section, or action…" />
+            <button
+              type="button"
+              className="tool-btn"
+              style={{ height: 28, padding: "0 8px" }}
+              onClick={() => onOpenChange(false)}
+              aria-label="Close command menu"
+            >
+              <X size={13} aria-hidden="true" />
+            </button>
+          </div>
+
+          <Command.List>
+            <Command.Empty>No matching projects or commands.</Command.Empty>
+
+            <Command.Group heading="Case Studies">
+              {PROJECTS.map((project) => (
+                <Command.Item
+                  key={project.id}
+                  value={`${project.title} ${project.subtitle} ${project.stack.join(" ")}`}
+                  onSelect={() => runAndClose(() => onOpenProject(project))}
+                >
+                  <span className="cmdk-item-left">
+                    <FolderOpen size={14} className="mono-meta--accent" aria-hidden="true" />
+                    <span>{project.title}</span>
+                  </span>
+                  <span className="mono-meta">{project.disciplineLabel}</span>
+                </Command.Item>
+              ))}
+            </Command.Group>
+
+            <Command.Group heading="Sections">
+              {NAV_ITEMS.map((nav) => (
+                <Command.Item
+                  key={nav.id}
+                  value={`Go to ${nav.label}`}
+                  onSelect={() =>
+                    runAndClose(() => {
+                      document.getElementById(nav.id)?.scrollIntoView({ behavior: "smooth" });
+                    })
+                  }
+                >
+                  <span className="cmdk-item-left">
+                    <Hash size={14} aria-hidden="true" />
+                    <span>{nav.label}</span>
+                  </span>
+                  <span className="mono-meta">{nav.num}</span>
+                </Command.Item>
+              ))}
+            </Command.Group>
+
+            <Command.Group heading="Preferences & Contact">
+              <Command.Item
+                value="Toggle theme light dark mode daylight darkroom"
+                onSelect={() => runAndClose(onToggleTheme)}
+              >
+                <span className="cmdk-item-left">
+                  {theme === "light" ? <Moon size={14} aria-hidden="true" /> : <Sun size={14} aria-hidden="true" />}
+                  <span>Switch to {theme === "light" ? "Darkroom" : "Daylight"} theme</span>
+                </span>
+                <span className="mono-meta">Theme</span>
+              </Command.Item>
+
+              <Command.Item
+                value={`Copy email ${PROFILE.email}`}
+                onSelect={() =>
+                  runAndClose(async () => {
+                    await navigator.clipboard.writeText(PROFILE.email);
+                    onToast(`Copied ${PROFILE.email}`);
+                  })
+                }
+              >
+                <span className="cmdk-item-left">
+                  <Copy size={14} aria-hidden="true" />
+                  <span>Copy Email Address</span>
+                </span>
+                <span className="mono-meta">{PROFILE.email}</span>
+              </Command.Item>
+
+              <Command.Item
+                value={`Copy phone ${PROFILE.phone}`}
+                onSelect={() =>
+                  runAndClose(async () => {
+                    await navigator.clipboard.writeText(PROFILE.phone);
+                    onToast(`Copied ${PROFILE.phone}`);
+                  })
+                }
+              >
+                <span className="cmdk-item-left">
+                  <Phone size={14} aria-hidden="true" />
+                  <span>Copy Phone Number</span>
+                </span>
+                <span className="mono-meta">{PROFILE.phone}</span>
+              </Command.Item>
+
+              <Command.Item
+                value="Open GitHub profile Ytian-DEV"
+                onSelect={() =>
+                  runAndClose(() => {
+                    window.open(PROFILE.github, "_blank", "noopener,noreferrer");
+                  })
+                }
+              >
+                <span className="cmdk-item-left">
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                  <span>Open GitHub Profile</span>
+                </span>
+                <span className="mono-meta">Ytian-DEV</span>
+              </Command.Item>
+            </Command.Group>
+          </Command.List>
+
+          <div className="cmdk-footer">
+            <span>↑↓ Navigate · ↵ Select</span>
+            <span>ESC to close</span>
+          </div>
+        </Command>
+      </div>
+    </div>
   );
 }

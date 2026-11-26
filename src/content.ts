@@ -1,404 +1,559 @@
-import boardmapV2 from "./assets/imgURL/boardmap-v2.webp";
-import reseato from "./assets/imgURL/reseato-cebu.webp";
-import mapaguapa from "./assets/imgURL/mapaguapa.webp";
 import amaranth from "./assets/imgURL/amaranth.webp";
-import invitation from "./assets/imgURL/birthday-invitation.webp";
-import ticTacToe from "./assets/imgURL/tictactoe.webp";
+import boardmapV2 from "./assets/imgURL/boardmap-v2.webp";
 import lilyFlowers from "./assets/imgURL/lily-flowers.webp";
+import mapaguapa from "./assets/imgURL/mapaguapa.webp";
+import reseato from "./assets/imgURL/reseato-cebu.webp";
+
 import bmLogIn from "./assets/images/BoardMap/loginpage.webp";
-import bmStudentMap from "./assets/images/BoardMap/studentdashboard-mapview.webp";
-import bmStudentMapFilter from "./assets/images/BoardMap/studentdashboard-mapview-filter.webp";
-import bmStudentList from "./assets/images/BoardMap/studentdashboard-listview.webp";
-import bmStudentProperty from "./assets/images/BoardMap/studentdashboard-property.webp";
-import bmStudentChat from "./assets/images/BoardMap/studentdashboard-message-chat.webp";
-import bmOwnerProperty from "./assets/images/BoardMap/ownerdashboard-property.webp";
-import bmOwnerInquiries from "./assets/images/BoardMap/ownerdashboard-inquiries.webp";
 import bmOwnerAnalytics from "./assets/images/BoardMap/ownerdashboard-analytics.webp";
-import rydeHomeDark from "./assets/images/Ryde/home-page-dark-theme.webp";
-import rydeLoginDark from "./assets/images/Ryde/login-page-dark-theme.webp";
-import rydeOtpLight from "./assets/images/Ryde/otp-page-light-theme.webp";
-import rydeHomeLight from "./assets/images/Ryde/home-page-light-theme.webp";
-import rydePickup from "./assets/images/Ryde/set-pick-up-location-page-light-theme.webp";
-import rydeTime from "./assets/images/Ryde/select-time-page-light-theme.webp";
-import rydePayment from "./assets/images/Ryde/payment-method-page-light-theme.webp";
+import bmOwnerInquiries from "./assets/images/BoardMap/ownerdashboard-inquiries.webp";
+import bmOwnerProperty from "./assets/images/BoardMap/ownerdashboard-property.webp";
+import bmStudentList from "./assets/images/BoardMap/studentdashboard-listview.webp";
+import bmStudentMapFilter from "./assets/images/BoardMap/studentdashboard-mapview-filter.webp";
+import bmStudentMap from "./assets/images/BoardMap/studentdashboard-mapview.webp";
+import bmStudentChat from "./assets/images/BoardMap/studentdashboard-message-chat.webp";
+import bmStudentProperty from "./assets/images/BoardMap/studentdashboard-property.webp";
 
 import khAndroidHome from "./assets/images/Kheryne/android-home.webp";
-import khAndroidScan from "./assets/images/Kheryne/android-scan.webp";
-import khAndroidReport from "./assets/images/Kheryne/android-report.webp";
 import khAndroidMorpho from "./assets/images/Kheryne/android-morphometrics.webp";
-import khWinWorkspace from "./assets/images/Kheryne/windows-workspace.webp";
-import khWinLive from "./assets/images/Kheryne/windows-live.webp";
+import khAndroidReport from "./assets/images/Kheryne/android-report.webp";
+import khAndroidScan from "./assets/images/Kheryne/android-scan.webp";
 import khWinCompare from "./assets/images/Kheryne/windows-compare.webp";
 import khWinKey from "./assets/images/Kheryne/windows-key.webp";
+import khWinLive from "./assets/images/Kheryne/windows-live.webp";
 import khWinReport from "./assets/images/Kheryne/windows-report.webp";
+import khWinWorkspace from "./assets/images/Kheryne/windows-workspace.webp";
+
+import rydeLogin from "./assets/images/Ryde/02-phone-login.webp";
+import rydeOtp from "./assets/images/Ryde/03-otp-verification.webp";
+import rydeHomeLight from "./assets/images/Ryde/05-home-map-light.webp";
+import rydePickupSearch from "./assets/images/Ryde/06-pickup-destination.webp";
+import rydeTiersLight from "./assets/images/Ryde/07-ride-tiers-light.webp";
+import rydePaymentSchedule from "./assets/images/Ryde/08-payment-schedule.webp";
+import rydeLiveLight from "./assets/images/Ryde/10-live-tracking-light.webp";
+import rydeSummaryRating from "./assets/images/Ryde/11-ride-summary-rating.webp";
+import rydeHomeDark from "./assets/images/Ryde/15-home-map-dark.webp";
+import rydeTiersDark from "./assets/images/Ryde/16-ride-tiers-dark.webp";
+import rydeLiveDark from "./assets/images/Ryde/17-live-tracking-dark.webp";
+import rydeProfileDark from "./assets/images/Ryde/18-profile-settings-dark.webp";
+
+import agapayCropSuggestions from "./assets/images/Agapay/farmer-crop-suggestions.webp";
+import agapayHomeDark from "./assets/images/Agapay/farmer-home-dark.webp";
+import agapayHomeLight from "./assets/images/Agapay/farmer-home-light.webp";
+import agapayMapDark from "./assets/images/Agapay/farmer-map-dark.webp";
+import agapayMapLight from "./assets/images/Agapay/farmer-map-light.webp";
+import agapayPlantingWindow from "./assets/images/Agapay/farmer-planting-window.webp";
+import agapaySmsPreview from "./assets/images/Agapay/farmer-sms-preview.webp";
+import agapayYieldEstimate from "./assets/images/Agapay/farmer-yield-estimate.webp";
+import agapayLiveLgu from "./assets/images/Agapay/live-lgu-dashboard.webp";
+import agapayLiveWelcome from "./assets/images/Agapay/live-welcome.webp";
+
+import carevendCatalog from "./assets/images/CareVend/kiosk-slot-catalog.webp";
+import carevendHome from "./assets/images/CareVend/kiosk-triage-home.webp";
 
 export const PROFILE = {
   name: "Christian Boyles",
   fullName: "Christian Earl James Boyles",
-  role: "Full-Stack Developer",
+  role: "Junior Software Engineer",
+  specialization: "UI/UX · Frontend · Backend",
   location: "Baybay City, Philippines",
+  timezone: "Asia/Manila",
+  education: "BS Computer Science (4th Year) · Visayas State University",
   email: "christian02613@gmail.com",
   phone: "+63 915 211 1698",
   phoneHref: "tel:+639152111698",
   github: "https://github.com/Ytian-DEV",
   githubLabel: "github.com/Ytian-DEV",
-  availability: "Open to full-time & freelance · 2026",
+  /** Drop your finished PDF into public/resume.pdf and set this to "/resume.pdf" to enable direct download. */
+  resumeUrl: null as string | null,
+  availability: "Open to full-time & freelance roles",
 };
 
-export type ProjectCategory = "fullstack" | "frontend" | "design";
+export type ProjectCategory = "fullstack" | "design";
+
+export interface GalleryItem {
+  src: string;
+  caption: string;
+  group?: string;
+  portrait?: boolean;
+}
 
 export interface Project {
   id: string;
-  /** Display number; assigned from PROJECT_ORDER below. */
   index: string;
   title: string;
-  kicker: string;
+  subtitle: string;
   period: string;
+  year: string;
   category: ProjectCategory;
+  disciplineLabel: string;
+  featured: boolean;
+  mobile?: boolean;
+  tabletPortrait?: boolean;
   summary: string;
   problem: string;
   role: string;
+  architectureNote: string;
   built: string[];
   stack: string[];
+  metrics?: { label: string; value: string }[];
   live?: string;
-  extraLink?: { label: string; href: string };
+  figma?: string;
   cover: string;
-  gallery: { src: string; caption: string }[];
-  flagship?: boolean;
-  /** Key facts shown on the flagship card. */
-  facts?: { label: string; value: string }[];
-  /** Portrait mobile screens get a different gallery layout. */
-  mobile?: boolean;
+  secondaryPreviews?: string[];
+  gallery: GalleryItem[];
 }
 
-const ALL_PROJECTS: Project[] = [
+const RAW_PROJECTS: Omit<Project, "index">[] = [
+  {
+    id: "agapay",
+    title: "Agapay",
+    subtitle: "Hyper-Local Planting & Climate Decision App for Filipino Farmers",
+    period: "2026",
+    year: "2026",
+    category: "fullstack",
+    disciplineLabel: "Full-Stack Mobile App & UI/UX",
+    featured: true,
+    mobile: true,
+    summary:
+      "A mobile-first agricultural decision application for Filipino farmers—delivering field-level planting windows, 1 km suitability grids, offline sync, and SMS advisories, paired with an RA 10173-compliant LGU dashboard.",
+    problem:
+      "Smallholder farmers make high-stakes planting decisions amid unpredictable rainfall and waterlogging without hyper-local guidance, while municipal offices lack privacy-safe visibility into barangay crop crowding.",
+    role: "Product Designer & Full-Stack Developer — designed the multi-plan iOS 26 UI system in Figma (codenamed BukidTech) and built the live application.",
+    architectureNote:
+      "Pairs an offline-capable, multilingual farmer mobile interface (with sync queues and SMS fallback) alongside a companion LGU workspace enforcing RA 10173 Data Privacy suppression (<5 reporting farmers) and CSV/PDF export.",
+    built: [
+      "Farmer mobile app surfacing GO / WAIT / AVOID planting windows, 7-day rainfall & waterlogging checks, crop rankings, and yield estimates",
+      "Interactive spatial suitability grid across Baybay City barangays (Rain, Soil, Flood, and Suitability layers)",
+      "Offline preview mode, field sync status, and SMS advisory fallback designed for low-connectivity farm parcels",
+      "Companion City Agriculture Office (LGU) workspace monitoring barangay crop crowding and planted hectares with RA 10173 privacy suppression",
+    ],
+    stack: ["React", "TypeScript", "Mobile Web / App", "Offline-First UX", "Spatial Maps", "Figma", "Light & Dark Modes"],
+    metrics: [
+      { label: "Primary UX", value: "Farmer Mobile App" },
+      { label: "Resilience", value: "Offline + SMS Ready" },
+      { label: "Privacy", value: "RA 10173 Aggregated" },
+    ],
+    live: "https://agapay-tau.vercel.app/",
+    figma: "https://www.figma.com/design/uzxr3AUL2so9ADoJQfUgG4/BukidTech-%E2%80%93-iOS-26-App-Design?node-id=0-1&t=3eihe5d52qOvpWNo-1",
+    cover: agapayLiveWelcome,
+    secondaryPreviews: [agapayHomeLight, agapayMapLight],
+    gallery: [
+      { src: agapayLiveWelcome, caption: "Agapay mobile entry — Multilingual, offline preview & SMS access", group: "Farmer App", portrait: true },
+      { src: agapayHomeLight, caption: "Farmer home — Planting window, waterlogging & 7-day rain outlook", group: "Farmer App", portrait: true },
+      { src: agapayMapLight, caption: "1 km suitability grid (GO / WAIT / AVOID) — Brgy. Gabas", group: "Farmer App", portrait: true },
+      { src: agapayPlantingWindow, caption: "Daily planting window & soil drainage guidance", group: "Farmer App", portrait: true },
+      { src: agapayCropSuggestions, caption: "Crop suitability ranking & recommendations", group: "Farmer App", portrait: true },
+      { src: agapayYieldEstimate, caption: "Projected harvest & yield estimator", group: "Farmer App", portrait: true },
+      { src: agapaySmsPreview, caption: "Low-connectivity SMS advisory thread", group: "Farmer App", portrait: true },
+      { src: agapayHomeDark, caption: "Dark mode — Farmer planting window & rainfall dashboard", group: "Dark Mode", portrait: true },
+      { src: agapayMapDark, caption: "Dark mode — Barangay suitability map", group: "Dark Mode", portrait: true },
+      { src: agapayLiveLgu, caption: "Companion LGU Workspace — Barangay crowding map & planted hectares", group: "LGU Companion", portrait: false },
+    ],
+  },
+  {
+    id: "kheryne",
+    title: "Kheryne",
+    subtitle: "Offline Nematode Identification System · Android & Windows",
+    period: "2026",
+    year: "2026",
+    category: "design",
+    disciplineLabel: "UI/UX System · Cross-Platform",
+    featured: true,
+    summary:
+      "An offline-first microscope assistant that detects plant-parasitic nematodes in real time and guides researchers from order to genus across paired Android and Windows workspaces.",
+    problem:
+      "Identifying nematodes requires hours at the microscope comparing subtle anatomy against dichotomous keys, while agricultural field labs rarely have reliable internet for cloud inference.",
+    role: "Product & UI/UX Designer — authored the complete multi-platform design system, token architecture, and end-to-end research workflows in Figma.",
+    architectureNote:
+      "Designed around on-device inference constraints: confidence-graded trait explanations, physical stage-micrometer calibration, and zero-latency phone-to-desktop pairing.",
+    built: [
+      "Eyepiece live-scan HUD on Android that marks candidate specimens and prompts 40× magnification switches for genus-level anatomy",
+      "Explainable taxonomic breakdowns (Order → Family → Genus) surfacing diagnostic traits like stylet knobs, tail shape, and vulva position",
+      "Built-in morphometrics calibration workflow calculating De Man ratios without manual spreadsheet entry",
+      "Paired Windows desktop lab environment for live microscope streaming, side-by-side specimen comparison, dichotomous keys, and PDF reporting",
+      "Tokenized light and dark themes tuned for both bright field conditions and dim microscopy rooms",
+    ],
+    stack: ["Figma", "Design Systems", "Design Tokens", "Android UX", "Windows UX", "Light & Dark Modes"],
+    metrics: [
+      { label: "Platforms", value: "Android + Windows" },
+      { label: "Operation", value: "100% Offline-First" },
+      { label: "Themes", value: "Calibrated Light & Dark" },
+    ],
+    figma: "https://www.figma.com/design/KWcNyL3Ehh9ayQ09f7QB1n/Kheryne-%E2%80%94-UI-design?node-id=1-4",
+    cover: khWinWorkspace,
+    secondaryPreviews: [khAndroidScan, khAndroidReport],
+    gallery: [
+      { src: khWinWorkspace, caption: "Windows — Lab workspace & specimen queue", group: "Windows Lab" },
+      { src: khWinLive, caption: "Windows — Live stream paired from eyepiece phone", group: "Windows Lab" },
+      { src: khWinCompare, caption: "Windows — Side-by-side morphological comparison", group: "Windows Lab" },
+      { src: khWinKey, caption: "Windows — Interactive dichotomous key", group: "Windows Lab" },
+      { src: khWinReport, caption: "Windows — Exportable taxonomic report", group: "Windows Lab" },
+      { src: khAndroidHome, caption: "Android — Field home in light & dark modes", group: "Android Field", portrait: true },
+      { src: khAndroidScan, caption: "Android — Live eyepiece scan & genus prompt", group: "Android Field", portrait: true },
+      { src: khAndroidReport, caption: "Android — Confidence & trait breakdown", group: "Android Field", portrait: true },
+      { src: khAndroidMorpho, caption: "Android — Stage-micrometer calibration & De Man indices", group: "Android Field", portrait: true },
+    ],
+  },
+  {
+    id: "mapaguapa",
+    title: "MAPAGUAPA",
+    subtitle: "Campus Housing Discovery Platform · VSU",
+    period: "Mar – Apr 2026",
+    year: "2026",
+    category: "fullstack",
+    disciplineLabel: "Full-Stack Engineering",
+    featured: true,
+    summary:
+      "A map-integrated housing platform built for Visayas State University students to evaluate boarding houses and apartments simultaneously by budget, walking distance, and room comfort.",
+    problem:
+      "Incoming and returning Viscan students weighed price, campus proximity, and amenities together, yet existing listings were scattered across unstructured social posts with no spatial search.",
+    role: "Full-Stack Engineer — owned map integration, multi-criteria filtering, authentication flows, and responsive UI architecture.",
+    architectureNote:
+      "Backed by Supabase Auth and relational PostgreSQL queries so saved listings, room availability, and coordinate bounds stay synchronized across mobile and desktop.",
+    built: [
+      "Interactive spatial search pairing map pins with multi-axis filters for monthly budget, distance to campus gates, and comfort amenities",
+      "Authenticated student accounts with persistent saved listings and comparison shortlists via Supabase Auth",
+      "Mobile-first interface hierarchy engineered for fast browsing over campus cellular connections",
+    ],
+    stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Maps API", "Tailwind CSS"],
+    metrics: [
+      { label: "Audience", value: "VSU Students" },
+      { label: "Core Flow", value: "Map + 3-Axis Filter" },
+      { label: "Backend", value: "Supabase Auth & DB" },
+    ],
+    live: "https://mapaguapa.vercel.app/",
+    cover: mapaguapa,
+    gallery: [{ src: mapaguapa, caption: "MAPAGUAPA — Authentication & campus housing entry" }],
+  },
+  {
+    id: "ryde",
+    title: "Ryde.",
+    subtitle: "Campus Ride-Hailing & Multi-Service App · VSU Baybay (Dev Build)",
+    period: "2026 – Present",
+    year: "2026",
+    category: "fullstack",
+    disciplineLabel: "App Dev & UI/UX System · In Dev",
+    featured: true,
+    mobile: true,
+    summary:
+      "A localized mobility and delivery app built around VSU Baybay—combining Motor, Taxi, Food, and local errand booking with live driver tracking, GCash checkout, and an 18-screen Liquid Glass UI system.",
+    problem:
+      "Commuters and students around VSU Baybay rely on informal rides and scattered chat groups without upfront fare tiers, live driver ETAs, or trip safety tools.",
+    role: "Product Designer & Developer — authored the 18-screen iOS 26 Liquid Glass system in Figma and engineered the working application in active development.",
+    architectureNote:
+      "Translated from a tokenized Liquid Glass Figma design system (full light & dark parity) into an interactive app build covering OTP auth, VSU/Baybay spatial pinning, fare-tier sheets, live trip tracking, and Safety SOS.",
+    built: [
+      "Multi-service booking hub supporting Motor, Taxi, Food, and local Services with instant VSU Baybay quick-pins (DCST, VSU Hospital, 7/11 Utod)",
+      "Active dev build implementing the end-to-end trip lifecycle: phone OTP verification, route search, ride-tier & schedule selection, live driver arrival tracking, and ratings",
+      "18-screen iOS 26 Liquid Glass design system in Figma engineered with full daylight and low-glare dark mode parity",
+      "Integrated commuter payment and trust workflows including GCash checkout, verified driver profiles, trip sharing, and Safety SOS",
+    ],
+    stack: ["React", "TypeScript", "Mobile Web / App", "Maps", "Figma", "Design Systems", "Light & Dark Modes"],
+    metrics: [
+      { label: "Build State", value: "In Active Dev" },
+      { label: "UI System", value: "18 Production Screens" },
+      { label: "Locale", value: "VSU · Baybay City" },
+    ],
+    // Attach your dev live web URL here when ready: live: "https://...",
+    figma: "https://www.figma.com/design/FJbTiEChKqH4h2rAMHfsYg/Ryde.-app?node-id=0-1&t=srmMfrVtVFGE27sK-1",
+    cover: rydeHomeLight,
+    secondaryPreviews: [rydeHomeDark, rydeLiveLight],
+    gallery: [
+      { src: rydeHomeLight, caption: "Home map & multi-service quick book (VSU Baybay)", group: "Booking Flow", portrait: true },
+      { src: rydePickupSearch, caption: "Pickup & destination spatial search", group: "Booking Flow", portrait: true },
+      { src: rydeTiersLight, caption: "Ride tier & upfront fare selection sheet", group: "Booking Flow", portrait: true },
+      { src: rydePaymentSchedule, caption: "GCash payment & scheduled departure sheet", group: "Booking Flow", portrait: true },
+      { src: rydeLiveLight, caption: "Live driver arrival tracking & Safety SOS", group: "Live Trip", portrait: true },
+      { src: rydeSummaryRating, caption: "Completed trip summary & driver rating", group: "Live Trip", portrait: true },
+      { src: rydeHomeDark, caption: "Dark mode — Home map & service switcher", group: "Dark Mode", portrait: true },
+      { src: rydeTiersDark, caption: "Dark mode — Ride tiers & fare sheet", group: "Dark Mode", portrait: true },
+      { src: rydeLiveDark, caption: "Dark mode — Live route tracking", group: "Dark Mode", portrait: true },
+      { src: rydeProfileDark, caption: "Dark mode — Commuter profile & settings", group: "Dark Mode", portrait: true },
+      { src: rydeLogin, caption: "Phone number sign-in", group: "Onboarding", portrait: true },
+      { src: rydeOtp, caption: "SMS OTP verification", group: "Onboarding", portrait: true },
+    ],
+  },
+  {
+    id: "amaranth",
+    title: "Amaranth",
+    subtitle: "Official Campus Publication Platform · VSU",
+    period: "Aug 2025 – Present",
+    year: "2025–26",
+    category: "fullstack",
+    disciplineLabel: "Full-Stack & Editorial UI",
+    featured: true,
+    summary:
+      "A modern editorial redesign and full-stack rebuild of Visayas State University's official student publication—prioritizing mobile readability, clear story hierarchy, and structured publishing.",
+    problem:
+      "The legacy publication site buried breaking campus reporting under cluttered navigation and struggled on mobile viewports where most student readers arrive.",
+    role: "Full-Stack Developer — led information architecture, editorial typography, responsive frontend, and Supabase content integration.",
+    architectureNote:
+      "Structured around dynamic category feeds, featured lead stories, and most-read rankings backed by Supabase tables and fast client caching.",
+    built: [
+      "Re-engineered editorial homepage surfacing lead reporting, section verticals, and most-read campus stories at a glance",
+      "Supabase-backed article and category data pipeline replacing static page bottlenecks",
+      "Phone-first reading experience with calibrated measure, contrast, and responsive card grids",
+    ],
+    stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS"],
+    metrics: [
+      { label: "Publication", value: "VSU Official Press" },
+      { label: "Focus", value: "Editorial IA & CMS" },
+      { label: "Viewport", value: "Mobile-First Reader" },
+    ],
+    live: "https://amaranth-iota.vercel.app/",
+    cover: amaranth,
+    gallery: [{ src: amaranth, caption: "Amaranth — Lead story hierarchy & most-read editorial feed" }],
+  },
+  {
+    id: "carevend",
+    title: "CareVend",
+    subtitle: "Campus OTC Health & Hygiene Kiosk · Portrait iPad",
+    period: "2026",
+    year: "2026",
+    category: "fullstack",
+    disciplineLabel: "Portrait iPad Kiosk & Web App",
+    featured: true,
+    tabletPortrait: true,
+    summary:
+      "A vertical iPad self-service health and menstrual hygiene vending kiosk—guiding students through quick symptom and contraindication checks before dispensing OTC essentials or escalating to the school clinic.",
+    problem:
+      "Students needing basic first-aid, pain relief, or menstrual care on campus face clinic queues or after-hours closures, yet unguided vending risks unsafe medication choices.",
+    role: "Product Designer & Frontend/Full-Stack Engineer — designed the portrait iPad touch interface, clinical safety decision tree, and 9-slot dispensing flow.",
+    architectureNote:
+      "Engineered specifically for vertical iPad touch targets—modeling branching symptom-and-allergy safety checks (escalating to the school nurse on contraindications) alongside live 9-slot (`A1–C3`) inventory state, ingredient card flips, and checkout simulation.",
+    built: [
+      "Portrait iPad touchscreen triage across 7 campus health & hygiene needs with allergy and recent-dose contraindication safeguards",
+      "Automatic school clinic nurse escalation whenever high-risk symptoms or medication conflicts are detected",
+      "Interactive 9-slot (`A1–C3`) vending machine grid with live stock counts, inline active-ingredient card flips, and sticky multi-item cart",
+      "End-to-end kiosk checkout and slot-dispensing flow with operator one-tap slot restocking and fullscreen kiosk mode",
+    ],
+    stack: ["React", "TypeScript", "Portrait iPad UX", "State Machines", "Tailwind CSS"],
+    metrics: [
+      { label: "Form Factor", value: "Portrait iPad Kiosk" },
+      { label: "Inventory", value: "9 Physical Slots (A1–C3)" },
+      { label: "Safety", value: "Contraindication Triage" },
+    ],
+    live: "https://carevend.vercel.app/",
+    cover: carevendHome,
+    secondaryPreviews: [carevendCatalog],
+    gallery: [
+      { src: carevendHome, caption: "Portrait iPad home — 2×4 symptom & hygiene need triage", portrait: true },
+      { src: carevendCatalog, caption: "Portrait iPad 9-slot (A1–C3) catalog — Stock, ingredient inspect & cart", portrait: true },
+    ],
+  },
   {
     id: "boardmap",
-    index: "01",
     title: "BoardMap",
-    kicker: "Student housing platform",
-    period: "Nov 2025 → Now",
+    subtitle: "Two-Sided Student Housing Marketplace & Realtime Chat",
+    period: "Nov 2025 – Present",
+    year: "2025–26",
     category: "fullstack",
+    disciplineLabel: "Full-Stack & Product Design",
+    featured: false,
     summary:
-      "VSU students used to hunt for boarding houses door-to-door. BoardMap puts every listing on a live map — with filters, owner dashboards, inquiries and in-app messaging.",
+      "End-to-end boarding house marketplace putting VSU listings on a live clustered Leaflet map with role-based student and landlord dashboards, inquiries, and realtime chat.",
     problem:
-      "Students and faculty arriving at VSU Baybay had no single place to compare boarding houses. Listings lived in Facebook posts and word of mouth, so finding a room meant walking the town.",
-    role: "Product design → full-stack build. I designed the flows in Figma, then built v1 and the v2 rebuild end-to-end.",
+      "Finding off-campus rooms meant walking street-to-street or chasing outdated social posts, with no structured way for landlords to track occupants and inquiries.",
+    role: "Product Designer & Full-Stack Engineer — designed the initial multi-role system in Figma, shipped v1, and engineered the v2 production rebuild.",
+    architectureNote:
+      "Enforces tenant/owner separation via PostgreSQL Row-Level Security (RLS) policies, pairing Leaflet spatial clustering with Supabase Realtime messaging channels.",
     built: [
-      "Map-first discovery with Leaflet: clustering, filters by price, distance and amenities",
-      "Two role-based dashboards — students browse & message, owners manage listings, occupants and inquiries",
-      "Supabase Postgres schema with row-level security, auth and realtime chat",
-      "v2 rebuild with cleaner navigation, faster loading and a polished visual system",
+      "Leaflet map discovery with marker clustering and live filtering by monthly rate, distance, and amenities",
+      "Dual role-based workspaces: students browse and message; landlords manage room inventory, occupants, inquiries, and analytics",
+      "Supabase PostgreSQL schema secured with Row-Level Security (RLS), authentication, and realtime chat subscriptions",
+      "v2 architecture overhaul delivering cleaner navigation, faster bundle loads, and cohesive UI tokens",
     ],
-    stack: ["React", "TypeScript", "Leaflet", "Supabase", "Tailwind CSS"],
+    stack: ["React", "TypeScript", "Leaflet", "Supabase", "PostgreSQL RLS", "Tailwind CSS", "Figma"],
     live: "https://batch-2025-vsu-boardmap-web.vercel.app/",
-    extraLink: {
-      label: "Original Figma concept",
-      href: "https://www.figma.com/design/PLyl615g6uSVaesonXgCk2/BoardMap?node-id=0-1&t=R30u6mbH4MCXcR7o-1",
-    },
+    figma: "https://www.figma.com/design/PLyl615g6uSVaesonXgCk2/BoardMap?node-id=0-1&t=R30u6mbH4MCXcR7o-1",
     cover: boardmapV2,
     gallery: [
-      { src: boardmapV2, caption: "v2 — live landing & sign-in" },
-      { src: bmStudentMap, caption: "Concept — student map view" },
-      { src: bmStudentMapFilter, caption: "Concept — map filters" },
-      { src: bmStudentList, caption: "Concept — list view" },
-      { src: bmStudentProperty, caption: "Concept — property detail" },
-      { src: bmStudentChat, caption: "Concept — in-app messaging" },
-      { src: bmOwnerProperty, caption: "Concept — owner listings" },
-      { src: bmOwnerInquiries, caption: "Concept — owner inquiries" },
-      { src: bmOwnerAnalytics, caption: "Concept — owner analytics" },
-      { src: bmLogIn, caption: "Concept — log in" },
+      { src: boardmapV2, caption: "BoardMap v2 — Production landing & sign-in", group: "Live v2" },
+      { src: bmStudentMap, caption: "Student workspace — Live map discovery", group: "Student Flow" },
+      { src: bmStudentMapFilter, caption: "Student workspace — Price & amenity filters", group: "Student Flow" },
+      { src: bmStudentList, caption: "Student workspace — Card list view", group: "Student Flow" },
+      { src: bmStudentProperty, caption: "Student workspace — Property detail & rooms", group: "Student Flow" },
+      { src: bmStudentChat, caption: "Student workspace — Realtime landlord messaging", group: "Student Flow" },
+      { src: bmOwnerProperty, caption: "Owner suite — Property & room management", group: "Owner Suite" },
+      { src: bmOwnerInquiries, caption: "Owner suite — Tenant inquiries pipeline", group: "Owner Suite" },
+      { src: bmOwnerAnalytics, caption: "Owner suite — Occupancy & listing analytics", group: "Owner Suite" },
+      { src: bmLogIn, caption: "Original v1 authentication concept", group: "Live v2" },
     ],
   },
   {
     id: "reseato",
-    index: "02",
     title: "RESEATO Cebu",
-    kicker: "Restaurant reservations",
-    period: "Feb → Apr 2026",
+    subtitle: "Realtime Mall Restaurant Reservations & Reviews",
+    period: "Feb – Apr 2026",
+    year: "2026",
     category: "fullstack",
+    disciplineLabel: "Full-Stack Engineering",
+    featured: false,
     summary:
-      "Skip the queue at SM City & SM Seaside. Real-time table availability, reservations and diner reviews for Cebu's top restaurants.",
+      "Real-time table availability, time-slot booking validation, and diner dish recommendations for high-traffic restaurants at SM City Cebu and SM Seaside.",
     problem:
-      "Mall restaurants in Cebu fill up fast on weekends and diners have no way to know what's free until they've already queued.",
-    role: "Full-stack developer — data model, booking flow, review system and responsive UI.",
+      "Weekend mall diners had no visibility into table waitlists until physically queuing at the restaurant podium.",
+    role: "Full-Stack Developer — engineered the relational booking schema, conflict-free slot validation, review system, and mobile booking UI.",
+    architectureNote:
+      "Uses Supabase Realtime subscriptions to broadcast table state changes immediately while server-side constraints prevent overlapping slot double-bookings.",
     built: [
-      "Live table availability powered by Supabase realtime subscriptions",
-      "Booking flow with time-slot validation to prevent double reservations",
-      "Ratings & reviews with recommendations of what to order",
-      "Responsive interface tuned for diners booking on their phones",
+      "Live table availability indicators powered by Supabase Realtime channel subscriptions",
+      "Reservation flow with party-size and time-slot validation to eliminate double-booked tables",
+      "Verified diner ratings and dish-level order recommendations",
     ],
-    stack: ["React", "TypeScript", "Supabase", "Realtime", "Tailwind CSS"],
+    stack: ["React", "TypeScript", "Supabase Realtime", "PostgreSQL", "Tailwind CSS"],
     live: "https://reseato-cebu-v2.vercel.app/",
     cover: reseato,
-    gallery: [{ src: reseato, caption: "Restaurant discovery & booking" }],
-  },
-  {
-    id: "mapaguapa",
-    index: "03",
-    title: "MAPAGUAPA",
-    kicker: "Housing finder · VYM",
-    period: "Mar → Apr 2026",
-    category: "fullstack",
-    flagship: true,
-    facts: [
-      { label: "Role", value: "Full-stack developer" },
-      { label: "Stack", value: "React · TypeScript · Supabase · Maps" },
-      { label: "Built for", value: "Viscan students at VSU" },
-    ],
-    summary:
-      "Helps Viscan students find boarding houses and apartments that match their comfort, location and budget — all in one accessible platform.",
-    problem:
-      "Budget, distance and comfort are the three things students weigh, but no existing tool let them filter on all three at once.",
-    role: "Full-stack developer — map integration, listing search and account flows.",
-    built: [
-      "Map-integrated search with budget, location and comfort filters",
-      "Account flows and saved listings backed by Supabase auth",
-      "Accessible, mobile-first UI with clear hierarchy",
-    ],
-    stack: ["React", "TypeScript", "Supabase", "Maps", "Tailwind CSS"],
-    live: "https://mapaguapa.vercel.app/",
-    cover: mapaguapa,
-    gallery: [{ src: mapaguapa, caption: "Sign in — a room near campus" }],
-  },
-  {
-    id: "amaranth",
-    index: "04",
-    title: "Amaranth Website",
-    kicker: "Campus publication",
-    period: "Aug 2025 → Now",
-    category: "fullstack",
-    summary:
-      "A responsive revamp of VSU's official student publication with clearer information architecture, campus resources and a CMS-style workflow.",
-    problem:
-      "The publication's old site buried new articles and was hard to read on phones, where most students actually visit.",
-    role: "Full-stack developer — information architecture, article system and responsive front-end.",
-    built: [
-      "Article feed and categories backed by Supabase",
-      "Reworked information architecture so latest stories surface first",
-      "Responsive layouts for phone-first readers",
-    ],
-    stack: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
-    live: "https://amaranth-iota.vercel.app/",
-    cover: amaranth,
-    gallery: [{ src: amaranth, caption: "Homepage — top story & most read" }],
+    gallery: [{ src: reseato, caption: "RESEATO Cebu — Restaurant discovery & live table booking" }],
   },
   {
     id: "lily",
-    index: "",
     title: "Lily Flowers",
-    kicker: "Inventory & invoicing",
+    subtitle: "Florist Inventory, Invoicing & Revenue Operations",
     period: "2026",
+    year: "2026",
     category: "fullstack",
+    disciplineLabel: "Full-Stack Engineering",
+    featured: false,
     summary:
-      "Inventory and invoice management for a Baybay City flower shop — orders, payments, deliveries, customers and a bouquet catalog, with a live revenue dashboard.",
+      "Internal operations platform for a Baybay City flower shop—automating sequential invoices, deposit balance tracking, weekly delivery schedules, and revenue analytics.",
     problem:
-      "The shop tracked bouquet orders, deposits and delivery dates by hand, so balances were missed and nobody could see at a glance what was due this week.",
-    role: "Full-stack developer — data model, invoicing flow, dashboard and admin UI.",
+      "Handwritten bouquet orders and partial cash deposits caused missed balances and made weekly delivery preparation difficult to audit.",
+    role: "Full-Stack Developer — designed the accounting/order data model, invoicing state machine, and role-gated staff dashboard.",
+    architectureNote:
+      "Models partial payments and outstanding balances directly in PostgreSQL so revenue collected vs. receivable stays accurate across order states.",
     built: [
-      "Order flow that issues dated invoice numbers (INV-YYYYMMDD-####) and tracks each order from Confirmed → Preparing → Ready",
-      "Payments with outstanding balances, so the shop sees exactly what is left to collect",
-      "Dashboard: revenue this month, balance to collect, open orders, deliveries this week and a 6-month revenue chart",
-      "Bouquet catalog with best-sellers, plus customer records and staff accounts with roles",
+      "Automated invoice generator (`INV-YYYYMMDD-####`) tracking orders across Confirmed → Preparing → Ready states",
+      "Partial-payment ledger surfacing exact outstanding customer balances to collect",
+      "Executive dashboard displaying monthly revenue, open orders, upcoming deliveries, and a 6-month revenue trend",
+      "Bouquet catalog with best-seller tracking and role-based staff accounts",
     ],
-    stack: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
+    stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS"],
     live: "https://lily-flower-invoice-management.vercel.app/",
     cover: lilyFlowers,
-    gallery: [{ src: lilyFlowers, caption: "Staff sign-in" }],
-  },
-  {
-    id: "invitation",
-    index: "05",
-    title: "e-Invitation + Admin",
-    kicker: "Event platform",
-    period: "Oct 2025",
-    category: "fullstack",
-    summary:
-      "A public invitation experience linked to an admin dashboard for guest lists, QR check-in and live attendance tracking.",
-    problem:
-      "Paper invites and manual guest lists make it impossible to know who has actually arrived at an event.",
-    role: "Full-stack developer — built in one week, from invitation UI to admin tooling.",
-    built: [
-      "Animated public invitation with RSVP",
-      "Admin dashboard to manage guests and generate QR codes",
-      "QR scanning check-in with real-time attendance updates",
-    ],
-    stack: ["React", "TypeScript", "Supabase", "QR codes", "Tailwind CSS"],
-    live: "https://invitation-web-t7q7.vercel.app/",
-    extraLink: { label: "Admin dashboard", href: "https://invitation-web-t7q7.vercel.app/#/administrator" },
-    cover: invitation,
-    gallery: [{ src: invitation, caption: "Public invitation" }],
-  },
-  {
-    id: "tictactoe",
-    index: "06",
-    title: "Tic Tac Toe",
-    kicker: "Game",
-    period: "Oct 2025",
-    category: "frontend",
-    summary:
-      "A React + TypeScript game with polished interactions, score tracking and a strong visual identity.",
-    problem: "A focused exercise in state management and interaction design — small scope, high polish.",
-    role: "Front-end developer.",
-    built: ["Typed game state and win detection", "Score tracking across rounds", "Micro-interactions and a neon visual identity"],
-    stack: ["React", "TypeScript", "Tailwind CSS"],
-    live: "https://tiktactoe-zeta.vercel.app/",
-    cover: ticTacToe,
-    gallery: [{ src: ticTacToe, caption: "Game board" }],
-  },
-  {
-    id: "kheryne",
-    index: "",
-    title: "Kheryne",
-    kicker: "Nematode ID · Android + Windows",
-    period: "2026",
-    category: "design",
-    summary:
-      "An offline assistant that spots plant-parasitic nematodes through the microscope and identifies them from order to genus — designed for Android and Windows, in light and dark.",
-    problem:
-      "Identifying nematodes means hours at the eyepiece comparing anatomy against dichotomous keys, and field labs often have no reliable internet — so cloud tools aren't an option.",
-    role: "Product & UI designer — the full system in Figma: foundations, components, and every flow on Android and Windows.",
-    built: [
-      "Live scan: a phone clipped to the eyepiece marks likely nematodes in real time and prompts a switch to 40× for genus-level detail",
-      "Explainable results — order → family → genus with confidence, plus the traits used (stylet knobs, tail shape, vulva position)",
-      "Morphometrics with stage-micrometer calibration and automatic De Man indices",
-      "Windows workspace that pairs with the phone for live streaming, batch analysis, side-by-side compare and full PDF reports",
-      "Offline-first (models on-device), light & dark themes, built on a documented design system",
-    ],
-    stack: ["Figma", "Design system", "Android", "Windows", "Light & dark"],
-    extraLink: {
-      label: "Open in Figma",
-      href: "https://www.figma.com/design/KWcNyL3Ehh9ayQ09f7QB1n/Kheryne-%E2%80%94-UI-design?node-id=1-4",
-    },
-    cover: khWinWorkspace,
-    gallery: [
-      { src: khAndroidHome, caption: "Android — home, light & dark" },
-      { src: khAndroidScan, caption: "Android — live scan & identify" },
-      { src: khAndroidReport, caption: "Android — identification report" },
-      { src: khAndroidMorpho, caption: "Android — calibrate & measure" },
-      { src: khWinWorkspace, caption: "Windows — workspace" },
-      { src: khWinLive, caption: "Windows — live stream from phone" },
-      { src: khWinCompare, caption: "Windows — compare" },
-      { src: khWinKey, caption: "Windows — dichotomous key" },
-      { src: khWinReport, caption: "Windows — full report" },
-    ],
-  },
-  {
-    id: "ryde",
-    index: "07",
-    title: "Ryde",
-    kicker: "Mobile UX blueprint",
-    period: "2026",
-    category: "design",
-    mobile: true,
-    summary:
-      "A ride-booking app flow — onboarding, OTP, pickup & destination, scheduling and payment — explored in both dark and light themes.",
-    problem: "Ride-booking flows often lose users between choosing a destination and paying. Ryde explores a shorter path.",
-    role: "Product & UI designer — full user journey in Figma, designed to be built.",
-    built: [
-      "End-to-end booking journey across 17 screens",
-      "Dark and light theme systems",
-      "Component-driven Figma file ready for hand-off",
-    ],
-    stack: ["Figma", "UX flows", "Prototyping", "Design systems"],
-    cover: rydeHomeDark,
-    gallery: [
-      { src: rydeLoginDark, caption: "Log in — dark" },
-      { src: rydeHomeDark, caption: "Home — dark" },
-      { src: rydeOtpLight, caption: "OTP — light" },
-      { src: rydeHomeLight, caption: "Home — light" },
-      { src: rydePickup, caption: "Set pick-up" },
-      { src: rydeTime, caption: "Schedule" },
-      { src: rydePayment, caption: "Payment" },
-    ],
+    gallery: [{ src: lilyFlowers, caption: "Lily Flowers — Staff portal & invoicing operations" }],
   },
 ];
 
-/** Display order — the first entry is numbered 01. */
-const PROJECT_ORDER = ["mapaguapa", "amaranth", "boardmap", "reseato", "lily", "invitation", "tictactoe", "kheryne", "ryde"];
-
-export const PROJECTS: Project[] = PROJECT_ORDER.map((id, i) => ({
-  ...ALL_PROJECTS.find((p) => p.id === id)!,
-  index: String(i + 1).padStart(2, "0"),
+export const PROJECTS: Project[] = RAW_PROJECTS.map((project, idx) => ({
+  ...project,
+  index: String(idx + 1).padStart(2, "0"),
 }));
 
-export const FILTERS: { id: "all" | ProjectCategory; label: string }[] = [
-  { id: "all", label: "All realms" },
-  { id: "fullstack", label: "Full-stack" },
-  { id: "frontend", label: "Front-end" },
-  { id: "design", label: "Blueprints" },
+export const FEATURED_PROJECTS = PROJECTS.filter((p) => p.featured);
+export const ARCHIVE_PROJECTS = PROJECTS.filter((p) => !p.featured);
+
+export const WORK_FILTERS: { id: "all" | ProjectCategory; label: string }[] = [
+  { id: "all", label: "All Work" },
+  { id: "fullstack", label: "Full-Stack" },
+  { id: "design", label: "UI/UX Systems" },
 ];
 
-export const STATS = [
-  { value: 6, suffix: "", pad: true, label: "Production apps live" },
-  { value: 2, suffix: "+ yrs", label: "Building for the web" },
-  { value: 12, suffix: "", label: "Technologies in the arsenal" },
-  { value: 4, suffix: "th yr", label: "BS Computer Science · VSU" },
-];
+export interface CapabilityPillar {
+  index: string;
+  title: string;
+  blurb: string;
+  tools: string[];
+}
 
-export const ARSENAL = [
+export const CAPABILITIES: CapabilityPillar[] = [
   {
-    title: "Frontend",
-    blurb: "Interfaces that feel fast and obvious.",
-    icon: "code",
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Vite", "Responsive UI"],
+    index: "01",
+    title: "UI/UX & Design",
+    blurb: "Multi-platform flows, design tokens, and prototypes built for clean handoff.",
+    tools: ["Figma", "Design Systems", "Prototyping", "UX Flows", "Wireframing", "WCAG Accessibility"],
   },
   {
+    index: "02",
+    title: "Frontend & Mobile",
+    blurb: "Fast, typed interfaces across modern web browsers and mobile devices.",
+    tools: ["React", "Next.js", "TypeScript", "React Native", "Flutter", "Tailwind CSS", "Vite"],
+  },
+  {
+    index: "03",
     title: "Backend & Data",
-    blurb: "Auth, storage and realtime that just work.",
-    icon: "database",
-    items: ["Supabase", "PostgreSQL", "Firebase", "MongoDB", "REST APIs", "Leaflet Maps"],
+    blurb: "APIs, auth, and relational schemas engineered for production reliability.",
+    tools: [
+      "Node.js / Express",
+      "Python",
+      "Supabase",
+      "PostgreSQL",
+      "Firebase",
+      "MongoDB",
+      "REST APIs",
+      "Leaflet Maps",
+      "Git & GitHub",
+      "Vercel",
+    ],
   },
-  {
-    title: "Craft & Delivery",
-    blurb: "Designed before it's built, shipped when it's right.",
-    icon: "star",
-    items: ["Figma", "Git & GitHub", "Vercel", "UX flows", "Prototyping", "Agile"],
-  },
-] as const;
-
-export const MARQUEE = [
-  "React", "TypeScript", "Next.js", "Supabase", "PostgreSQL", "Tailwind CSS",
-  "Firebase", "MongoDB", "Leaflet", "Vite", "Vercel", "Figma", "Git",
 ];
 
-export const CAMPAIGN = [
-  { n: "I", title: "Scout", text: "Understand the users, the constraints and what success looks like before a single pixel moves." },
-  { n: "II", title: "Blueprint", text: "Wireframes and high-fidelity prototypes in Figma — validated with real people, not guesses." },
-  { n: "III", title: "Forge", text: "Component-first React + TypeScript on a Supabase back-end. Typed, tested, reviewable." },
-  { n: "IV", title: "Launch", text: "Deployed on Vercel, measured, and iterated with feedback. Shipping is the start, not the end." },
-];
+export interface ExperienceEntry {
+  period: string;
+  role: string;
+  org: string;
+  type: string;
+  highlight?: boolean;
+  details: string;
+}
 
-export const TIMELINE = [
+export const EXPERIENCE: ExperienceEntry[] = [
   {
-    when: "May 2025 — Present",
-    role: "Full-Stack Developer",
-    org: "Freelance & campus projects",
-    text: "Own features end-to-end: Postgres schemas and RLS in Supabase, typed React front-ends, Vercel deploys.",
-    active: true,
+    period: "May 2025 – Present",
+    role: "Full-Stack Software Engineer",
+    org: "Independent & Campus Production Systems",
+    type: "Engineering",
+    highlight: true,
+    details:
+      "Architecting and shipping production web platforms end-to-end—MAPAGUAPA, Amaranth, BoardMap, RESEATO Cebu, and Lily Flowers—spanning PostgreSQL/RLS, Node/Express, React, and TypeScript.",
   },
   {
-    when: "Dec 2024 — Present",
-    role: "Product & UI Designer",
-    org: "Figma",
-    text: "Design flows and high-fidelity prototypes with implementation in mind — BoardMap, Ryde.",
+    period: "Dec 2024 – Present",
+    role: "Product & UI/UX Designer",
+    org: "Cross-Platform Systems in Figma",
+    type: "Design",
+    details:
+      "Designing multi-theme component libraries and high-fidelity product blueprints ready for engineering handoff, including Kheryne (Android + Windows) and Ryde.",
   },
   {
-    when: "Sep 2024 — Present",
-    role: "Front-End Developer",
-    org: "React · TypeScript",
-    text: "Responsive, accessible interfaces with clean component architecture.",
-  },
-  {
-    when: "Aug 2022 — Present",
-    role: "BS Computer Science",
+    period: "Aug 2022 – Present",
+    role: "BS Computer Science (4th Year)",
     org: "Visayas State University",
-    text: "Software engineering, data structures, databases and web development.",
+    type: "Education",
+    details:
+      "Completing undergraduate coursework in software engineering, database management systems, algorithms, data structures, and web/mobile development.",
+  },
+];
+
+export interface CredentialItem {
+  title: string;
+  issuer: string;
+  date: string;
+  note: string;
+  summary?: string;
+  certificateUrl?: string;
+}
+
+export const CREDENTIALS: CredentialItem[] = [
+  {
+    title: "Space Business Innovation Camp · National Finalist",
+    issuer: "Philippine Space Agency (PhilSA)",
+    date: "Nov 23, 2026",
+    note: "Finalist",
+    summary: "Selected among competing teams nationwide to present at the Final Demo Day.",
   },
   {
-    when: "2025",
-    role: "Certifications",
-    org: "Cisco NetAcad · HarvardX",
-    text: "Introduction to Data Science · Data Science: R Basics (PH125.1x)",
+    title: "Introduction to Data Science",
+    issuer: "Cisco Networking Academy",
+    date: "Sep 12, 2025",
+    note: "Certificate",
+    certificateUrl: "/certificates/introduction-to-data-science-cisco.pdf",
+  },
+  {
+    title: "Data Science: R Basics",
+    issuer: "HarvardX · edX",
+    date: "2025",
+    note: "PH125.1x",
   },
 ];

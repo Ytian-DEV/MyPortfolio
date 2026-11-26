@@ -1,97 +1,163 @@
-import { motion, useReducedMotion } from "framer-motion";
-import { useRef } from "react";
-import { PROFILE } from "../content";
-import { HeroDragon } from "./HeroDragon";
-import { Chip, MagneticButton } from "./ui";
+import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, Copy, FileText } from "lucide-react";
+import { useState } from "react";
+import { FEATURED_PROJECTS, PROFILE, PROJECTS, type Project } from "../content";
 
-const HEADLINE = ["I", "forge", "web", "apps", "worthy", "of", "the"];
+interface HeroProps {
+  onToast: (message: string) => void;
+  onOpenProject: (project: Project) => void;
+}
 
-export function Hero({ breathing, flying, onDragonClick }: { breathing: boolean; flying: boolean; onDragonClick: () => void }) {
-  const artRef = useRef<HTMLDivElement>(null);
-  const frame = useRef(0);
-  const reduce = useReducedMotion();
+const DOSSIER_STACK = [
+  "React",
+  "TypeScript",
+  "React Native",
+  "Flutter",
+  "Node / Express",
+  "Python",
+  "Supabase",
+  "PostgreSQL",
+  "Figma",
+];
 
-  const onMove = (e: React.PointerEvent) => {
-    if (reduce || e.pointerType !== "mouse") return;
-    const { innerWidth: w, innerHeight: h } = window;
-    const mx = (e.clientX / w - 0.5) * 2;
-    const my = (e.clientY / h - 0.5) * 2;
-    cancelAnimationFrame(frame.current);
-    frame.current = requestAnimationFrame(() => {
-      artRef.current?.style.setProperty("--mx", mx.toFixed(3));
-      artRef.current?.style.setProperty("--my", my.toFixed(3));
-    });
+export function Hero({ onToast, onOpenProject }: HeroProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(PROFILE.email);
+      setCopied(true);
+      onToast("Copied christian02613@gmail.com to clipboard");
+      window.setTimeout(() => setCopied(false), 2200);
+    } catch {
+      window.location.href = `mailto:${PROFILE.email}`;
+    }
   };
 
-  const word = (i: number) => ({
-    initial: reduce ? false : { opacity: 0, y: "0.6em", filter: "blur(8px)" },
-    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-    transition: { duration: 0.9, delay: 0.15 + i * 0.07, ease: [0.16, 1, 0.3, 1] as const },
-  });
+  const handleResumeAction = () => {
+    if (PROFILE.resumeUrl) {
+      window.open(PROFILE.resumeUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+    const subject = encodeURIComponent("Resume request — Junior Software Engineer");
+    window.location.href = `mailto:${PROFILE.email}?subject=${subject}`;
+    onToast("Resume PDF is being finalized — opening email request");
+  };
 
   return (
-    <section id="top" className="hero" onPointerMove={onMove}>
-      <div className="hero__grid" aria-hidden="true" />
-      <div className="container hero__inner">
-        <div className="hero__copy">
-          <motion.p className="status" {...word(0)}>
-            <span className="status__dot" aria-hidden="true" />
-            {PROFILE.availability}
-          </motion.p>
-          <motion.p className="hero__role" {...word(1)}>
-            {PROFILE.role} <span aria-hidden="true">·</span> {PROFILE.location}
-          </motion.p>
-
-          <h1 className="hero__title" aria-label="I forge web apps worthy of the throne.">
-            {HEADLINE.map((w, i) => (
-              <motion.span key={w + i} className="hero__word" aria-hidden="true" {...word(i + 2)}>
-                {w}
-              </motion.span>
-            ))}
-            <motion.span className="hero__word hero__word--fire" aria-hidden="true" {...word(HEADLINE.length + 2)}>
-              throne.
-            </motion.span>
-          </h1>
-
-          <motion.p className="hero__sub" {...word(11)}>
-            React, TypeScript &amp; Supabase — from database schema to pixel-perfect interface. Six
-            production apps shipped for students, restaurants, a flower shop and campus organisations.
-          </motion.p>
-
-          <motion.div className="hero__ctas" {...word(12)}>
-            <MagneticButton href="#work">See my conquests</MagneticButton>
-            <MagneticButton href="#contact" variant="ghost">Send a raven</MagneticButton>
-          </motion.div>
-
-          <motion.div className="hero__stack" {...word(13)}>
-            {["React", "TypeScript", "Next.js", "Supabase", "Tailwind"].map((s) => (
-              <Chip key={s}>{s}</Chip>
-            ))}
-          </motion.div>
+    <section id="top" className="hero" aria-labelledby="hero-heading">
+      <div className="container">
+        <div className="hero__spec-bar">
+          <span className="mono-meta mono-meta--accent">{PROFILE.role}</span>
+          <span className="hero__spec-divider" aria-hidden="true" />
+          <span className="mono-meta">{PROFILE.specialization}</span>
+          <span className="hero__spec-divider" aria-hidden="true" />
+          <span className="mono-meta">{PROFILE.location}</span>
         </div>
 
-        <motion.div
-          ref={artRef}
-          className="hero__art"
-          initial={reduce ? false : { opacity: 0, scale: 0.92 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.4, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <button type="button" className="hero__dragon" onClick={onDragonClick} aria-label="Wake the dragon">
-            <HeroDragon breathing={breathing} flying={flying} />
-          </button>
-          <p className="hero__hint" aria-hidden="true">
-            click the dragon — or type <kbd>dracarys</kbd>
-          </p>
-        </motion.div>
-      </div>
+        <div className="hero__split">
+          <div className="hero__main">
+            <h1 id="hero-heading" className="serif-hero hero__title">
+              Interfaces shaped with <em>editorial clarity</em>; engineered cleanly down to the schema.
+            </h1>
 
-      <div className="container hero__foot">
-        <a href="#work" className="scroll-cue">
-          <span className="scroll-cue__line" aria-hidden="true" />
-          Scroll to enter the realm
-        </a>
-        <p className="hero__quote">“Ship it, or it didn't happen.”</p>
+            <p className="hero__lead">
+              I’m <strong>{PROFILE.name}</strong>, a 4th-year Computer Science student and full-stack developer building
+              end-to-end software—from tokenized Figma systems on web and mobile to typed{" "}
+              <strong>React, React Native, Node/Express</strong>, and <strong>PostgreSQL</strong> applications.
+            </p>
+
+            <div className="hero__actions">
+              <a href="#work" className="btn btn--primary">
+                Selected Work
+                <ArrowDownRight size={16} aria-hidden="true" />
+              </a>
+
+              <button type="button" className="btn btn--outline" onClick={handleCopyEmail}>
+                {copied ? <Check size={15} aria-hidden="true" /> : <Copy size={15} aria-hidden="true" />}
+                {copied ? "Email Copied" : "Copy Email"}
+              </button>
+
+              <button type="button" className="btn btn--ghost" onClick={handleResumeAction}>
+                <FileText size={15} aria-hidden="true" />
+                {PROFILE.resumeUrl ? "Resume PDF" : "Request Resume"}
+              </button>
+            </div>
+          </div>
+
+          <aside className="dossier" aria-label="Engineer specification dossier">
+            <div className="dossier__head">
+              <span className="mono-meta">ENGINEER DOSSIER // 2026</span>
+              <span className="dossier__status">
+                <span className="status-dot" aria-hidden="true" />
+                Open to Roles
+              </span>
+            </div>
+
+            <dl className="dossier__specs">
+              <div className="dossier__row">
+                <dt className="mono-meta">FOCUS</dt>
+                <dd>UI/UX Systems · Web &amp; Mobile · Backend APIs</dd>
+              </div>
+
+              <div className="dossier__row">
+                <dt className="mono-meta">EDUCATION</dt>
+                <dd>BS Computer Science (4th Yr) · VSU</dd>
+              </div>
+
+              <div className="dossier__row dossier__row--stack">
+                <dt className="mono-meta">CORE STACK</dt>
+                <dd className="dossier__tags">
+                  {DOSSIER_STACK.map((item) => (
+                    <span key={item} className="tag">
+                      {item}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            </dl>
+
+            <div className="dossier__index">
+              <div className="dossier__index-head">
+                <span className="mono-meta mono-meta--accent">FEATURED INDEX</span>
+                <span className="mono-meta">Quick Jump</span>
+              </div>
+
+              <div className="dossier__links" role="list">
+                {FEATURED_PROJECTS.slice(0, 5).map((project) => (
+                  <button
+                    key={project.id}
+                    type="button"
+                    role="listitem"
+                    className="dossier__jump"
+                    onClick={() => onOpenProject(project)}
+                  >
+                    <span className="dossier__jump-left">
+                      <span className="mono-meta mono-meta--accent">{project.index}</span>
+                      <span className="dossier__jump-title">{project.title}</span>
+                    </span>
+                    <span className="dossier__jump-right">
+                      <span className="mono-meta">{project.category === "design" ? "UI/UX" : "Full-Stack"}</span>
+                      <ArrowRight size={13} className="dossier__arrow" aria-hidden="true" />
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="dossier__foot">
+              <a
+                href={PROFILE.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="dossier__ext"
+              >
+                {PROFILE.githubLabel}
+                <ArrowUpRight size={13} aria-hidden="true" />
+              </a>
+              <span className="mono-meta">{String(PROJECTS.length).padStart(2, "0")} Shipped Builds</span>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
   );
